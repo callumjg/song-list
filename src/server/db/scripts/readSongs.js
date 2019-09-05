@@ -48,6 +48,10 @@ const readAndWriteSongsToJSON = (readDir, writeDir) => {
 };
 
 const readAndWriteSongsToDB = async () => {
+	readAndWriteSongsToJSON(
+		path.join(__dirname, "/data.csv"),
+		path.join(__dirname, "/songs.json")
+	);
 	console.log(process.env.DB_URL);
 	await require("../mongoose");
 	const songs = JSON.parse(
@@ -64,7 +68,14 @@ const readAndWriteSongsToDB = async () => {
 // 	path.join(__dirname, "/songs.json")
 // );
 
-readAndWriteSongsToDB();
+// readAndWriteSongsToDB();
+
+const getID = dir => {
+	const songs = readSongs(dir);
+	console.log(songs.length);
+};
+
+readSongs(path.join(__dirname, "songs.json"));
 
 module.exports = { readSongs, readAndWriteSongsToJSON };
 // console.log(songsArray);
