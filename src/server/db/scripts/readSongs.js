@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const Song = require("./Song");
+const Song = require("../../models/Song");
 
 const readSongs = dir => {
 	const data = fs.readFileSync(dir);
@@ -23,6 +23,10 @@ const readSongs = dir => {
 	// parse values
 	songsArray.forEach(song => {
 		for (let val in song) {
+			while (song[val].includes("$$$")) {
+				song[val] = song[val].replace("$$$", ",");
+			}
+
 			if (val === "title")
 				song[val] = song[val]
 					.split(" ")
@@ -32,7 +36,6 @@ const readSongs = dir => {
 			if ((val === "tags" || val === "notes") && song[val])
 				song[val] = song[val].split("&&&");
 			if ((val === "tags" || val === "notes") && !song[val]) song[val] = [];
-			if (val === "author") song[val] = song[val].replace("$$$", ", ");
 		}
 	});
 	console.log(songsArray);
@@ -46,7 +49,7 @@ const readAndWriteSongsToJSON = (readDir, writeDir) => {
 
 const readAndWriteSongsToDB = async () => {
 	console.log(process.env.DB_URL);
-	await require("../db/mongoose");
+	await require("../mongoose");
 	const songs = JSON.parse(
 		fs.readFileSync(path.join(__dirname, "/songs.json"))
 	);
