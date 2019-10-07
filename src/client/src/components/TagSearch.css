@@ -1,0 +1,19 @@
+.tag-search {
+	/* border: 2px solid green; */
+	padding: 1rem;
+	margin: 1rem 0;
+}
+
+.tag-search input {
+	/* border: none; */
+}
+
+.tag-search input:focus {
+	/* border: none; */
+	/* outline: none; */
+}
+
+.tag-search:focus {
+	border: 2px solid blue;
+	background: red;
+}

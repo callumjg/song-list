@@ -1,0 +1,82 @@
+/*The design goal is for children components to fill their container. Sizing is determined by declarations at a parent level*/
+
+html,
+body,
+#root {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	color: #666;
+	background-color: white;
+}
+
+#root {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+#root > * {
+	position: relative;
+	display: flex;
+}
+
+nav {
+	padding: 1rem;
+	width: 100%;
+	/* border-bottom: 1px solid rgba(100, 100, 100, 0.3); */
+	box-shadow: 0 0 8px 5px rgba(100, 100, 100, 0.1);
+	cursor: default;
+}
+
+#root > section,
+main {
+	flex: 1;
+}
+
+#root > section > aside {
+	padding: 1.5rem;
+	min-width: 5rem;
+	border-right: 1px solid rgba(100, 100, 100, 0.3);
+}
+
+footer {
+	padding: 2rem;
+	border-top: 1px solid rgba(100, 100, 100, 0.3);
+	cursor: default;
+	justify-content: center;
+}
+
+i.ui.icon {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/*
+main {
+	border: 1rem solid navajowhite;
+}
+
+header {
+	border: 1rem solid green;
+}
+
+nav {
+	border: 1rem solid coral;
+}
+
+section {
+	border: 1rem solid orange;
+}
+
+aside {
+	border: 1rem solid purple;
+}
+
+footer {
+	border: 1rem solid blue;
+}
+*/

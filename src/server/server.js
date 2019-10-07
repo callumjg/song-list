@@ -1,7 +1,7 @@
 const express = require("express");
 const chalk = require("chalk");
 const server = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const songsRouter = require("./routes/songs");
 const servicesRouter = require("./routes/services");
 require("./db/mongoose");
