@@ -1,6 +1,6 @@
 import axios from "axios";
 const server = axios.create({
-	baseURL: "/"
+	baseURL: "/api/v1"
 });
 
 export default server;

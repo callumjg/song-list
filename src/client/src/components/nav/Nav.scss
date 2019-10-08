@@ -1,0 +1,25 @@
+@import "../../styles/colors";
+@import "../../styles/mixins";
+
+nav {
+	@include flex();
+	flex: 1;
+	ul {
+		@include flex(flex-end);
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		li:first-child ~ li {
+			margin-left: 1rem;
+		}
+		li {
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+			cursor: pointer;
+			&:hover {
+				border-bottom: 0.1rem solid $accent;
+				padding-bottom: 0.4rem;
+			}
+		}
+	}
+}

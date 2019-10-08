@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Client from "./components/Client";
+import App from "./components/App";
 
-ReactDOM.render(<Client />, document.querySelector("#root"));
+ReactDOM.render(<App />, document.querySelector("#root"));
