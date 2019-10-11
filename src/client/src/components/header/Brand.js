@@ -5,7 +5,7 @@ import "./Brand.scss";
 const Brand = props => {
 	return (
 		<div className="brand">
-			<img src={logo} />
+			<img src={logo} alt="Graceville Presbyterian Church" />
 		</div>
 	);
 };

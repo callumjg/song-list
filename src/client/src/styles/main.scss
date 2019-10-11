@@ -55,3 +55,10 @@ i {
 .relative {
 	position: relative;
 }
+
+.btn.no-glow {
+	&:focus {
+		box-shadow: none !important;
+		outline: none;
+	}
+}

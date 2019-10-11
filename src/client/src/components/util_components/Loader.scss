@@ -1,0 +1,42 @@
+@import "../../styles/mixins";
+@import "../../styles/colors";
+
+.loader {
+	@include flex();
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	cursor: default;
+	background: rgba(white, 0.7);
+	animation: fadein 240ms ease-in-out 1;
+
+	div {
+		height: 3rem;
+		width: 3rem;
+		border: 4px solid rgba(0, 0, 0, 0.2);
+		border-top: 4px solid rgba(0, 0, 0, 0.6);
+		border-radius: 100%;
+		animation: round 500ms linear infinite;
+	}
+}
+
+@keyframes round {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

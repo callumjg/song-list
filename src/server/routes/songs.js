@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Song = require("../models/Song");
 const whiteListBody = require("../middleware/whitelistBody");
+const { escapeSpecialChar, commaSplit } = require("../utils");
 
 const allowedUpdates = [
 	"tags",
@@ -72,20 +73,40 @@ router.get("/", async (req, res) => {
 				: [{ title: regex }, { author: regex }];
 		}
 
-		// filter by tags
+		// find by tags
 		if (req.query.tags) {
-			const tags = req.query.tags
-				.split(" ")
-				.map(t => t.replace("_", " "))
-				.map(t => new RegExp(t, "i"));
-			filter.tags = { $all: tags };
+			let $all = commaSplit(req.query.tags).map(
+				t => new RegExp(escapeSpecialChar(t), "i")
+			);
+			filter.tags = {
+				...filter.tags,
+				$all
+			};
 		}
+
+		//filter by tags
+		if (req.query.exclude) {
+			let $not = new RegExp(
+				commaSplit(req.query.exclude)
+					.map(t => escapeSpecialChar(t))
+					.join("|"),
+				"i"
+			);
+
+			filter.tags = {
+				...filter.tags,
+				$not
+			};
+		}
+		// Count total available resources
+		const count = await Song.countDocuments({ ...filter, limit: null });
 
 		// retrieve and send resource
 		const songs = await Song.find(filter, select, options);
-		res.send({ songs });
+		res.send({ songs, count });
 	} catch (e) {
 		let status = e.status || 400;
+		console.log(e);
 		res.status(status).send({ message: e.message });
 	}
 });

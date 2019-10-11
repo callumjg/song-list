@@ -3,7 +3,7 @@ import SongsList from "../songs/SongsList";
 import "./Home.scss";
 
 const Home = props => (
-	<div className="container py-5">
+	<div className="container py-3">
 		<SongsList />
 	</div>
 );
