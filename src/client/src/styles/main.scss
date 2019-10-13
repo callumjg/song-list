@@ -24,11 +24,11 @@ body,
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	height: 100%;
+	min-height: 100%;
+	@include flex(space-between, stretch, column);
 }
 
 #root {
-	@include flex(space-between, stretch, column);
 	font-family: $font;
 	font-size: $font-size;
 	color: $text-color-dark;

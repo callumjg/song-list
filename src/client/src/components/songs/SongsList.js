@@ -6,34 +6,39 @@ import PageButtons from "./PageButtons";
 import SongsTable from "./SongsTable";
 import Limiter from "./Limiter";
 import Loader from "../util_components/Loader";
+import "./SongsList.scss";
 
 const SongsList = props => {
 	const [songs, setSongs] = useState([]);
-	const [limit, setLimit] = useState(30);
+	const [limit, setLimit] = useState(50);
 	const [page, setPage] = useState(0);
 	const [pagesNum, setPagesNum] = useState(0);
-	const [tags, setTags] = useState([]);
+	const [tags, setTags] = useState(["category a"]);
+	const [exclude, setExclude] = useState(["archived", "deleted"]);
 	const [search, setSearch] = useState("");
 	const [searchInput, setSearchInput] = useState("");
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [timer, setTimer] = useState(null);
 
+	function buildUrl() {
+		let url = `/songs?limit=${limit}`;
+		if (typeof limit === "number") url += `&skip=${limit * page}`;
+		if (tags.length) url += `&tags=${tags.map(t => t.toLowerCase()).join(",")}`;
+		if (exclude.length)
+			url += `&exclude=${exclude.map(t => t.toLowerCase()).join(",")}`;
+		if (search) url += `&search=${search}`;
+		return url;
+	}
+
+	const url = buildUrl();
+
 	useEffect(() => {
 		(async () => {
 			setLoading(true);
 
 			try {
-				let url = `/songs?limit=${limit}`;
-				if (typeof limit === "number") url += `&skip=${limit * page}`;
-				if (tags.length)
-					url += `&tags=${tags.map(t => t.replace(" ", "_")).join("+")}`;
-				if (search) url += `&search=${search}`;
-
-				// make request
 				const response = await server.get(url);
-
-				// handle results
 				const { songs, count } = response.data;
 				setSongs(songs);
 				setPagesNum(Math.ceil(count / limit));
@@ -43,23 +48,27 @@ const SongsList = props => {
 			}
 			setLoading(false);
 		})();
-	}, [limit, page, tags, search]);
+	}, [url]);
 
 	function setSearchDelayed(string) {
 		setLoading(true);
 		setSearchInput(string);
 		clearTimeout(timer);
-		setTimer(setTimeout(() => setSearch(string), 200));
+		setTimer(setTimeout(() => setSearch(string), 100));
 	}
 
 	return (
 		<section className="relative py-3">
 			<h4>Songs</h4>
-
 			{error && <p className="alert alert-danger my-2 p-2">{error}</p>}
 			<SongSearch search={searchInput} setSearch={setSearchDelayed} />
-			<div className="d-flex justify-content-between">
-				<SongTags tags={tags} setTags={setTags} />
+			<div className="tags-n-limit">
+				<SongTags
+					tags={tags}
+					setTags={setTags}
+					exclude={exclude}
+					setExclude={setExclude}
+				/>
 				<Limiter limit={limit} setLimit={setLimit} setPage={setPage} />
 			</div>
 			<div className="relative">

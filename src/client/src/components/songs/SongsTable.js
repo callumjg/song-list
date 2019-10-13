@@ -8,9 +8,18 @@ const SongsTable = ({ songs }) => {
 			<thead className="">
 				<tr>
 					<th>Title</th>
-					<th>Key</th>
-					<th>Author</th>
-					<th>Actions</th>
+					<th>
+						<i className="ui user icon" />
+					</th>
+					<th>
+						<i className="ui key icon" />
+					</th>
+					<th>
+						<i className="ui tags icon" />
+					</th>
+					<th>
+						<i className="ui chain icon" />
+					</th>
 				</tr>
 			</thead>
 			<tbody>

@@ -6,7 +6,7 @@ const Limiter = ({ setLimit, setPage, limit }) => {
 		setPage(0);
 	}
 	return (
-		<div className="d-flex justify-content-end align-items-center">
+		<div className="mb-3">
 			<span className="mr-2">Limit: </span>
 			<div className="btn-group btn-group-toggle">
 				{pages.map((p, i) => (

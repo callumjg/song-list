@@ -1,67 +1,51 @@
 import React, { useState, useEffect } from "react";
+import Tags from "./Tags";
 
-class Tags {
-	constructor(tags) {
-		this.val = tags;
-	}
+const SongTags = ({ tags, setTags, exclude, setExclude }) => {
+	const T = new Tags(tags, exclude);
+	const [activeCat, setActiveCat] = useState("Category A");
+	const catButtons = ["Category A", "Category B (Hymn)"];
+	const buttonClasses = "btn btn-outline-primary no-glow btn-sm";
+	const [showArchived, setShowArchived] = useState("");
 
-	addTag(tag) {
-		if (!this.val.includes(tag)) this.val = [...this.val, tag];
-		return this;
+	function getCatClasses(c) {
+		return activeCat === c ? buttonClasses + " active" : buttonClasses;
 	}
-	removeTag(tag) {
-		this.val = this.val.filter(t => t !== tag);
-		return this;
+	function handleCatClick(c) {
+		setActiveCat(c);
+		T.addTag(c).addExclude(c === catButtons[0] ? catButtons[1] : catButtons[0]);
+		setTags(T.getTags());
+		setExclude(T.getExclude());
 	}
-	value() {
-		return this.val;
-	}
-}
-
-const SongTags = ({ tags, setTags }) => {
-	const T = new Tags(tags);
-	const [cat, setCat] = useState("A");
-	const [archived, setArchived] = useState("");
-
-	function toggleCategory() {
-		let meowCat = cat;
-		let neowCat = cat === "A" ? "B" : "A";
-		setTags(
-			T.addTag(`Category ${meowCat}`)
-				.removeTag(`Category ${neowCat}`)
-				.value()
-		);
-		setCat(neowCat);
-	}
-
+	console.log(tags);
 	return (
 		<div className="my-3">
 			<div className="btn-group btn-group-toggle">
-				<button
-					className={`btn btn-sm no-glow btn-outline-primary${
-						cat === "A" ? " active" : ""
-					}`}
-					onClick={() => toggleCategory()}
-				>
-					Category A
-				</button>
-				<button
-					className={`btn btn-sm no-glow btn-outline-primary${
-						cat === "B" ? " active" : ""
-					}`}
-					onClick={() => toggleCategory()}
-				>
-					Category B (Hymns)
-				</button>
+				{catButtons.map((c, i) => (
+					<button
+						className={getCatClasses(c)}
+						onClick={() => handleCatClick(c)}
+						key={i}
+					>
+						{c}
+					</button>
+				))}
 			</div>
 			<button
-				className={`btn btn-sm no-glow btn-outline-primary ml-3${archived}`}
+				className={buttonClasses + showArchived + " ml-2"}
 				onClick={() => {
-					if (!archived) setTags(T.addTag("Archived").value());
-					setArchived(archived ? "" : " active");
+					if (!showArchived) {
+						setShowArchived(" active");
+						setTags(T.addTag("archived").getTags());
+						setExclude(T.getExclude());
+					} else {
+						setShowArchived("");
+						setTags(T.addExclude("archived").getTags());
+						setExclude(T.getExclude());
+					}
 				}}
 			>
-				Show Archived
+				<i className="ui archive icon" /> Archived
 			</button>
 		</div>
 	);
