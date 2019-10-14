@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Tags from "./Tags";
 
 const SongTags = ({ tags, setTags, exclude, setExclude }) => {
@@ -17,7 +17,6 @@ const SongTags = ({ tags, setTags, exclude, setExclude }) => {
 		setTags(T.getTags());
 		setExclude(T.getExclude());
 	}
-	console.log(tags);
 	return (
 		<div className="my-3">
 			<div className="btn-group btn-group-toggle">

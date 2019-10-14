@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 //Get Service
 router.get("/:_id", async (req, res) => {
 	try {
-		const service = await Service.findById(req.params._id);
+		const service = await Service.findById(req.params._id).populate("songs");
 		if (!service) return res.status(404).send();
 		res.send(service);
 	} catch (e) {
@@ -28,7 +28,7 @@ router.get("/:_id", async (req, res) => {
 //Get Services
 router.get("/", async (req, res) => {
 	try {
-		const services = await Service.find({});
+		const services = await Service.find({}).populate("songs");
 		res.send({ services });
 	} catch (e) {
 		console.log(e);

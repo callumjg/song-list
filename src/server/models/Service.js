@@ -5,7 +5,7 @@ const serviceSchema = new mongoose.Schema({
 		type: Date,
 		requied: true
 	},
-	songs: [{ type: mongoose.Types.ObjectId }],
+	songs: [{ type: mongoose.Types.ObjectId, ref: "Song" }],
 	tags: [{ type: String }]
 });
 

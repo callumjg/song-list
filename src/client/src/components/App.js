@@ -1,8 +1,12 @@
 import React from "react";
+import { Router, Route } from "react-router-dom";
+import { history } from "../utils";
 import Header from "./header/Header";
 import Home from "./home/Home";
+import Metrics from "./metrics/Metrics";
 import Footer from "./footer/Footer";
 import "../styles/main.scss";
+// import "../styles/layout-dev.scss";
 class App extends React.Component {
 	render() {
 		return (
@@ -10,7 +14,10 @@ class App extends React.Component {
 				<Header />
 				<section>
 					<main>
-						<Home />
+						<Router history={history}>
+							<Route path="/" component={Home} exact />
+							<Route path="/metrics" component={Metrics} exact />
+						</Router>
 					</main>
 				</section>
 				<Footer />

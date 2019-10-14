@@ -39,7 +39,8 @@ const songSchema = new mongoose.Schema(
 			{
 				type: String
 			}
-		]
+		],
+		services: [{ type: mongoose.Types.ObjectId, ref: "Service" }]
 	},
 	{
 		timestamps: true

@@ -48,7 +48,7 @@ const SongsList = props => {
 			}
 			setLoading(false);
 		})();
-	}, [url]);
+	}, [url, limit]);
 
 	function setSearchDelayed(string) {
 		setLoading(true);

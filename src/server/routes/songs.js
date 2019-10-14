@@ -1,5 +1,12 @@
 const router = require("express").Router();
+const {
+	subMonths,
+	isAfter,
+	compareAsc,
+	differenceInCalendarMonths
+} = require("date-fns");
 const Song = require("../models/Song");
+const Service = require("../models/Service");
 const whiteListBody = require("../middleware/whitelistBody");
 const { escapeSpecialChar, commaSplit } = require("../utils");
 
@@ -21,6 +28,83 @@ router.post("/", async (req, res) => {
 	try {
 		const song = await new Song(req.body).save();
 		res.send({ song });
+	} catch (e) {
+		let status = e.status || 400;
+		res.status(status).send({ message: e.message });
+	}
+});
+
+// Get song metrics
+router.get("/metrics", async (req, res) => {
+	try {
+		const filter = { tags: { $not: /archived|deleted/i } };
+		const count = await Song.countDocuments(filter);
+		const songs = (await Song.find(filter).populate("services", "date")).map(
+			song => Object.assign({ metrics: {} }, song.toObject())
+		);
+		const services = await Service.find({}, "date");
+		const firstService = services.sort((a, b) => compareAsc(a.date, b.date))[0]
+			.date;
+		const now = new Date();
+
+		const range = {
+			"2 years": { months: 24, date: subMonths(now, 24) },
+			"1 year": { months: 12, date: subMonths(now, 12) },
+			"6 months": { months: 6, date: subMonths(now, 6) },
+			"3 months": { months: 3, date: subMonths(now, 3) },
+			"1 month": { months: 1, date: subMonths(now, 1) }
+		};
+
+		for (r in range) {
+			range[r].services = services.filter(({ date }) =>
+				isAfter(date, range[r].date)
+			).length;
+		}
+
+		const servicesCount =
+			// get plays
+			songs.forEach(song => {
+				let total = song.services.length;
+
+				// set total
+				song.metrics.plays = { total: total };
+
+				// iterate through range
+				for (r in range) {
+					let count = song.services.filter(({ date }) =>
+						isAfter(date, range[r].date)
+					).length;
+					song.metrics.plays[r] = count;
+				}
+			});
+
+		//get plays per service
+		songs.forEach(song => {
+			let { metrics } = song;
+			let { plays } = metrics;
+
+			song.metrics.playsPerService = {
+				total: plays.total / services.length
+			};
+
+			for (r in range) {
+				song.metrics.playsPerService[r] = plays[r] / range[r].services;
+			}
+		});
+
+		//get plays per month
+		songs.forEach(song => {
+			let { metrics } = song;
+			let { plays } = metrics;
+			song.metrics.playsPerMonth = {
+				total: plays.total / differenceInCalendarMonths(now, firstService)
+			};
+			for (r in range) {
+				song.metrics.playsPerMonth[r] =
+					plays[r] === 0 ? 0 : range[r].months / plays[r];
+			}
+		});
+		res.send({ songs, count, range });
 	} catch (e) {
 		let status = e.status || 400;
 		res.status(status).send({ message: e.message });
@@ -102,7 +186,10 @@ router.get("/", async (req, res) => {
 		const count = await Song.countDocuments({ ...filter, limit: null });
 
 		// retrieve and send resource
-		const songs = await Song.find(filter, select, options);
+		const songs = await Song.find(filter, select, options).populate({
+			path: "services",
+			select: "date"
+		});
 		res.send({ songs, count });
 	} catch (e) {
 		let status = e.status || 400;
