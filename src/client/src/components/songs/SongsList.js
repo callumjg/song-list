@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import server from "../../apis/server";
+import React, { useState } from "react";
+import useResource from "../../hooks/useResource";
 import SongSearch from "./SongSearch";
 import SongTags from "./SongTags";
 import PageButtons from "./PageButtons";
@@ -9,16 +9,13 @@ import Loader from "../util_components/Loader";
 import "./SongsList.scss";
 
 const SongsList = props => {
-	const [songs, setSongs] = useState([]);
 	const [limit, setLimit] = useState(50);
 	const [page, setPage] = useState(0);
-	const [pagesNum, setPagesNum] = useState(0);
 	const [tags, setTags] = useState(["category a"]);
 	const [exclude, setExclude] = useState(["archived", "deleted"]);
 	const [search, setSearch] = useState("");
 	const [searchInput, setSearchInput] = useState("");
-	const [error, setError] = useState(null);
-	const [loading, setLoading] = useState(true);
+	const [isPending, setIsPending] = useState(false);
 	const [timer, setTimer] = useState(null);
 
 	function buildUrl() {
@@ -32,29 +29,21 @@ const SongsList = props => {
 	}
 
 	const url = buildUrl();
-
-	useEffect(() => {
-		(async () => {
-			setLoading(true);
-
-			try {
-				const response = await server.get(url);
-				const { songs, count } = response.data;
-				setSongs(songs);
-				setPagesNum(Math.ceil(count / limit));
-			} catch (e) {
-				let message = e.response ? e.response.data.message : e.message;
-				setError(message);
-			}
-			setLoading(false);
-		})();
-	}, [url, limit]);
+	const [{ count, songs }, error, isLoading] = useResource(url, {
+		count: 0,
+		songs: []
+	});
 
 	function setSearchDelayed(string) {
-		setLoading(true);
+		setIsPending(true);
 		setSearchInput(string);
 		clearTimeout(timer);
-		setTimer(setTimeout(() => setSearch(string), 100));
+		setTimer(
+			setTimeout(() => {
+				setSearch(string);
+				setIsPending(false);
+			}, 100)
+		);
 	}
 
 	return (
@@ -72,11 +61,15 @@ const SongsList = props => {
 				<Limiter limit={limit} setLimit={setLimit} setPage={setPage} />
 			</div>
 			<div className="relative">
-				<Loader loading={loading}>
+				<Loader loading={isLoading || isPending}>
 					<SongsTable songs={songs} />
 				</Loader>
 			</div>
-			<PageButtons page={page} pagesNum={pagesNum} setPage={setPage} />
+			<PageButtons
+				page={page}
+				pagesNum={Math.ceil(count / limit)}
+				setPage={setPage}
+			/>
 		</section>
 	);
 };
