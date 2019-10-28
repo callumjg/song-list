@@ -6,6 +6,7 @@ export default function useResource(url, defaultData) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
+		if (!url) return;
 		(async () => {
 			setIsLoading(true);
 			try {
@@ -19,5 +20,5 @@ export default function useResource(url, defaultData) {
 			setIsLoading(false);
 		})();
 	}, [url]);
-	return [data, error, isLoading];
+	return [url ? data : defaultData, error, isLoading];
 }

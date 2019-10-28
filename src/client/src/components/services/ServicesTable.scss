@@ -1,0 +1,11 @@
+@import "../../styles/mixins";
+@import "../../styles/colors";
+.services-table {
+	font-size: 85%;
+	cursor: default;
+	tr {
+		td {
+			padding: 0.1rem;
+		}
+	}
+}

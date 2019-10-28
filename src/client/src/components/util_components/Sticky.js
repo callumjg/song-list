@@ -1,48 +1,35 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Sticky.scss";
 
-class Sticky extends React.Component {
-	state = {
-		isStuck: false
-	};
+function Sticky(props) {
+	const [stuck, setStuck] = useState("");
+	const [offset, setOffset] = useState(0);
+	const element = useRef(null);
 
-	constructor(props) {
-		super(props);
-		this.element = React.createRef();
-	}
-	componentDidMount() {
-		this.setState({ offset: this.element.current.offsetHeight });
-		document.addEventListener("scroll", e => this.handleScroll(e));
-	}
-	componentWillUnmount() {
-		document.removeEventListener("scroll", e => this.handleScroll(e));
-	}
+	useEffect(() => {
+		setOffset(element.current.offsetHeight);
+	}, []);
 
-	handleScroll(e) {
-		if (window.scrollY > this.state.offset && !this.state.isStuck) {
-			this.setState({ isStuck: true });
+	useEffect(() => {
+		function handleScroll() {
+			window.scrollY > offset ? setStuck(" stuck") : setStuck("");
 		}
-		if (window.scrollY < this.state.offset && this.state.isStuck)
-			this.setState({ isStuck: false });
-	}
+		if (offset) {
+			document.addEventListener("scroll", handleScroll);
+		}
+		return () => document.removeEventListener("scroll", handleScroll);
+	}, [offset]);
 
-	renderOffsetElement() {
-		if (this.state.isStuck)
-			return <div style={{ height: this.state.offset }} />;
-	}
-	render() {
-		return (
-			<>
-				<div
-					className={`sticky${this.state.isStuck ? " stuck" : ""}`}
-					ref={this.element}
-				>
-					{this.props.children}
-				</div>
-				{this.renderOffsetElement()}
-			</>
-		);
-	}
+	return (
+		<>
+			<div className={`sticky${stuck}`} ref={element}>
+				{typeof props.children === "function"
+					? props.children(stuck)
+					: props.children}
+			</div>
+			{stuck && <div style={{ height: offset }} />}
+		</>
+	);
 }
 
 export default Sticky;

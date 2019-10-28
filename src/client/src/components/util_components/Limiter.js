@@ -1,6 +1,5 @@
 import React from "react";
-const Limiter = ({ setLimit, setPage, limit }) => {
-	const pages = [10, 30, 50, 100, "All"];
+const Limiter = ({ setLimit, limitButtons, setPage, limit }) => {
 	function onClick(v) {
 		setLimit(v);
 		setPage(0);
@@ -9,7 +8,7 @@ const Limiter = ({ setLimit, setPage, limit }) => {
 		<div className="mb-3">
 			<span className="mr-2">Limit: </span>
 			<div className="btn-group btn-group-toggle">
-				{pages.map((p, i) => (
+				{limitButtons.map((p, i) => (
 					<button
 						className={`btn btn-sm no-glow btn-outline-secondary${
 							limit === p ? " active" : ""

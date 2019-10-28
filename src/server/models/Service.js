@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const Song = require("./Song");
 const serviceSchema = new mongoose.Schema({
 	date: {
 		type: Date,

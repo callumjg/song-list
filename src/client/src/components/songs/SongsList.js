@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import useResource from "../../hooks/useResource";
 import SongSearch from "./SongSearch";
 import SongTags from "./SongTags";
-import PageButtons from "./PageButtons";
+import PageButtons from "../util_components/PageButtons";
 import SongsTable from "./SongsTable";
-import Limiter from "./Limiter";
+import Sticky from "../util_components/Sticky";
+import Limiter from "../util_components/Limiter";
 import Loader from "../util_components/Loader";
 import "./SongsList.scss";
 
@@ -47,19 +48,32 @@ const SongsList = props => {
 	}
 
 	return (
-		<section className="relative py-3">
+		<section className="songs-list relative my-3">
 			<h4>Songs</h4>
+			<Sticky>
+				{stuck => (
+					<section className={`controls${stuck}`}>
+						<div className={stuck ? "container" : ""}>
+							<SongSearch search={searchInput} setSearch={setSearchDelayed} />
+							<div className="d-flex justify-content-between align-items-center">
+								<SongTags
+									tags={tags}
+									setTags={setTags}
+									exclude={exclude}
+									setExclude={setExclude}
+								/>
+								<Limiter
+									limit={limit}
+									setLimit={setLimit}
+									setPage={setPage}
+									limitButtons={[10, 30, 50, 100, "All"]}
+								/>
+							</div>
+						</div>
+					</section>
+				)}
+			</Sticky>
 			{error && <p className="alert alert-danger my-2 p-2">{error}</p>}
-			<SongSearch search={searchInput} setSearch={setSearchDelayed} />
-			<div className="tags-n-limit">
-				<SongTags
-					tags={tags}
-					setTags={setTags}
-					exclude={exclude}
-					setExclude={setExclude}
-				/>
-				<Limiter limit={limit} setLimit={setLimit} setPage={setPage} />
-			</div>
 			<div className="relative">
 				<Loader loading={isLoading || isPending}>
 					<SongsTable songs={songs} />

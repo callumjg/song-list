@@ -5,9 +5,12 @@
 @import "../../../node_modules/bootstrap/scss/_variables";
 @import "../../../node_modules/bootstrap/scss/mixins/_breakpoints";
 
-.tags-n-limit {
-	@include flex(space-between, left, column);
-	@include media-breakpoint-up(md) {
-		@include flex(space-between, center);
+.songs-list {
+	.controls {
+		&.stuck {
+			@include boxShadow();
+			background-color: rgba(white, 0.8);
+			padding: 0.1rem 0;
+		}
 	}
 }

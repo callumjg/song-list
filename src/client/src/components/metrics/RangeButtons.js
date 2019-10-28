@@ -10,7 +10,7 @@ function RangeButtons(props) {
 		["1 Month", "1 month"]
 	];
 	return (
-		<div className="btn-group btn-group-toggle mb-3">
+		<div className="btn-group btn-group-toggle">
 			{rangeButtons.map(([label, r], i) => (
 				<button
 					key={i}

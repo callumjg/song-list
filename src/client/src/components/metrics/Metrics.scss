@@ -1,2 +1,26 @@
+@import "../../styles/mixins";
+@import "../../styles/colors";
+
+// @import "../../../node_modules/bootstrap/scss/functions";
+// @import "../../../node_modules/bootstrap/scss/variables";
+// @import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
 .metrics {
+	.metric-controls {
+		padding-bottom: 1rem;
+		& > div {
+			@include flex(space-between, center);
+		}
+		&.stuck {
+			@include boxShadow();
+			padding: 1rem;
+			background-color: rgba(white, 0.8);
+		}
+	}
+	.sortable {
+		&:hover {
+			background-color: rgba($primary, 0.05);
+			cursor: pointer;
+		}
+	}
 }

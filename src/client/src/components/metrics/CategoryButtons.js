@@ -5,7 +5,7 @@ function CategoryButtons(props) {
 		["Category B (Hymn)", () => props.setCategory(/Category B/gi)]
 	];
 	return (
-		<div className="btn-group btn-group-toggle mb-3">
+		<div className="btn-group btn-group-toggle">
 			{categoryButtons.map(([label, onClick], i) => (
 				<button
 					key={i}
