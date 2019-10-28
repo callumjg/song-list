@@ -28,7 +28,11 @@ router.get("/:_id", async (req, res) => {
 //Get Services
 router.get("/", async (req, res) => {
 	try {
-		const services = await Service.find({}).populate("songs");
+		const filter = {};
+		const select = "_id date";
+		const options = { sort: { date: -1 } };
+		const services = await Service.find(filter, select, options);
+
 		res.send({ services });
 	} catch (e) {
 		console.log(e);

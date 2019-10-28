@@ -61,22 +61,21 @@ router.get("/metrics", async (req, res) => {
 			).length;
 		}
 
-		const servicesCount =
-			// get plays
-			songs.forEach(song => {
-				let total = song.services.length;
+		// get plays
+		songs.forEach(song => {
+			let total = song.services.length;
 
-				// set total
-				song.metrics.plays = { total: total };
+			// set total
+			song.metrics.plays = { total: total };
 
-				// iterate through range
-				for (r in range) {
-					let count = song.services.filter(({ date }) =>
-						isAfter(date, range[r].date)
-					).length;
-					song.metrics.plays[r] = count;
-				}
-			});
+			// iterate through range
+			for (r in range) {
+				let count = song.services.filter(({ date }) =>
+					isAfter(date, range[r].date)
+				).length;
+				song.metrics.plays[r] = count;
+			}
+		});
 
 		//get plays per service
 		songs.forEach(song => {

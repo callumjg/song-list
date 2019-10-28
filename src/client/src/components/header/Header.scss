@@ -6,6 +6,7 @@ header {
 	background-color: white;
 	// color: $text-color-light;
 	color: $primary;
+	z-index: 99999;
 	cursor: default;
 	.container {
 		@include flex(space-between);
