@@ -37,4 +37,4 @@ class Tags {
 	}
 }
 
-module.exports = Tags;
+export default Tags;
