@@ -2,13 +2,14 @@ import React from "react";
 import Sticky from "../util_components/Sticky";
 import CategoryButtons from "./CategoryButtons";
 import RangeButtons from "./RangeButtons";
+import "./MetricsControls.scss";
 
 function MetricControls({ state, dispatch }) {
 	const { range, category } = state;
 	return (
 		<Sticky>
 			{stuck => (
-				<div className={`metric-controls${stuck ? " stuck" : ""}`}>
+				<div className={`metrics-controls${stuck ? " stuck" : ""}`}>
 					<div className={stuck ? "container" : ""}>
 						<CategoryButtons
 							category={category}

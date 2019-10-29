@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import useResources from "../../hooks/useResource";
 import Loader from "../util_components/Loader";
-import MetricControls from "./MetricsControls";
+import MetricsControls from "./MetricsControls";
 import MetricsTable from "./MetricsTable";
 import { useMetricsReducer } from "./helpers";
 import "./Metrics.scss";
@@ -24,11 +24,11 @@ function Metrics(props) {
 	});
 	useEffect(() => {
 		dispatch({ type: "SET_SONGS", payload: songs });
-	}, [songs]);
+	}, [songs, dispatch]);
 
 	return (
 		<section className="metrics container py-3 relative">
-			<MetricControls state={state} dispatch={dispatch} />
+			<MetricsControls state={state} dispatch={dispatch} />
 			<Loader loading={isLoading}>
 				{error && <div className="alert alert-danger">{error}</div>}
 				<MetricsTable state={state} dispatch={dispatch} />
