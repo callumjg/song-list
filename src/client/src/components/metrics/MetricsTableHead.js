@@ -7,6 +7,7 @@ function MetricsTableHead({ state, dispatch }) {
 		<thead>
 			<tr>
 				<th>Title</th>
+				<th className="text-center">Earliest Recorded Service</th>
 				<th
 					className="text-center sortable"
 					onClick={() =>

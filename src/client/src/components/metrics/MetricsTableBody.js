@@ -1,5 +1,6 @@
 import React from "react";
 import { getWeeksSincePlayed, sortSincePlayed, sortPlays } from "./helpers";
+import { format } from "date-fns";
 function MetricsTableBody({ state, dispatch }) {
 	let { sortBy, isAsc, songs, range, category } = state;
 	songs = getWeeksSincePlayed(songs);
@@ -23,6 +24,11 @@ function MetricsTableBody({ state, dispatch }) {
 					className={s.metrics.plays[range] < avPlays ? "text-danger" : ""}
 				>
 					<td>{s.title}</td>
+					<td className="text-center">
+						{s.services.length
+							? format(new Date(s.services[0].date), "dd/MM/yyy")
+							: "-"}
+					</td>
 					<td className="text-center">{s.metrics.plays[range]}</td>
 					<td className="text-right">{s.metrics.weeksSincePlayed}</td>
 				</tr>
