@@ -5,7 +5,7 @@ const Limiter = ({ setLimit, limitButtons, setPage, limit }) => {
 		setPage(0);
 	}
 	return (
-		<div className="mb-3">
+		<div>
 			<span className="mr-2">Limit: </span>
 			<div className="btn-group btn-group-toggle">
 				{limitButtons.map((p, i) => (

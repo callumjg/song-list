@@ -6,7 +6,6 @@ import SongsTable from "./SongsTable";
 import SongsControls from "./SongsControls";
 import useSongListReducer from "./useSongListReducer";
 import Loader from "../util_components/Loader";
-import "./SongsList.scss";
 
 const SongsList = props => {
 	const initialState = {
@@ -14,12 +13,12 @@ const SongsList = props => {
 		page: 0,
 		tags: ["category a"],
 		exclude: ["archived", "deleted"],
-		search: "",
-		isPending: false
+		search: ""
 	};
 	const [state, dispatch] = useSongListReducer(initialState);
-	const { limit, page, tags, exclude, search, isPending } = state;
+	const { limit, page, tags, exclude, search } = state;
 	const [searchInput, setSearchInput] = useState("");
+	const [isPending, setIsPending] = useState(false);
 	const [timer, setTimer] = useState(null);
 
 	const url = useMemo(() => {
@@ -38,20 +37,19 @@ const SongsList = props => {
 	});
 
 	function setSearchDelayed(string) {
-		dispatch({ type: "SET_IS_PENDING", payload: true });
+		setIsPending(true);
 		setSearchInput(string);
 		clearTimeout(timer);
 		setTimer(
 			setTimeout(() => {
-				dispatch({ type: "SET_SEARCH", payload: false });
-				dispatch({ type: "SET_IS_PENDING", payload: false });
-			}, 100)
+				dispatch({ type: "SET_SEARCH", payload: string });
+				setIsPending(false);
+			}, 200)
 		);
 	}
 
 	return (
 		<section className="songs-list relative my-3">
-			<h4>Songs</h4>
 			<SongsControls state={state} dispatch={dispatch} />
 			<SongSearch search={searchInput} setSearch={setSearchDelayed} />
 			{error && <p className="alert alert-danger my-2 p-2">{error}</p>}

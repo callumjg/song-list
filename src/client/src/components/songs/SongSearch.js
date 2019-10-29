@@ -2,7 +2,7 @@ import React from "react";
 
 const SongSearch = ({ search, setSearch }) => {
 	return (
-		<div className="mt-3">
+		<div className="my-3">
 			<input
 				type="text"
 				className="form-control "

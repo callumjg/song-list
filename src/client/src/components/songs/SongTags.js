@@ -18,8 +18,8 @@ const SongTags = ({ tags, setTags, exclude, setExclude }) => {
 		setExclude(T.getExclude());
 	}
 	return (
-		<div className="my-3">
-			<div className="btn-group btn-group-toggle">
+		<div>
+			<div className="btn-group btn-group-toggle mr-2">
 				{catButtons.map((c, i) => (
 					<button
 						className={getCatClasses(c)}
@@ -31,7 +31,7 @@ const SongTags = ({ tags, setTags, exclude, setExclude }) => {
 				))}
 			</div>
 			<button
-				className={buttonClasses + showArchived + " ml-2"}
+				className={buttonClasses + showArchived}
 				onClick={() => {
 					if (!showArchived) {
 						setShowArchived(" active");
