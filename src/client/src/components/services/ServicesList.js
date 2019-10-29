@@ -42,7 +42,10 @@ function ServicesList(props) {
 	return (
 		<section className="container relative py-3">
 			<h4>Services</h4>
-			{error && <p className="alert alert-danger my-2 p-2">{error}</p>}
+			{error ||
+				(submitError && (
+					<p className="alert alert-danger my-2 p-2">{error || submitError}</p>
+				))}
 			<div className="d-flex justify-content-between align-items-start">
 				<button
 					className="btn btn-sm btn-outline-primary"
@@ -58,7 +61,7 @@ function ServicesList(props) {
 				/>
 			</div>
 			<div className="relative">
-				<Loader loading={isLoading}>
+				<Loader loading={isLoading || isSubmitting}>
 					<ServicesTable services={services} />
 				</Loader>
 			</div>

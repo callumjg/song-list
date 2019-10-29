@@ -6,11 +6,11 @@ function SongSelector(props) {
 	const [open, setOpen] = useState(" open");
 	useEffect(() => {
 		props.songs.length || props.isLoading ? setOpen(" open") : setOpen("");
-	}, [props.songs]);
+	}, [props.songs, props.isLoading]);
+
 	function onSelect(song) {
 		props.onSelect(song);
 		setOpen("");
-		console.log(props);
 	}
 	return (
 		<div className={`song-selector${open}`}>

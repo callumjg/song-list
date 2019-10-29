@@ -22,6 +22,7 @@ function ServiceForm(props) {
 
 	return (
 		<form onSubmit={onSubmit} className="service-form container">
+			{error && <div className="alert alert-danger">{error}</div>}
 			<section className="form-group">
 				<label>Date</label>
 				<input

@@ -1,7 +1,17 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
 .brand {
 	img {
-		height: 3rem;
+		height: 2.5rem;
 		width: auto;
 		margin: 0.2rem;
+	}
+
+	@include media-breakpoint-up(sm) {
+		img {
+			height: 3rem;
+		}
 	}
 }
