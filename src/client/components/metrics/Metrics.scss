@@ -1,0 +1,15 @@
+@import "../../styles/mixins";
+@import "../../styles/colors";
+
+// @import "../../../node_modules/bootstrap/scss/functions";
+// @import "../../../node_modules/bootstrap/scss/variables";
+// @import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+.metrics {
+  .sortable {
+    &:hover {
+      background-color: rgba($primary, 0.05);
+      cursor: pointer;
+    }
+  }
+}
