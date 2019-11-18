@@ -1,31 +1,20 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const chalk = require("chalk");
-const PUBLIC_DIR = __dirname + "/src/client/public";
+const path = require("path");
+const entry = path.resolve(__dirname, "src", "client", "index.js");
+const assets = path.resolve(__dirname, "src", "client", "public");
 
-module.exports = env => ({
-  mode: env.NODE_ENV,
-  entry: __dirname + "/src/client/index.js",
+module.exports = {
+  entry,
   output: {
-    path: __dirname + "/build",
-    filename: "index.bundle.js"
+    publicPath: "/"
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-react"],
-              plugins: ["@babel/plugin-proposal-class-properties"]
-            }
-          },
-          {
-            loader: "eslint-loader"
-          }
-        ]
+        use: ["babel-loader", "eslint-loader"]
       },
       {
         test: /\.s[ac]ss$/i,
@@ -37,34 +26,19 @@ module.exports = env => ({
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: "file-loader"
-          }
-        ]
+        loader: "file-loader"
       }
     ]
   },
   devtool: "source-map", //enum
-  context: __dirname, // string (absolute path!)
-  target: "web", // enum
   devServer: {
     proxy: {
       "/api": "http://localhost:3001"
     },
-    contentBase: __dirname + "/src/server/public", // boolean | string | array, static file location
+    contentBase: path.resolve(__dirname, "dist"),
     publicPath: "/",
-    compress: true, // enable gzip compression
-    historyApiFallback: {
-      rewrites: [
-        {
-          from: /\.js/,
-          to: context => context.parsedUrl.href.match(/\/[^/]+\.js$/)[0]
-        },
-        { from: /./, to: "/" }
-      ],
-      disableDotRule: true
-    },
+    compress: true,
+    historyApiFallback: true,
     port: 3000,
     after: function() {
       console.log(
@@ -74,8 +48,8 @@ module.exports = env => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: PUBLIC_DIR + "/index.html",
-      favicon: PUBLIC_DIR + "/favicon.ico"
+      template: assets + "/index.html",
+      favicon: assets + "/favicon.ico"
     })
   ]
-});
+};
