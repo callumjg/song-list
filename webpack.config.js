@@ -38,13 +38,8 @@ module.exports = {
     contentBase: path.resolve(__dirname, "dist"),
     publicPath: "/",
     compress: true,
-    historyApiFallback: true,
     port: 3000,
-    after: function() {
-      console.log(
-        `Development server for client listening on ${chalk.green(this.port)}`
-      );
-    }
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({
