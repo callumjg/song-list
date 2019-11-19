@@ -1,14 +1,16 @@
 import React from "react";
 import { getWeeksSincePlayed, sortSincePlayed, sortPlays } from "./helpers";
 import { format } from "date-fns";
+
 function MetricsTableBody({ state, dispatch }) {
   let { sortBy, isAsc, songs, range, category } = state;
-  songs = getWeeksSincePlayed(songs);
+  
+  // songs = getMetrics(songs);
 
-  function sortSongs(arr) {
-    return sortBy === "PLAYS"
-      ? arr.sort(sortSincePlayed(isAsc)).sort(sortPlays(range, isAsc))
-      : arr.sort(sortPlays(range, isAsc)).sort(sortSincePlayed(isAsc));
+  // function sortSongs(arr) {
+  //   return sortBy === "PLAYS"
+  //     ? arr.sort(sortSincePlayed(isAsc)).sort(sortPlays(range, isAsc))
+  //     : arr.sort(sortPlays(range, isAsc)).sort(sortSincePlayed(isAsc));
   }
   const avPlays =
     songs.reduce((acc, song) => acc + song.metrics.plays[range], 0) /

@@ -3,13 +3,13 @@ import useResources from "../../hooks/useResource";
 import Loader from "../util_components/Loader";
 import MetricsControls from "./MetricsControls";
 import MetricsTable from "./MetricsTable";
-import { useMetricsReducer } from "./helpers";
+import { useMetricsReducer, getMetrics } from "./helpers";
 import "./Metrics.scss";
 
 // Functional component
 function Metrics(props) {
   const initialState = {
-    range: "6 months",
+    range: "6",
     category: /Category A/i,
     sortBy: "PLAYS",
     isAsc: false,
@@ -18,13 +18,18 @@ function Metrics(props) {
 
   const [state, dispatch] = useMetricsReducer(initialState);
 
-  let [{ songs }, error, isLoading] = useResources("/songs/metrics", {
-    songs: [],
-    count: 0
-  });
+  const [{ songs }, error, isLoading] = useResources(
+    `/songs/metrics?range=${state.range}`,
+    {
+      songs: []
+    }
+  );
   useEffect(() => {
-    dispatch({ type: "SET_SONGS", payload: songs });
-  }, [songs, dispatch]);
+    dispatch({
+      type: "SET_SONGS",
+      payload: getMetrics(songs, state.range, state.sortBy, state.isAsc)
+    });
+  }, [songs, state.range, state.sortBy, state.isAsc, dispatch]);
 
   return (
     <section className="metrics container py-3 relative">

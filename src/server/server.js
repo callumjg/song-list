@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3001;
 const apiRouter = require("./routes/api");
 const root = "/dist";
 
-require("./db/mongoose");
+require("./db/mongoose")();
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));

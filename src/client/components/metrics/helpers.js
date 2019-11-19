@@ -1,5 +1,4 @@
 import { useReducer } from "react";
-import { differenceInCalendarWeeks, compareDesc } from "date-fns";
 
 // metrics reducer
 function reducer(state, { type, payload }) {
@@ -23,6 +22,13 @@ function reducer(state, { type, payload }) {
 export function useMetricsReducer(initialState = {}) {
   const [state, dispatch] = useReducer(reducer, initialState);
   return [state, dispatch];
+}
+
+// get metrics
+// must add: weeksSincePlayed, earliestService
+// must sort according to rules
+export function getMetrics(songs, range, sortBy, isAsc) {
+  return songs.map(song => ({ ...song, weeksSincePlayed: 0, earliestService }));
 }
 
 // Sort functions
