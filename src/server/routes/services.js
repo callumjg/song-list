@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const Service = require("../models/Service");
 const Song = require("../models/Song");
+const whiteListBody = require("../middleware/whitelistBody");
+
+const allowedUpdates = ["songs", "tags", "date"];
 
 // create service
 router.post("/", async (req, res) => {
@@ -69,11 +72,31 @@ router.get("/", async (req, res) => {
   }
 });
 
+// update service
+router.patch("/:_id", whiteListBody(allowedUpdates), async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const service = await Service.findById(_id);
+    Object.keys(req.body).forEach(u => (service[u] = req.body[u]));
+    await service.save();
+    res.send({ service });
+  } catch (e) {
+    let status = e.status || 400;
+    console.log("Error: " + e.message);
+    res.status(status).send({ message: e.message });
+  }
+});
+
 // delete service
 router.delete("/:_id", async (req, res) => {
   try {
     const service = await Service.findById(req.params._id);
     if (!service) return res.status(404).send();
+    await service.songs.forEach(async _id => {
+      const song = await Song.findById(_id);
+      song.services = song.services.filter(val => val !== _id);
+      await song.save();
+    });
     await service.remove();
     res.send(service);
   } catch (e) {
