@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 
-async function connect() {
+module.exports = async function connect() {
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
@@ -12,6 +12,4 @@ async function connect() {
     console.log(chalk.red("Error, unable to connect to database"));
     console.log(e);
   }
-}
-
-connect();
+};

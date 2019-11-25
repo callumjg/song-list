@@ -10,11 +10,6 @@ router.post("/", async (req, res) => {
   try {
     const service = new Service(req.body);
     await service.save();
-    await service.songs.forEach(async _id => {
-      const song = await Song.findById(_id);
-      song.services = [...song.services, service._id];
-      await song.save();
-    });
     res.status(201).send(service);
   } catch (e) {
     console.log(e);
@@ -37,6 +32,9 @@ router.get("/:_id", async (req, res) => {
 //Get Services
 router.get("/", async (req, res) => {
   try {
+    // destructure query params
+    const { limit, skip, sort, fromDate, toDate } = req.query;
+
     // filter used to return results based on specific params
     const filter = {};
 
@@ -47,14 +45,18 @@ router.get("/", async (req, res) => {
     const options = { sort: { date: -1 } };
 
     // set limit and skip for pagination
-    if (req.query.limit) options.limit = parseInt(req.query.limit);
-    if (req.query.skip) options.skip = parseInt(req.query.skip);
+    if (limit) options.limit = parseInt(limit);
+    if (skip) options.skip = parseInt(skip);
 
     // set sort options
-    if (req.query.sort) {
-      let parts = req.query.sort.split("_");
+    if (sort) {
+      let parts = sort.split("_");
       options.sort[parts[0]] = parts[1] === "desc" ? -1 : 1;
     }
+    // handle date filters
+    if (fromDate || toDate) filter.date = {};
+    if (fromDate) filter.date.$gte = new Date(parseInt(fromDate));
+    if (toDate) filter.date.$lte = new Date(parseInt(toDate));
 
     // Count total available resources
     const count = await Service.countDocuments({ ...filter, limit: null });
@@ -92,11 +94,6 @@ router.delete("/:_id", async (req, res) => {
   try {
     const service = await Service.findById(req.params._id);
     if (!service) return res.status(404).send();
-    await service.songs.forEach(async _id => {
-      const song = await Song.findById(_id);
-      song.services = song.services.filter(val => val !== _id);
-      await song.save();
-    });
     await service.remove();
     res.send(service);
   } catch (e) {
