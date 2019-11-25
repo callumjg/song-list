@@ -10,11 +10,6 @@ router.post("/", async (req, res) => {
   try {
     const service = new Service(req.body);
     await service.save();
-    await service.songs.forEach(async _id => {
-      const song = await Song.findById(_id);
-      song.services = [...song.services, service._id];
-      await song.save();
-    });
     res.status(201).send(service);
   } catch (e) {
     console.log(e);
@@ -99,11 +94,6 @@ router.delete("/:_id", async (req, res) => {
   try {
     const service = await Service.findById(req.params._id);
     if (!service) return res.status(404).send();
-    await service.songs.forEach(async _id => {
-      const song = await Song.findById(_id);
-      song.services = song.services.filter(val => val !== _id);
-      await song.save();
-    });
     await service.remove();
     res.send(service);
   } catch (e) {
