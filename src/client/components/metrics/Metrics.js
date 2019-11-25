@@ -45,6 +45,9 @@ function Metrics(props) {
       .filter(song => song.tags.find(cat => cat.match(category)))
       .map(song => {
         const services = song.services.sort();
+        const averagePlacement = song.totalIndices
+          ? Math.round((100 * song.totalIndices) / services.length) / 100
+          : "-";
         const earliestService = services.length
           ? moment(services[0]).format("DD/MM/YYYY")
           : "-";
@@ -57,6 +60,7 @@ function Metrics(props) {
           services,
           plays,
           earliestService,
+          averagePlacement,
           weeksSincePlayed
         };
       })

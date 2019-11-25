@@ -7,16 +7,26 @@ function MetricsTableBody({ state }) {
 
   return (
     <tbody>
-      {songs.map(({ _id, title, plays, earliestService, weeksSincePlayed }) => (
-        <tr key={_id} className={plays < avPlays ? "text-danger" : ""}>
-          <td>{title}</td>
-          <td className="text-center">{earliestService}</td>
-          <td className="text-center">{plays}</td>
-          <td className="text-right">
-            {weeksSincePlayed === Infinity ? "∞" : weeksSincePlayed}
-          </td>
-        </tr>
-      ))}
+      {songs.map(
+        ({
+          _id,
+          title,
+          plays,
+          earliestService,
+          averagePlacement,
+          weeksSincePlayed
+        }) => (
+          <tr key={_id} className={plays < avPlays ? "text-danger" : ""}>
+            <td>{title}</td>
+            <td className="text-center">{earliestService}</td>
+            <td className="text-center">{averagePlacement}</td>
+            <td className="text-center">{plays}</td>
+            <td className="text-right">
+              {weeksSincePlayed === Infinity ? "∞" : weeksSincePlayed}
+            </td>
+          </tr>
+        )
+      )}
     </tbody>
   );
 }

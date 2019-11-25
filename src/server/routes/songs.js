@@ -48,7 +48,7 @@ router.get("/metrics", async (req, res) => {
     const songsObj = songs
       .map(song => ({ ...song.toObject(), services: [] }))
       .reduce((acc, song) => {
-        acc[song._id] = song;
+        acc[song._id] = { ...song, totalIndices: 0 };
         return acc;
       }, {});
 
@@ -60,9 +60,10 @@ router.get("/metrics", async (req, res) => {
 
     // Add services array to each song
     services.forEach(service =>
-      service.songs.forEach(_id => {
+      service.songs.forEach((_id, i) => {
         if (!songsObj[_id]) return;
         songsObj[_id].services.push(moment(service.date).valueOf());
+        songsObj[_id].totalIndices += i + 1;
       })
     );
     res.send({ songs: Object.values(songsObj) });
