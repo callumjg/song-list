@@ -14,7 +14,7 @@ server.use(express.urlencoded({ extended: true }));
 server.use("/api/v1", apiRouter);
 
 server.use(express.static("dist"));
-server.use((req, res) => {
+server.get("*", (req, res) => {
   res.sendFile("index.html", { root });
 });
 
