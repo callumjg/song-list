@@ -62,7 +62,7 @@ router.get("/metrics", async (req, res) => {
     services.forEach(service =>
       service.songs.forEach(_id => {
         if (!songsObj[_id]) return;
-        songsObj[_id].services.push(moment(service.date).unix());
+        songsObj[_id].services.push(moment(service.date).valueOf());
       })
     );
     res.send({ songs: Object.values(songsObj) });

@@ -1,7 +1,7 @@
 import React from "react";
 
 function MetricsTableHead({ state, dispatch }) {
-  const { sortBy, isAsc } = state;
+  const { sortBy, sort } = state;
 
   return (
     <thead>
@@ -13,14 +13,14 @@ function MetricsTableHead({ state, dispatch }) {
           onClick={() =>
             dispatch(
               sortBy === "PLAYS"
-                ? { type: "TOGGLE_IS_ASC" }
+                ? { type: "TOGGLE_SORT" }
                 : { type: "SET_SORT_BY", payload: "PLAYS" }
             )
           }
         >
           Plays
           {sortBy === "PLAYS" && (
-            <i className={`ui ${isAsc ? "up" : "down"} chevron icon ml-2`} />
+            <i className={`ui ${sort > 0 ? "up" : "down"} chevron icon ml-2`} />
           )}
         </th>
         <th
@@ -29,13 +29,13 @@ function MetricsTableHead({ state, dispatch }) {
             dispatch(
               sortBy === "PLAYS"
                 ? { type: "SET_SORT_BY", payload: "WEEKS" }
-                : { type: "TOGGLE_IS_ASC" }
+                : { type: "TOGGLE_SORT" }
             )
           }
         >
           Wks since played
           {sortBy !== "PLAYS" && (
-            <i className={`ui ${isAsc ? "down" : "up"} chevron icon ml-2`} />
+            <i className={`ui ${sort > 0 ? "down" : "up"} chevron icon ml-2`} />
           )}
         </th>
       </tr>
