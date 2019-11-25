@@ -1,9 +1,10 @@
 const express = require("express");
 const chalk = require("chalk");
+const path = require("path");
 const server = express();
 const PORT = process.env.PORT || 3001;
 const apiRouter = require("./routes/api");
-const root = "/dist";
+const root = path.resolve(__dirname, "/dist");
 
 require("./db/mongoose")();
 
