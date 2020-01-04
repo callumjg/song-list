@@ -4,6 +4,9 @@ export default function useResource(url, defaultData) {
   const [data, setData] = useState(defaultData);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [nonce, setNonce] = useState(0);
+
+  const refresh = () => setNonce(nonce + 1);
 
   useEffect(() => {
     if (!url) return;
@@ -19,6 +22,6 @@ export default function useResource(url, defaultData) {
       }
       setIsLoading(false);
     })();
-  }, [url]);
-  return [url ? data : defaultData, error, isLoading];
+  }, [url, nonce]);
+  return [url ? data : defaultData, error, isLoading, refresh];
 }

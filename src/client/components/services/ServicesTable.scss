@@ -3,9 +3,16 @@
 .services-table {
   font-size: 85%;
   cursor: default;
+  tr,
+  td,
+  th {
+    flex: 1;
+  }
   tr {
-    td {
-      padding: 0.1rem;
+    @include flex(space-between, stretch);
+    td,
+    th {
+      @include flex(flex-start);
     }
   }
 }

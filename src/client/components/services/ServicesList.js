@@ -12,7 +12,7 @@ function ServicesList(props) {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
   const url = useMemo(() => {
@@ -21,23 +21,38 @@ function ServicesList(props) {
     return url;
   }, [limit, page]);
 
-  const [{ count, services }, error, isLoading] = useResource(url, {
-    count: 0,
-    services: []
-  });
+  const [{ count, services }, error, isFetching, refreshServices] = useResource(
+    url,
+    {
+      count: 0,
+      services: []
+    }
+  );
 
-  async function onSubmit(formValues) {
-    setIsSubmitting(true);
+  const onSubmit = async formValues => {
+    setIsLoading(true);
     try {
-      const response = await server.post("/services", formValues);
-      console.log(response);
-      // console.log("placeholder");
+      await server.post("/services", formValues);
+      setIsModalOpen(false);
+      refreshServices();
     } catch (e) {
       let message = e.response ? e.response.data.message : e.message;
       setSubmitError(message);
     }
-    setIsSubmitting(false);
-  }
+    setIsLoading(false);
+  };
+
+  const deleteService = async _id => {
+    setIsLoading(true);
+    try {
+      await server.delete(`/services/${_id}`);
+      refreshServices();
+    } catch (e) {
+      let message = e.response ? e.response.data.message : e.message;
+      setSubmitError(message);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <section className="container relative py-3">
@@ -61,8 +76,8 @@ function ServicesList(props) {
         />
       </div>
       <div className="relative">
-        <Loader loading={isLoading || isSubmitting}>
-          <ServicesTable services={services} />
+        <Loader loading={isFetching || isLoading}>
+          <ServicesTable services={services} deleteService={deleteService} />
         </Loader>
       </div>
       <PageButtons

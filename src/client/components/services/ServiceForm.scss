@@ -8,15 +8,20 @@
     position: relative;
     flex: 1;
   }
-
-  .songs-list {
+  h4 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .list {
     margin: 0;
     padding: 0;
     li {
-      padding: 0.5rem 0;
-      border-top: 1px solid rgba($primary, 0.3);
-
       @include flex(space-between);
+      background-color: rgba($primary, 0.05);
+      &:nth-child(even) {
+        background-color: rgba($primary, 0.08);
+      }
+      padding: 0.5rem;
     }
   }
 }
