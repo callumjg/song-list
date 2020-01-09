@@ -2,36 +2,48 @@ import React from "react";
 import { format } from "date-fns";
 import "./ServicesTable.scss";
 
-function ServicesTable(props) {
-  return (
-    <table className="table services-table">
-      <tbody>
-        {props.services.map(s => {
-          return (
-            <tr key={s._id}>
-              <td style={{ width: "60%" }}>
-                {format(new Date(s.date), "dd/MM/yyyy")}
-                <ol>
-                  {s.songs.map((s, i) => (
-                    <li key={i}>{s.title}</li>
-                  ))}
-                </ol>
-              </td>
-              <td>
-                {s.tags && (
-                  <ul>
-                    {s.tags.map((t, i) => (
-                      <li key={i}>{t}</li>
-                    ))}
-                  </ul>
-                )}
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  );
-}
+const ServicesTable = ({ services, deleteService }) => (
+  <table className="table services-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Songs</th>
+        <th>Tags</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {services.map(service => (
+        <tr key={service._id}>
+          <td>{format(new Date(service.date), "dd/MM/yyyy")}</td>
+          <td>
+            <ol>
+              {service.songs.map((song, i) => (
+                <li key={i}>{song.title}</li>
+              ))}
+            </ol>
+          </td>
+          <td>
+            {service.tags && (
+              <ul>
+                {service.tags.map((tag, i) => (
+                  <li key={i}>{tag}</li>
+                ))}
+              </ul>
+            )}
+          </td>
+          <td>
+            <button className="btn btn-sm btn-outline-danger" type="button">
+              <i
+                className="ui trash icon"
+                onClick={() => deleteService(service._id)}
+              />
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+);
 
 export default ServicesTable;

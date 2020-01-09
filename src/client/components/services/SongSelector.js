@@ -4,14 +4,16 @@ import "./SongSelector.scss";
 
 function SongSelector(props) {
   const [open, setOpen] = useState(" open");
+
   useEffect(() => {
     props.songs.length || props.isLoading ? setOpen(" open") : setOpen("");
   }, [props.songs, props.isLoading]);
 
-  function onSelect(song) {
+  const onSelect = song => {
     props.onSelect(song);
     setOpen("");
-  }
+  };
+
   return (
     <div className={`song-selector${open}`}>
       <Loader loading={props.isLoading}>
