@@ -1,6 +1,9 @@
 import React from "react";
 
-const SongSearch: React.FC = ({ search, setSearch }) => {
+const SongSearch: React.FC<{ search: any; setSearch: any }> = ({
+  search,
+  setSearch
+}) => {
   return (
     <div className="my-3">
       <input

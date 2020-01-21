@@ -6,7 +6,7 @@ import ServiceForm from "./ServiceForm";
 import Limiter from "../util_components/Limiter";
 import Loader from "../util_components/Loader";
 import Modal from "../util_components/modal/Modal";
-import server from "../../../apis/server";
+import server from "../../apis/server";
 
 const ServicesList: React.FC = props => {
   const [limit, setLimit] = useState(10);
@@ -29,7 +29,7 @@ const ServicesList: React.FC = props => {
     }
   );
 
-  const onSubmit = async formValues => {
+  const onSubmit = async (formValues: any) => {
     setIsLoading(true);
     try {
       await server.post("/services", formValues);
@@ -42,7 +42,7 @@ const ServicesList: React.FC = props => {
     setIsLoading(false);
   };
 
-  const deleteService = async _id => {
+  const deleteService = async (_id: string) => {
     setIsLoading(true);
     try {
       await server.delete(`/services/${_id}`);

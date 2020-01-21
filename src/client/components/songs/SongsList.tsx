@@ -36,13 +36,13 @@ const SongsList: React.FC = props => {
     songs: []
   });
 
-  function setSearchDelayed(string) {
+  function setSearchDelayed(payload) {
     setIsPending(true);
-    setSearchInput(string);
+    setSearchInput(payload);
     clearTimeout(timer);
     setTimer(
       setTimeout(() => {
-        dispatch({ type: "SET_SEARCH", payload: string });
+        dispatch({ type: "SET_SEARCH", payload });
         setIsPending(false);
       }, 200)
     );

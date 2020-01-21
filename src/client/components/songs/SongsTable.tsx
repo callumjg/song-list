@@ -2,7 +2,7 @@ import React from "react";
 import SongRow from "./SongRow";
 import "./SongsTable.scss";
 
-const SongsTable: React.FC = ({ songs }) => {
+const SongsTable: React.FC<{ songs: any[] }> = ({ songs }) => {
   return (
     <table className="table songs-table">
       <thead className="">

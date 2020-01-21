@@ -4,7 +4,12 @@ import useResource from "../../hooks/useResource";
 import SongSelector from "./SongSelector";
 import "./ServiceForm.scss";
 
-const ServiceForm: React.FC = props => {
+interface Props {
+  onSubmit: (args: any) => void;
+  onDismiss: () => void;
+}
+
+const ServiceForm: React.FC<Props> = props => {
   const [search, setSearch] = useState("");
   const [inputTag, setInputTag] = useState("");
   const [date, setDate] = useState("");
@@ -13,10 +18,10 @@ const ServiceForm: React.FC = props => {
   });
   const [tags, tagDispatch, tagActions] = useListReducer([]);
   const url = search.length > 1 ? `/songs?limit=5&search=${search}` : null;
-  const [resource, error, isLoading] = useResource(url);
+  const [resource, error, isLoading] = useResource(url, null);
   const searchSongs = resource ? resource.songs : [];
 
-  const onSubmit = async e => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
     try {
       await props.onSubmit({ songs, date, tags });
@@ -26,7 +31,7 @@ const ServiceForm: React.FC = props => {
     }
   };
 
-  const onSongSelect = payload => {
+  const onSongSelect = (payload: any) => {
     songDispatch({ type: songActions.ADD, payload });
     setSearch("");
   };
@@ -36,10 +41,10 @@ const ServiceForm: React.FC = props => {
     setInputTag("");
   };
 
-  const removeTag = payload =>
+  const removeTag = (payload: any) =>
     tagDispatch({ type: tagActions.REMOVE, payload });
 
-  const onTagKeyPress = e => {
+  const onTagKeyPress = (e: any) => {
     if (e.key === "Enter") {
       e.preventDefault();
       addTag();
@@ -65,7 +70,7 @@ const ServiceForm: React.FC = props => {
         <h4>Tags</h4>
         {tags.length > 0 && (
           <ol className="list tags-list">
-            {tags.map((tag, i) => (
+            {tags.map((tag: any, i: number) => (
               <li key={i}>
                 {tag}
                 <button className="btn btn-sm btn-outline-danger" type="button">
@@ -93,19 +98,22 @@ const ServiceForm: React.FC = props => {
         <h4>Songs</h4>
         <ol className="list songs-list">
           {songs.length > 0 &&
-            songs.map(({ title, _id }) => (
-              <li key={_id}>
-                {title}
-                <button className="btn btn-sm btn-outline-danger">
-                  <i
-                    className="ui trash icon"
-                    onClick={() =>
-                      songDispatch({ type: songActions.REMOVE, payload: _id })
-                    }
-                  />
-                </button>
-              </li>
-            ))}
+            songs.map((song: any) => {
+              const { title, _id } = song;
+              return (
+                <li key={_id}>
+                  {title}
+                  <button className="btn btn-sm btn-outline-danger">
+                    <i
+                      className="ui trash icon"
+                      onClick={() =>
+                        songDispatch({ type: songActions.REMOVE, payload: _id })
+                      }
+                    />
+                  </button>
+                </li>
+              );
+            })}
         </ol>
       </section>
       <section className="search form-group">

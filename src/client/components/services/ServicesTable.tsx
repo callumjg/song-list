@@ -2,7 +2,12 @@ import React from "react";
 import { format } from "date-fns";
 import "./ServicesTable.scss";
 
-const ServicesTable: React.FC = ({ services, deleteService }) => (
+interface Props {
+  services: any[];
+  deleteService: (...args: any[]) => void;
+}
+
+const ServicesTable: React.FC<Props> = ({ services, deleteService }) => (
   <table className="table services-table">
     <thead>
       <tr>
@@ -18,7 +23,7 @@ const ServicesTable: React.FC = ({ services, deleteService }) => (
           <td>{format(new Date(service.date), "dd/MM/yyyy")}</td>
           <td>
             <ol>
-              {service.songs.map((song, i) => (
+              {service.songs.map((song: any, i: number) => (
                 <li key={i}>{song.title}</li>
               ))}
             </ol>
@@ -26,7 +31,7 @@ const ServicesTable: React.FC = ({ services, deleteService }) => (
           <td>
             {service.tags && (
               <ul>
-                {service.tags.map((tag, i) => (
+                {service.tags.map((tag: any, i: number) => (
                   <li key={i}>{tag}</li>
                 ))}
               </ul>

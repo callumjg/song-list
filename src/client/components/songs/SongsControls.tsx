@@ -4,11 +4,14 @@ import Sticky from "../util_components/Sticky";
 import Limiter from "../util_components/Limiter";
 import "./SongsControls.scss";
 
-const SongsControls: React.FC = ({ state, dispatch }) => {
+const SongsControls: React.FC<{ state: any; dispatch: any }> = ({
+  state,
+  dispatch
+}) => {
   const { tags, exclude, limit } = state;
   return (
     <Sticky>
-      {stuck => (
+      {(stuck: string) => (
         <section className={`songs-controls${stuck}`}>
           <div className={stuck ? "container" : ""}>
             <SongTags

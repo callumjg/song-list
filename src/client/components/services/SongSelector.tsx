@@ -2,24 +2,29 @@ import React, { useState, useEffect } from "react";
 import Loader from "../util_components/Loader";
 import "./SongSelector.scss";
 
-const SongSelector: React.FC = props => {
+interface Props {
+  songs: any[];
+  isLoading: boolean;
+  onSelect: (arg: any) => void;
+}
+const SongSelector: React.FC<Props> = ({ songs, isLoading, onSelect }) => {
   const [open, setOpen] = useState(" open");
 
   useEffect(() => {
-    props.songs.length || props.isLoading ? setOpen(" open") : setOpen("");
-  }, [props.songs, props.isLoading]);
+    songs.length || isLoading ? setOpen(" open") : setOpen("");
+  }, [songs, isLoading]);
 
-  const onSelect = song => {
-    props.onSelect(song);
+  const onSelectWrapper = (song: any) => {
+    onSelect(song);
     setOpen("");
   };
 
   return (
     <div className={`song-selector${open}`}>
-      <Loader loading={props.isLoading}>
+      <Loader loading={isLoading}>
         <div className="song-selector-container">
-          {props.songs.map(s => (
-            <div key={s._id} onClick={() => onSelect(s)}>
+          {songs.map(s => (
+            <div key={s._id} onClick={() => onSelectWrapper(s)}>
               {s.title}
               <i className="ui plus icon" />
             </div>

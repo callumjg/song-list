@@ -1,6 +1,12 @@
 import React from "react";
 
-const PageButtons: React.FC = ({ page, pagesNum, setPage }) => {
+interface Props {
+  page: number;
+  pagesNum: number;
+  setPage: (...args: any[]) => void;
+}
+
+const PageButtons: React.FC<Props> = ({ page, pagesNum, setPage }) => {
   if (pagesNum < 2) return null;
   let pages = [];
   for (let i = 1; i <= pagesNum; i++) {

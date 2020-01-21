@@ -1,4 +1,7 @@
 class Tags {
+  tags: any[];
+  exclude: any[];
+
   constructor(tags, exclude) {
     this.tags = tags;
     this.exclude = exclude;

@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import Tags from "./Tags";
 
-const SongTags: React.FC = ({ tags, setTags, exclude, setExclude }) => {
+interface Props {
+  tags: any[];
+  setTags: (tags: any[]) => any;
+  exclude: any[];
+  setExclude: (tags: any[]) => any;
+}
+const SongTags: React.FC<Props> = ({ tags, setTags, exclude, setExclude }) => {
   const T = new Tags(tags, exclude);
   const [activeCat, setActiveCat] = useState("Category A");
   const catButtons = ["Category A", "Category B (Hymn)"];
   const buttonClasses = "btn btn-outline-primary no-glow btn-sm";
   const [showArchived, setShowArchived] = useState("");
 
-  function getCatClasses(c) {
+  function getCatClasses(c: string) {
     return activeCat === c ? buttonClasses + " active" : buttonClasses;
   }
-  function handleCatClick(c) {
+  function handleCatClick(c: string) {
     setActiveCat(c);
     T.addTag(c).addExclude(c === catButtons[0] ? catButtons[1] : catButtons[0]);
     setTags(T.getTags());

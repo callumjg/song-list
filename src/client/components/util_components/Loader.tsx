@@ -5,7 +5,7 @@ interface Props {
   loading: boolean;
 }
 const Loader: React.FC<Props> = ({ loading, children }) => {
-  if (!loading) return children;
+  if (!loading) return <>{children}</>;
   return (
     <div>
       <div className="loader">

@@ -8,22 +8,39 @@ import ModalFooter from "./ModalFooter";
 	Required props: isOpen (bool), onDismiss (function)
 	Optional props: children, title, footer, large, small
 */
-const Modal: React.FC = props => {
+
+interface Props {
+  isOpen: boolean;
+  onDismiss: (...args: any[]) => any;
+  title?: string;
+  footer?: string;
+  large?: boolean;
+  small?: boolean;
+}
+const Modal: React.FC<Props> = ({
+  isOpen,
+  onDismiss,
+  title,
+  footer,
+  large,
+  small,
+  children
+}) => {
   const body = document.querySelector("body");
   const [display, setDisplay] = useState("none");
   const [show, setShow] = useState("");
 
   useEffect(() => {
-    if (props.isOpen) {
+    if (isOpen) {
       body.classList.add("modal-open");
       transitionIn();
     }
-    if (!props.isOpen) {
+    if (!isOpen) {
       transitionOut();
       body.classList.remove("modal-open");
     }
     return () => body.classList.remove("modal-open");
-  }, [props.isOpen, body.classList]);
+  }, [isOpen, body.classList]);
 
   const transitionIn = () => {
     setDisplay("block");
@@ -44,19 +61,19 @@ const Modal: React.FC = props => {
       <div className={`modal-backdrop fade${show}`} style={{ display }} />
       <div
         className={`modal fade${show}`}
-        onClick={props.onDismiss}
+        onClick={onDismiss}
         style={{ display }}
       >
         <div
           className={`modal-dialog modal-dialog-centered ${
-            props.large ? "modal-lg" : ""
-          } ${props.small ? "modal-sm" : ""}`}
+            large ? "modal-lg" : ""
+          } ${small ? "modal-sm" : ""}`}
           onClick={e => e.stopPropagation()}
         >
           <div className="modal-content" onSubmit={e => e.stopPropagation()}>
-            <ModalHeader title={props.title} onDismiss={props.onDismiss} />
-            <div className="modal-body">{props.children}</div>
-            <ModalFooter footer={props.footer} />
+            <ModalHeader title={title} onDismiss={onDismiss} />
+            <div className="modal-body">{children}</div>
+            <ModalFooter footer={footer} />
           </div>
         </div>
       </div>
