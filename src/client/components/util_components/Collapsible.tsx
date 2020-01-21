@@ -1,8 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
 import "./Collapsible.scss";
 
-class Collapsible extends React.Component {
-  state = { isOpen: false };
+interface State {
+  isOpen: boolean;
+}
+
+type Props = {
+  defaultOpen: boolean;
+  heading: string;
+};
+
+class Collapsible extends Component<Props, State> {
+  state: State = { isOpen: false };
 
   componentDidMount() {
     if (this.props.defaultOpen) this.setState({ isOpen: true });

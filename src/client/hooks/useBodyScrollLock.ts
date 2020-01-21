@@ -1,16 +1,17 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
-const useBodyScrollLock = dependency => {
-  const body = useRef(document.querySelector("body")).current;
+const body = document.querySelector("body");
+
+const useBodyScrollLock = (isLocked: boolean) => {
   useEffect(() => {
-    if (dependency) {
-      body.style = "overflow:hidden;";
+    if (isLocked) {
+      body.style.overflow = "hidden";
     }
-    if (!dependency) {
-      body.style = "";
+    if (!isLocked) {
+      body.style.overflow = "";
     }
-    return () => (body.style = "");
-  }, [dependency, body.style]);
+    return () => (body.style.overflow = "");
+  }, [isLocked]);
 };
 
 export default useBodyScrollLock;

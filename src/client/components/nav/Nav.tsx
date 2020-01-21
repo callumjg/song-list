@@ -6,7 +6,7 @@ import "./Nav.scss";
 
 const Nav: React.FC = () => {
   const [isNavOpen, setIsNavOpen] = useState("");
-  useBodyScrollLock(isNavOpen);
+  useBodyScrollLock(isNavOpen ? true : false);
 
   return (
     <div>
