@@ -1,6 +1,10 @@
 import { useReducer } from "react";
 
-function useListReducer(initialState = [], options = {}) {
+interface Options {
+  target?: any;
+}
+
+function useListReducer(initialState: any[] = [], options: Options = {}) {
   function reducer(state, { type, payload }) {
     switch (type) {
       case "ADD":
@@ -15,11 +19,11 @@ function useListReducer(initialState = [], options = {}) {
         return state;
     }
   }
-  const actions = {
-    ADD: "ADD",
-    REMOVE: "REMOVE",
-    CLEAR: "CLEAR"
-  };
+  enum actions {
+    add = "ADD",
+    remove = "REMOVE",
+    clear = "CLEAR"
+  }
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return [state, dispatch, actions];

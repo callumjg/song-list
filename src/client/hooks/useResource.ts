@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import server from "../apis/server";
 
-export default function useResource(url: String, defaultData: any) {
+export default function useResource(url: string, defaultData = {}) {
   const [data, setData] = useState(defaultData);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
