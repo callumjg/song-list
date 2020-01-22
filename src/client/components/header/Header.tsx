@@ -3,7 +3,7 @@ import Nav from "../nav/Nav";
 import Brand from "./Brand";
 import "./Header.scss";
 
-const Header: React.FC = props => (
+const Header: React.FC = () => (
   <header>
     <div className="container">
       <Brand />

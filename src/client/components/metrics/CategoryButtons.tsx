@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
   setCategory: (category: RegExp) => void;
-  category: string;
+  category: RegExp;
 }
 
 type CategoryButton = [String, () => void];

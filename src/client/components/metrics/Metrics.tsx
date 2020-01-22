@@ -6,28 +6,11 @@ import MetricsControls from "./MetricsControls";
 import MetricsTable from "./MetricsTable";
 import { useMetricsReducer } from "./useMetricsReducer";
 import "./Metrics.scss";
-
-interface Service {}
-
-interface Song {
-  tags: string[];
-  services: Service[];
-  plays: number;
-  weeksSincePlayed: number;
-  totalIndices: number;
-}
-
-interface State {
-  range: number;
-  category: RegExp;
-  sortBy: String;
-  sort: number;
-  songs: Song[];
-}
+import Song from "../../types/Song";
 
 const Metrics: React.FC = () => {
   // Define initial state
-  const initialState: State = {
+  const initialState = {
     range: 6, // value in months
     category: /Category A/i,
     sortBy: "PLAYS",
@@ -90,7 +73,6 @@ const Metrics: React.FC = () => {
     dispatch({
       type: "SET_SONGS",
       payload: filteredSongs
-      // payload: getMetrics(songs, state.range, state.sortBy, state.sort)
     });
   }, [filteredSongs, dispatch]);
 

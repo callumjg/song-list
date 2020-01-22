@@ -1,18 +1,16 @@
 import React from "react";
+import Song from "../../types/Song";
+import { StateDispatchProps } from "./useMetricsReducer";
 
-interface Props {
-  state: any;
-}
-
-const MetricsTableBody: React.FC<Props> = ({ state }) => {
+const MetricsTableBody: React.FC<StateDispatchProps> = ({ state }) => {
   let { songs } = state;
   const avPlays =
-    songs.reduce((acc: number, song: any) => acc + song.plays, 0) /
+    songs.reduce((acc: number, song: Song) => acc + song.plays, 0) /
     songs.length;
 
   return (
     <tbody>
-      {songs.map((song: any) => {
+      {songs.map((song: Song) => {
         const {
           _id,
           title,
@@ -33,7 +31,6 @@ const MetricsTableBody: React.FC<Props> = ({ state }) => {
           </tr>
         );
       })}
-      )
     </tbody>
   );
 };

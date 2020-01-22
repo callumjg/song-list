@@ -1,10 +1,10 @@
 import React from "react";
+import { StateDispatchProps, State } from "./useMetricsReducer";
 
-interface Props {
-  state: any;
-  dispatch: any;
-}
-const MetricsTableHead: React.FC<Props> = ({ state, dispatch }) => {
+const MetricsTableHead: React.FC<StateDispatchProps> = ({
+  state,
+  dispatch
+}) => {
   const { sortBy, sort } = state;
 
   return (

@@ -1,11 +1,9 @@
 import React from "react";
 import MetricsTableHead from "./MetricsTableHead";
 import MetricsTableBody from "./MetricsTableBody";
-interface Props {
-  state: any;
-  dispatch: any;
-}
-const MetricsTable: React.FC<Props> = props => {
+import { StateDispatchProps } from "./useMetricsReducer";
+
+const MetricsTable: React.FC<StateDispatchProps> = props => {
   return (
     <table className="table songs-table">
       <MetricsTableHead {...props} />

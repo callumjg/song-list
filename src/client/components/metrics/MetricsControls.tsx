@@ -3,17 +3,14 @@ import Sticky from "../util_components/Sticky";
 import CategoryButtons from "./CategoryButtons";
 import RangeButtons from "./RangeButtons";
 import "./MetricsControls.scss";
+import { StateDispatchProps } from "./useMetricsReducer";
 
-interface Props {
-  state: any;
-  dispatch: any;
-}
-
-const MetricControls: React.FC<Props> = ({ state, dispatch }) => {
+const MetricControls: React.FC<StateDispatchProps> = ({ state, dispatch }) => {
   const { range, category } = state;
+
   return (
     <Sticky>
-      {(stuck: string) => (
+      {(stuck: boolean) => (
         <div className={`metrics-controls${stuck ? " stuck" : ""}`}>
           <div className={stuck ? "container" : ""}>
             <CategoryButtons
