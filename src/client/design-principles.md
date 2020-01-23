@@ -1,13 +1,25 @@
-# Components
+# Utils
 
-Components should be:
+Are always:
 
 - Re-useable
-- Dumb as possible
-- Responsive
 - Fill all available width of container (use padding not margin)
-- Be as self contained as possible (e.g. be indifferent to inherited styles )
+- Rely on props not inheritance from parent
 
-# Pages
+Are ideally
 
-- Move business logic to re-useable hook where possible
+- Dumb
+- Receive necessary logic/callbacks as props
+- Responsive
+- Self contained
+- Indifferent to parent (styles/size/etc)
+
+## pages
+
+- Contain necessary business logic in highest level component
+- Move re-usable business logic to hooks where possible
+- Manage layout of children
+
+## layout
+
+Directory containing components responsible for containing large

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import moment from "moment";
 import useResources from "../../hooks/useResource";
-import Loader from "../../components/util_components/Loader";
+import Loader from "../../components/Loader";
 import MetricsControls from "./MetricsControls";
 import MetricsTable from "./MetricsTable";
 import { useMetricsReducer } from "./useMetricsReducer";

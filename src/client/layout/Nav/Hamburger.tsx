@@ -2,7 +2,7 @@ import React from "react";
 import "./Hamburger.scss";
 
 interface Props {
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const Hamburger: React.FC<Props> = ({ onClick }) => {

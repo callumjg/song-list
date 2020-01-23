@@ -1,11 +1,11 @@
 import React from "react";
 import { createBrowserHistory } from "history";
 import { Router, Route } from "react-router-dom";
-import Header from "./header/Header";
+import Header from "./Header";
 import SongsPage from "../pages/songs/SongsPage";
 import ServicesList from "../pages/services/ServicesList";
 import Metrics from "../pages/metrics/Metrics";
-import Footer from "./footer/Footer";
+import Footer from "./Footer";
 import "../styles/main.scss";
 
 export const history = createBrowserHistory();

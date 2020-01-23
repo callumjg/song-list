@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from "react";
 import useResource from "../../hooks/useResource";
-import PageButtons from "../../components/util_components/PageButtons";
+import PageButtons from "../../components/PageButtons";
 import ServicesTable from "./ServicesTable";
 import ServiceForm from "./ServiceForm";
-import Limiter from "../../components/util_components/Limiter";
-import Loader from "../../components/util_components/Loader";
-import Modal from "../../components/util_components/Modal";
+import Limiter from "../../components/Limiter";
+import Loader from "../../components/Loader";
+import Modal from "../../components/Modal";
 import server from "../../apis/server";
 
 const ServicesList: React.FC = props => {

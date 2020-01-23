@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from "react";
 import useResource from "../../hooks/useResource";
 import SongSearch from "./SongSearch";
-import PageButtons from "../../components/util_components/PageButtons";
+import PageButtons from "../../components/PageButtons";
 import SongsTable from "./SongsTable";
 import SongsControls from "./SongsControls";
 import useSongListReducer from "./useSongListReducer";
-import Loader from "../../components/util_components/Loader";
+import Loader from "../../components/Loader";
 
 const SongsList: React.FC = props => {
   const initialState = {
