@@ -11,8 +11,8 @@ const SongsControls: React.FC<{ state: any; dispatch: any }> = ({
   const { tags, exclude, limit } = state;
   return (
     <Sticky>
-      {(stuck: string) => (
-        <section className={`songs-controls${stuck}`}>
+      {stuck => (
+        <section className={`songs-controls${stuck ? " stuck" : ""}`}>
           <div className={stuck ? "container" : ""}>
             <SongTags
               tags={tags}

@@ -5,7 +5,7 @@ const SongSearch: React.FC<{ search: any; setSearch: any }> = ({
   setSearch
 }) => {
   return (
-    <div className="my-3">
+    <div className="">
       <input
         type="text"
         className="form-control "

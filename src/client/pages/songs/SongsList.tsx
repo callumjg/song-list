@@ -49,10 +49,10 @@ const SongsList: React.FC = props => {
   }
 
   return (
-    <section className="songs-list relative my-3">
+    <section className="songs-list relative ">
       <SongsControls state={state} dispatch={dispatch} />
       <SongSearch search={searchInput} setSearch={setSearchDelayed} />
-      {error && <p className="alert alert-danger my-2 p-2">{error}</p>}
+      {error && <p className="alert alert-danger  p-2">{error}</p>}
       <div className="relative">
         <Loader loading={isLoading || isPending}>
           <SongsTable songs={songs} />

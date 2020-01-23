@@ -1,9 +1,9 @@
 .sticky {
-	&.stuck {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		z-index: 8000;
-	}
+  &.stuck {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 8000;
+  }
 }

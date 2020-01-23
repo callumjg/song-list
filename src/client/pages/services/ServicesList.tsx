@@ -9,11 +9,6 @@ import Modal from "../../components/Modal";
 import server from "../../apis/server";
 
 const ServicesList: React.FC = props => {
-  return (
-    <div style={{ width: "50%", height: "30%", border: "2px solid red" }}>
-      Content
-    </div>
-  );
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);

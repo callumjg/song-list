@@ -1,33 +1,46 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import "./Sticky.scss";
 
-const Sticky: React.FC = props => {
-  const [stuck, setStuck] = useState("");
-  const [offset, setOffset] = useState(0);
+interface Props {
+  children: (stuck: boolean) => JSX.Element;
+  scrollTarget?: string;
+}
+
+function getAbsOffsetTop(element) {
+  let top: number = 0;
+  while (element) {
+    top += element.offsetTop || 0;
+    element = element.offsetParent;
+  }
+  return top;
+}
+
+const Sticky: React.FC<Props> = ({ children, scrollTarget = "#root" }) => {
+  const [stuck, setStuck] = useState(false);
+  const stuckClassText = stuck ? " stuck" : "";
   const element = useRef(null);
 
-  useEffect(() => {
-    setOffset(element.current.offsetHeight);
-  }, []);
+  const offsetHeight = element.current ? element.current.offsetHeight : 0;
+  const absOffset = useMemo(() => getAbsOffsetTop(element.current), [
+    element.current
+  ]);
 
   useEffect(() => {
+    const scrollingElement = document.querySelector(scrollTarget);
     function handleScroll() {
-      window.scrollY > offset ? setStuck(" stuck") : setStuck("");
+      scrollingElement.scrollTop > absOffset ? setStuck(true) : setStuck(false);
     }
-    if (offset) {
-      document.addEventListener("scroll", handleScroll);
-    }
-    return () => document.removeEventListener("scroll", handleScroll);
-  }, [offset]);
+    scrollingElement.addEventListener("scroll", handleScroll);
+
+    return () => scrollingElement.removeEventListener("scroll", handleScroll);
+  }, [element.current]);
 
   return (
     <>
-      <div className={`sticky${stuck}`} ref={element}>
-        {typeof props.children === "function"
-          ? props.children(stuck)
-          : props.children}
+      <div className={`sticky${stuckClassText}`} ref={element}>
+        {typeof children === "function" ? children(stuck) : children}
       </div>
-      {stuck && <div style={{ height: offset }} />}
+      {stuck && <div style={{ height: offsetHeight }} />}
     </>
   );
 };
