@@ -1,7 +1,7 @@
 import React from "react";
 import SongTags from "./SongTags";
-import Sticky from "../util_components/Sticky";
-import Limiter from "../util_components/Limiter";
+import Sticky from "../../components/util_components/Sticky";
+import Limiter from "../../components/util_components/Limiter";
 import "./SongsControls.scss";
 
 const SongsControls: React.FC<{ state: any; dispatch: any }> = ({

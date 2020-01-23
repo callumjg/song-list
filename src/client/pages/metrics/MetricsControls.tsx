@@ -1,5 +1,5 @@
 import React from "react";
-import Sticky from "../util_components/Sticky";
+import Sticky from "../../components/util_components/Sticky";
 import CategoryButtons from "./CategoryButtons";
 import RangeButtons from "./RangeButtons";
 import "./MetricsControls.scss";

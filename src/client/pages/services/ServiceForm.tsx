@@ -5,7 +5,7 @@ import SongSelector from "./SongSelector";
 import "./ServiceForm.scss";
 
 interface Props {
-  onSubmit: (args: any) => void;
+  onSubmit: (...args: any[]) => void;
   onDismiss: () => void;
 }
 

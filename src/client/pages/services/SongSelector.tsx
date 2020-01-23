@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Loader from "../util_components/Loader";
+import Loader from "../../components/util_components/Loader";
 import "./SongSelector.scss";
 
 interface Props {
