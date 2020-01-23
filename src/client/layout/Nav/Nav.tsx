@@ -5,18 +5,20 @@ import { history } from "../App";
 import "./Nav.scss";
 
 const Nav: React.FC = () => {
-  const [isNavOpen, setIsNavOpen] = useState("");
-  useBodyScrollLock(isNavOpen ? true : false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const navStatus = isNavOpen ? " open" : "";
+
+  useBodyScrollLock(isNavOpen);
 
   return (
     <div>
-      <Hamburger onClick={() => setIsNavOpen(" open")} />
+      <Hamburger onClick={() => setIsNavOpen(true)} />
       <nav>
         <div
-          className={`nav-container${isNavOpen}`}
-          onClick={() => setIsNavOpen("")}
+          className={`nav-container${navStatus}`}
+          onClick={() => setIsNavOpen(false)}
         >
-          <div className={`nav-slider${isNavOpen}`}>
+          <div className={`nav-slider${navStatus}`}>
             <i className="ui delete icon" />
             <ul>
               <li onClick={() => history.push("/")}>Songs</li>

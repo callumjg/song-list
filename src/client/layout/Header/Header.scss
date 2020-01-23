@@ -1,12 +1,11 @@
 @import "../../styles/colors";
 @import "../../styles/mixins";
 
-header {
+.header {
   @include boxShadow();
   background-color: white;
-  // color: $text-color-light;
+  flex: 1;
   color: $primary;
-  z-index: 999;
   cursor: default;
   .container {
     @include flex(space-between);

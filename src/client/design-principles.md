@@ -4,6 +4,7 @@ Are always:
 
 - Re-useable
 - Fill all available width of container (use padding not margin)
+- Grow to fill container
 - Rely on props not inheritance from parent
 
 Are ideally

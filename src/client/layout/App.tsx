@@ -6,7 +6,8 @@ import SongsPage from "../pages/songs/SongsPage";
 import ServicesList from "../pages/services/ServicesList";
 import Metrics from "../pages/metrics/Metrics";
 import Footer from "./Footer";
-import "../styles/main.scss";
+import "./App.scss";
+// import "./App-dev.scss";
 
 export const history = createBrowserHistory();
 
@@ -14,19 +15,23 @@ export const history = createBrowserHistory();
 class App extends React.Component {
   render() {
     return (
-      <React.Fragment>
-        <Header />
-        <section>
-          <main>
+      <>
+        <header>
+          <Header />
+        </header>
+        <main>
+          <div>
             <Router history={history}>
               <Route path="/" component={SongsPage} exact />
               <Route path="/services" component={ServicesList} exact />
               <Route path="/metrics" component={Metrics} exact />
             </Router>
-          </main>
-        </section>
-        <Footer />
-      </React.Fragment>
+          </div>
+        </main>
+        <footer>
+          <Footer />
+        </footer>
+      </>
     );
   }
 }

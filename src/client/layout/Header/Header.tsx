@@ -4,12 +4,12 @@ import Brand from "./Brand";
 import "./Header.scss";
 
 const Header: React.FC = () => (
-  <header>
+  <div className="header">
     <div className="container">
       <Brand />
       <Nav />
     </div>
-  </header>
+  </div>
 );
 
 export default Header;
