@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const chalk = require("chalk");
 const path = require("path");
-const entry = path.resolve(__dirname, "src", "client", "index.js");
+const entry = path.resolve(__dirname, "src", "client", "index.tsx");
 const assets = path.resolve(__dirname, "src", "client", "public");
 
 module.exports = {
@@ -11,6 +11,11 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: "ts-loader"
+      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
@@ -26,7 +31,12 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        loader: "file-loader"
+        use: "file-loader"
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        use: "source-map-loader"
       }
     ]
   },
@@ -39,12 +49,16 @@ module.exports = {
     publicPath: "/",
     compress: true,
     port: 3000,
-    historyApiFallback: true
+    historyApiFallback: true,
+    host: "0.0.0.0"
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: assets + "/index.html",
       favicon: assets + "/favicon.ico"
     })
-  ]
+  ],
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"]
+  }
 };

@@ -1,0 +1,11 @@
+@import "../../styles/colors";
+@import "../../styles/mixins";
+
+footer {
+  // border-top: 1px solid $primary;
+  // height: 10rem;
+  cursor: default;
+  .container {
+    @include flex();
+  }
+}
