@@ -2,9 +2,9 @@ import React from "react";
 import { createBrowserHistory } from "history";
 import { Router, Route } from "react-router-dom";
 import Header from "./Header";
-import SongsPage from "../pages/songs/SongsPage";
-import ServicesList from "../pages/services/ServicesList";
-import Metrics from "../pages/metrics/Metrics";
+import SongsPage from "../pages/SongsPage";
+import ServicesPage from "../pages/ServicesPage";
+import MetricsPage from "../pages/MetricsPage";
 import Footer from "./Footer";
 import "./App.scss";
 // import "./App-dev.scss";
@@ -23,8 +23,8 @@ class App extends React.Component {
           <div>
             <Router history={history}>
               <Route path="/" component={SongsPage} exact />
-              <Route path="/services" component={ServicesList} exact />
-              <Route path="/metrics" component={Metrics} exact />
+              <Route path="/services" component={ServicesPage} exact />
+              <Route path="/metrics" component={MetricsPage} exact />
             </Router>
           </div>
         </main>

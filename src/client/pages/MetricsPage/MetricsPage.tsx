@@ -23,12 +23,14 @@ const Metrics: React.FC = () => {
   const { range, category, sortBy, sort } = state;
 
   // Fetch songs from api
-  const [{ songs }, error, isLoading] = useResources(`/songs/metrics`, {
+  const [data, error, isLoading] = useResources(`/songs/metrics`, {
     songs: []
   });
 
+  const songs = data.songs as Song[];
+
   // Run analysis
-  const filteredSongs = useMemo(() => {
+  const filteredSongs: Song[] = useMemo(() => {
     const startOfRange = range
       ? moment()
           .subtract(range, "months")
@@ -42,15 +44,14 @@ const Metrics: React.FC = () => {
     sortFuncs = sortBy === "PLAYS" ? sortFuncs : sortFuncs.reverse();
 
     return songs
-      .filter((song: Song) => song.tags.find(cat => cat.match(category)))
-      .map((song: Song) => {
+      .filter(song => song.tags.find(cat => cat.match(category)))
+      .map(song => {
         const services = song.services.sort();
-        const averagePlacement = song.totalIndices
-          ? Math.round((100 * song.totalIndices) / services.length) / 100
-          : "-";
-        const earliestService = services.length
-          ? moment(services[0]).format("DD/MM/YYYY")
-          : "-";
+        const averagePlacement =
+          song.totalIndices &&
+          Math.round((100 * song.totalIndices) / services.length) / 100;
+        const earliestService =
+          services.length && moment(services[0]).format("DD/MM/YYYY");
         const weeksSincePlayed = services.length
           ? moment().diff(moment(services.reverse()[0]), "weeks")
           : Infinity;

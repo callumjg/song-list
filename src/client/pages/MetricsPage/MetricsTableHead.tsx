@@ -1,5 +1,5 @@
 import React from "react";
-import { StateDispatchProps, State } from "./useMetricsReducer";
+import { StateDispatchProps } from "./useMetricsReducer";
 
 const MetricsTableHead: React.FC<StateDispatchProps> = ({
   state,
