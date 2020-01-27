@@ -4,8 +4,15 @@ interface Options {
   target?: any;
 }
 
+type Action =
+  | { type: "ADD"; payload: any }
+  | { type: "REMOVE"; payload: any }
+  | { type: "CLEAR"; payload?: undefined };
+
 function useListReducer(initialState: any[] = [], options: Options = {}) {
-  function reducer(state, { type, payload }) {
+  function reducer(state: any[], action: Action) {
+    const { type, payload } = action;
+
     switch (type) {
       case "ADD":
         return [...state, payload];
@@ -19,14 +26,8 @@ function useListReducer(initialState: any[] = [], options: Options = {}) {
         return state;
     }
   }
-  enum actions {
-    add = "ADD",
-    remove = "REMOVE",
-    clear = "CLEAR"
-  }
-  const [state, dispatch] = useReducer(reducer, initialState);
 
-  return [state, dispatch, actions];
+  return useReducer(reducer, initialState);
 }
 
 export default useListReducer;

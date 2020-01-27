@@ -1,8 +1,8 @@
 export default interface Song {
   _id: string;
-  services: number[];
-  tags: string[];
   title: string;
+  services?: number[];
+  tags?: string[];
   totalIndices?: number;
   earliestService?: string;
   averagePlacement?: number;

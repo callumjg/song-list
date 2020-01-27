@@ -7,8 +7,9 @@ import Limiter from "../../components/Limiter";
 import Loader from "../../components/Loader";
 import Modal from "../../components/Modal";
 import server from "../../apis/server";
+import Service from "../../types/Service";
 
-const ServicesList: React.FC = props => {
+const ServicesPage: React.FC = () => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,17 +18,16 @@ const ServicesList: React.FC = props => {
 
   const url = useMemo(() => {
     let url = `/services?limit=${limit}`;
-    if (typeof limit === "number") url += `&skip=${limit * page}`;
+    if (limit) url += `&skip=${limit * page}`;
     return url;
   }, [limit, page]);
 
-  const [{ count, services }, error, isFetching, refreshServices] = useResource(
-    url,
-    {
-      count: 0,
-      services: []
-    }
-  );
+  const [data, error, isFetching, refreshServices] = useResource(url, {
+    count: 0,
+    services: []
+  });
+
+  const { count, services } = data as { count: number; services: Service[] };
 
   const onSubmit = async (formValues: any) => {
     setIsLoading(true);
@@ -100,4 +100,4 @@ const ServicesList: React.FC = props => {
   );
 };
 
-export default ServicesList;
+export default ServicesPage;

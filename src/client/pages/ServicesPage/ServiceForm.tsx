@@ -3,6 +3,7 @@ import useListReducer from "../../hooks/useListReducer";
 import useResource from "../../hooks/useResource";
 import SongSelector from "./SongSelector";
 import "./ServiceForm.scss";
+import Song from "../../types/Song";
 
 interface Props {
   onSubmit: (...args: any[]) => void;
@@ -13,10 +14,11 @@ const ServiceForm: React.FC<Props> = props => {
   const [search, setSearch] = useState("");
   const [inputTag, setInputTag] = useState("");
   const [date, setDate] = useState("");
-  const [songs, songDispatch, songActions] = useListReducer([], {
+
+  const [songs, songDispatch] = useListReducer([], {
     target: "_id"
   });
-  const [tags, tagDispatch, tagActions] = useListReducer([]);
+  const [tags, tagDispatch] = useListReducer([]);
   const url = search.length > 1 ? `/songs?limit=5&search=${search}` : null;
   const [resource, error, isLoading] = useResource(url, null);
   const searchSongs = resource ? resource.songs : [];
@@ -31,18 +33,17 @@ const ServiceForm: React.FC<Props> = props => {
     }
   };
 
-  const onSongSelect = (payload: any) => {
-    songDispatch({ type: songActions.ADD, payload });
+  const onSongSelect = payload => {
+    songDispatch({ type: "ADD", payload });
     setSearch("");
   };
 
   const addTag = () => {
-    tagDispatch({ type: tagActions.ADD, payload: inputTag });
+    tagDispatch({ type: "ADD", payload: inputTag });
     setInputTag("");
   };
 
-  const removeTag = (payload: any) =>
-    tagDispatch({ type: tagActions.REMOVE, payload });
+  const removeTag = (payload: any) => tagDispatch({ type: "REMOVE", payload });
 
   const onTagKeyPress = (e: any) => {
     if (e.key === "Enter") {
@@ -50,7 +51,6 @@ const ServiceForm: React.FC<Props> = props => {
       addTag();
     }
   };
-  console.log("input tag", inputTag);
   return (
     <form onSubmit={onSubmit} className="service-form container">
       {error && <div className="alert alert-danger">{error}</div>}
@@ -107,7 +107,7 @@ const ServiceForm: React.FC<Props> = props => {
                     <i
                       className="ui trash icon"
                       onClick={() =>
-                        songDispatch({ type: songActions.REMOVE, payload: _id })
+                        songDispatch({ type: "REMOVE", payload: _id })
                       }
                     />
                   </button>
@@ -142,8 +142,8 @@ const ServiceForm: React.FC<Props> = props => {
         <button
           type="button"
           onClick={() => {
-            tagDispatch({ type: tagActions.CLEAR });
-            songDispatch({ type: songActions.CLEAR });
+            tagDispatch({ type: "CLEAR" });
+            songDispatch({ type: "CLEAR" });
           }}
           className="btn btn-sm btn-outline-secondary"
         >
