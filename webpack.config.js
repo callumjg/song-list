@@ -71,11 +71,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: publicAssets + "/index.html",
       favicon: publicAssets + "/favicon.ico",
-      jsExtension: ".br"
-      // minify: {
-      //   collapseWhitespace: true
-      // },
-      // hash: true
+      minify: {
+        collapseWhitespace: true
+      }
     }),
     new CopmressionPlugin({
       filename: "[path].br[query]",
@@ -83,18 +81,15 @@ module.exports = {
       test: /\.(js|css|html|svg)$/,
       compressionOptions: { level: 11 },
       threshold: 10240,
-      minRatio: 0.8,
-      deleteOriginalAssets: false
+      minRatio: 0.8
     }),
-    // new CopmressionPlugin({
-    //   filename: "[path].gz[query]",
-    //   algorithm: "gzip",
-    //   test: /\.js$|\.css$|\.html$/,
-    //   deleteOriginalAssets: true,
-    //   threshold: 10240,
-    //   minRatio: 0.8
-    // }),
-    new HtmlWebpackChangeAssetsExtensionPlugin(),
+    new CopmressionPlugin({
+      filename: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    }),
     new CleanWebpackPlugin()
     // new BundleAnalyzerPlugin()
   ],

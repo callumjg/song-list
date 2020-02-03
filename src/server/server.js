@@ -1,22 +1,20 @@
 const express = require("express");
-const chalk = require("chalk");
+const path = require("path");
+const expressStaticGzip = require("express-static-gzip");
 const server = express();
-const PORT = process.env.PORT || 3001;
 const apiRouter = require("./routes/api");
-const root = "dist";
+const buildPath = path.join(__dirname, "../../dist");
 
-require("./db/mongoose")();
-
+// Middleware
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
+server.use(
+  expressStaticGzip(buildPath, { enableBrotli: true, orderPreference: ["br"] })
+);
 
+// Routes
 server.use("/api/v1", apiRouter);
+server.use(express.static(path.resolve(__dirname, "dist")));
+server.use((req, res) => res.sendFile(buildPath + "/index.html"));
 
-server.use(express.static("dist"));
-server.use((req, res) => {
-  res.sendFile("index.html", { root });
-});
-
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${chalk.green(PORT)}`);
-});
+module.exports = server;
