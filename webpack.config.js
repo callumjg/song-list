@@ -1,12 +1,16 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const chalk = require("chalk");
+const CopmressionPlugin = require("compression-webpack-plugin");
+const HtmlWebpackChangeAssetsExtensionPlugin = require("html-webpack-change-assets-extension-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
-const entry = path.resolve(__dirname, "src", "client", "index.tsx");
-const assets = path.resolve(__dirname, "src", "client", "public");
+const publicAssets = path.resolve(__dirname, "src", "client", "public");
 
+// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 module.exports = {
-  entry,
+  entry: path.resolve(__dirname, "src", "client", "index.tsx"),
   output: {
+    filename: "[name].bundle.js",
+    chunkFilename: "[name].bundle.js",
     publicPath: "/"
   },
   module: {
@@ -40,7 +44,18 @@ module.exports = {
       }
     ]
   },
-  devtool: "source-map", //enum
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
+          chunks: "all"
+        }
+      }
+    }
+  },
+  devtool: process.env.WEBPACK_DEV_SERVER ? "source-map" : "",
   devServer: {
     proxy: {
       "/api": "http://localhost:3001"
@@ -54,9 +69,34 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: assets + "/index.html",
-      favicon: assets + "/favicon.ico"
-    })
+      template: publicAssets + "/index.html",
+      favicon: publicAssets + "/favicon.ico",
+      jsExtension: ".br"
+      // minify: {
+      //   collapseWhitespace: true
+      // },
+      // hash: true
+    }),
+    new CopmressionPlugin({
+      filename: "[path].br[query]",
+      algorithm: "brotliCompress",
+      test: /\.(js|css|html|svg)$/,
+      compressionOptions: { level: 11 },
+      threshold: 10240,
+      minRatio: 0.8,
+      deleteOriginalAssets: false
+    }),
+    // new CopmressionPlugin({
+    //   filename: "[path].gz[query]",
+    //   algorithm: "gzip",
+    //   test: /\.js$|\.css$|\.html$/,
+    //   deleteOriginalAssets: true,
+    //   threshold: 10240,
+    //   minRatio: 0.8
+    // }),
+    new HtmlWebpackChangeAssetsExtensionPlugin(),
+    new CleanWebpackPlugin()
+    // new BundleAnalyzerPlugin()
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
