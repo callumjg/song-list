@@ -1,24 +1,12 @@
 import React, { Suspense, lazy } from "react";
-import { createBrowserHistory } from "history";
-import { Router, Route } from "react-router-dom";
-import "./App.scss";
+import Loader from "./Loader";
 
-const SongsPage = lazy(() => import("../pages/SongsPage"));
-const ServicesPage = lazy(() => import("../pages/ServicesPage"));
-const MetricsPage = lazy(() => import("../pages/MetricsPage"));
-// import "./App-dev.scss";
+const Router = lazy(() => import("./Router"));
 
-export const history = createBrowserHistory();
-
-// import "../styles/layout-dev.scss";
 const App = () => (
-  <Router history={history}>
-    <Suspense fallback={<div>Lazy loading</div>}>
-      <Route path="/" component={SongsPage} exact />
-      <Route path="/services" component={ServicesPage} exact />
-      <Route path="/metrics" component={MetricsPage} exact />
-    </Suspense>
-  </Router>
+  <Suspense fallback={<Loader loading />}>
+    <Router />
+  </Suspense>
 );
 
 export default App;

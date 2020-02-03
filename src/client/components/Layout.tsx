@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { history } from "./App";
+import { history } from "./Router";
 
 interface Props {
   header?: React.Component;

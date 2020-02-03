@@ -10,7 +10,7 @@ module.exports = {
   entry: path.resolve(__dirname, "src", "client", "index.tsx"),
   output: {
     filename: "[name].bundle.js",
-    chunkFilename: "[name].bundle.js",
+    chunkFilename: "[id].bundle.js",
     publicPath: "/"
   },
   module: {
@@ -91,8 +91,8 @@ module.exports = {
       threshold: 10240,
       minRatio: 0.8
     }),
-    new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin()
+    new CleanWebpackPlugin()
+    // new BundleAnalyzerPlugin()
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
