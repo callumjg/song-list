@@ -1,12 +1,16 @@
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const chalk = require("chalk");
+const CopmressionPlugin = require("compression-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
-const entry = path.resolve(__dirname, "src", "client", "index.tsx");
-const assets = path.resolve(__dirname, "src", "client", "public");
+const publicAssets = path.resolve(__dirname, "src", "client", "public");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = {
-  entry,
+  entry: path.resolve(__dirname, "src", "client", "index.tsx"),
   output: {
+    filename: "[name].bundle.js",
+    chunkFilename: "[id].bundle.js",
     publicPath: "/"
   },
   module: {
@@ -40,7 +44,18 @@ module.exports = {
       }
     ]
   },
-  devtool: "source-map", //enum
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
+          chunks: "all"
+        }
+      }
+    }
+  },
+  devtool: process.env.WEBPACK_DEV_SERVER ? "source-map" : "",
   devServer: {
     proxy: {
       "/api": "http://localhost:3001"
@@ -53,10 +68,31 @@ module.exports = {
     host: "0.0.0.0"
   },
   plugins: [
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new HtmlWebpackPlugin({
-      template: assets + "/index.html",
-      favicon: assets + "/favicon.ico"
-    })
+      template: publicAssets + "/index.html",
+      favicon: publicAssets + "/favicon.ico",
+      minify: {
+        collapseWhitespace: true
+      }
+    }),
+    new CopmressionPlugin({
+      filename: "[path].br[query]",
+      algorithm: "brotliCompress",
+      test: /\.(js|css|html|svg)$/,
+      compressionOptions: { level: 11 },
+      threshold: 10240,
+      minRatio: 0.8
+    }),
+    new CopmressionPlugin({
+      filename: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    }),
+    new CleanWebpackPlugin()
+    // new BundleAnalyzerPlugin()
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"]

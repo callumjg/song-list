@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import Layout from "../../components/Layout";
 import useResource from "../../hooks/useResource";
 import PageButtons from "../../components/PageButtons";
 import ServicesTable from "./ServicesTable";
@@ -55,48 +56,52 @@ const ServicesPage: React.FC = () => {
   };
 
   return (
-    <section className="container relative py-3">
-      <h4>Services</h4>
-      {error ||
-        (submitError && (
-          <p className="alert alert-danger my-2 p-2">{error || submitError}</p>
-        ))}
-      <div className="d-flex justify-content-between align-items-start">
-        <button
-          className="btn btn-sm btn-outline-primary"
-          onClick={() => setIsModalOpen(true)}
-        >
-          <i className="ui plus icon" /> Add Service
-        </button>
-        <Limiter
-          limit={limit}
-          setLimit={setLimit}
+    <Layout>
+      <section className="container relative py-3">
+        <h4>Services</h4>
+        {error ||
+          (submitError && (
+            <p className="alert alert-danger my-2 p-2">
+              {error || submitError}
+            </p>
+          ))}
+        <div className="d-flex justify-content-between align-items-start">
+          <button
+            className="btn btn-sm btn-outline-primary"
+            onClick={() => setIsModalOpen(true)}
+          >
+            <i className="ui plus icon" /> Add Service
+          </button>
+          <Limiter
+            limit={limit}
+            setLimit={setLimit}
+            setPage={setPage}
+            limitButtons={[5, 10, 20]}
+          />
+        </div>
+        <div className="relative">
+          <Loader loading={isFetching || isLoading}>
+            <ServicesTable services={services} deleteService={deleteService} />
+          </Loader>
+        </div>
+        <PageButtons
+          page={page}
+          pagesNum={Math.ceil(count / limit)}
           setPage={setPage}
-          limitButtons={[5, 10, 20]}
         />
-      </div>
-      <div className="relative">
-        <Loader loading={isFetching || isLoading}>
-          <ServicesTable services={services} deleteService={deleteService} />
-        </Loader>
-      </div>
-      <PageButtons
-        page={page}
-        pagesNum={Math.ceil(count / limit)}
-        setPage={setPage}
-      />
-      <Modal
-        isOpen={isModalOpen}
-        onDismiss={() => setIsModalOpen(false)}
-        large
-        title="New Service"
-      >
-        <ServiceForm
+        <Modal
+          isOpen={isModalOpen}
           onDismiss={() => setIsModalOpen(false)}
-          onSubmit={onSubmit}
-        />
-      </Modal>
-    </section>
+          large
+          title="New Service"
+        >
+          <ServiceForm
+            onDismiss={() => setIsModalOpen(false)}
+            onSubmit={onSubmit}
+          />
+        </Modal>
+      </section>
+    </Layout>
   );
 };
 

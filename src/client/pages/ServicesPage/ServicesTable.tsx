@@ -1,5 +1,5 @@
 import React from "react";
-import { format } from "date-fns";
+import moment from "moment";
 import "./ServicesTable.scss";
 
 interface Props {
@@ -20,7 +20,7 @@ const ServicesTable: React.FC<Props> = ({ services, deleteService }) => (
     <tbody>
       {services.map(service => (
         <tr key={service._id}>
-          <td>{format(new Date(service.date), "dd/MM/yyyy")}</td>
+          <td>{moment(service.date).format("DD/MM/YYYY")}</td>
           <td>
             <ol>
               {service.songs.map((song: any, i: number) => (

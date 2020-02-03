@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import Hamburger from "./Hamburger";
 import useBodyScrollLock from "../../hooks/useBodyScrollLock";
-import { history } from "../App";
 import "./Nav.scss";
 
-const Nav: React.FC = () => {
+export interface Link {
+  onClick: () => void;
+  label: string;
+}
+
+const Nav: React.FC<{ links: Link[] }> = ({ links = [] }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const navStatus = isNavOpen ? " open" : "";
 
@@ -21,9 +25,11 @@ const Nav: React.FC = () => {
           <div className={`nav-slider${navStatus}`}>
             <i className="ui delete icon" />
             <ul>
-              <li onClick={() => history.push("/")}>Songs</li>
-              <li onClick={() => history.push("/metrics")}>Metrics</li>
-              <li onClick={() => history.push("/services")}>Services</li>
+              {links.map(({ onClick, label }, i) => (
+                <li key={i} onClick={onClick}>
+                  {label}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
