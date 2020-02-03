@@ -1,2 +1,1 @@
-import SongsPage from "./SongsPage";
-export default SongsPage;
+export { default } from "./SongsPage";

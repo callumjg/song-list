@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import Layout from "../../components/Layout";
 import useResource from "../../hooks/useResource";
 import SongSearch from "./SongSearch";
 import PageButtons from "../../components/PageButtons";
@@ -7,7 +8,7 @@ import SongsControls from "./SongsControls";
 import useSongListReducer from "./useSongListReducer";
 import Loader from "../../components/Loader";
 
-const SongsPage: React.FC = props => {
+const SongsPage: React.FC = () => {
   const initialState = {
     limit: 50,
     page: 0,
@@ -49,27 +50,29 @@ const SongsPage: React.FC = props => {
   }
 
   return (
-    <div className="container py-3">
-      <section className="songs-list relative ">
-        <div className="pb-3">
-          <SongsControls state={state} dispatch={dispatch} />
-        </div>
-        <div className="pb-3">
-          <SongSearch search={searchInput} setSearch={setSearchDelayed} />
-        </div>
-        {error && <p className="alert alert-danger  p-2">{error}</p>}
-        <div className="relative">
-          <Loader loading={isLoading || isPending}>
-            <SongsTable songs={songs} />
-          </Loader>
-        </div>
-        <PageButtons
-          page={page}
-          pagesNum={Math.ceil(count / limit)}
-          setPage={payload => dispatch({ type: "SET_PAGE", payload })}
-        />
-      </section>
-    </div>
+    <Layout>
+      <div className="container py-3">
+        <section className="songs-list relative ">
+          <div className="pb-3">
+            <SongsControls state={state} dispatch={dispatch} />
+          </div>
+          <div className="pb-3">
+            <SongSearch search={searchInput} setSearch={setSearchDelayed} />
+          </div>
+          {error && <p className="alert alert-danger  p-2">{error}</p>}
+          <div className="relative">
+            <Loader loading={isLoading || isPending}>
+              <SongsTable songs={songs} />
+            </Loader>
+          </div>
+          <PageButtons
+            page={page}
+            pagesNum={Math.ceil(count / limit)}
+            setPage={payload => dispatch({ type: "SET_PAGE", payload })}
+          />
+        </section>
+      </div>
+    </Layout>
   );
 };
 

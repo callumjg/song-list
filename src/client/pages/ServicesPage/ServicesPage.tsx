@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import Layout from "../../components/Layout";
 import useResource from "../../hooks/useResource";
 import PageButtons from "../../components/PageButtons";
 import ServicesTable from "./ServicesTable";

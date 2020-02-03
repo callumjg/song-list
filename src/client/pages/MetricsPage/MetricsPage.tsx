@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import moment from "moment";
+import Layout from "../../components/Layout";
 import useResources from "../../hooks/useResource";
 import Loader from "../../components/Loader";
 import MetricsControls from "./MetricsControls";
@@ -78,13 +79,15 @@ const Metrics: React.FC = () => {
   }, [filteredSongs, dispatch]);
 
   return (
-    <section className="metrics container py-3 relative">
-      <MetricsControls state={state} dispatch={dispatch} />
-      <Loader loading={isLoading}>
-        {error && <div className="alert alert-danger">{error}</div>}
-        <MetricsTable state={state} dispatch={dispatch} />
-      </Loader>
-    </section>
+    <Layout>
+      <section className="metrics container py-3 relative">
+        <MetricsControls state={state} dispatch={dispatch} />
+        <Loader loading={isLoading}>
+          {error && <div className="alert alert-danger">{error}</div>}
+          <MetricsTable state={state} dispatch={dispatch} />
+        </Loader>
+      </section>
+    </Layout>
   );
 };
 
