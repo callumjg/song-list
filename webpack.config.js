@@ -1,11 +1,11 @@
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopmressionPlugin = require("compression-webpack-plugin");
-const HtmlWebpackChangeAssetsExtensionPlugin = require("html-webpack-change-assets-extension-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
 const publicAssets = path.resolve(__dirname, "src", "client", "public");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
-// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 module.exports = {
   entry: path.resolve(__dirname, "src", "client", "index.tsx"),
   output: {
@@ -68,6 +68,7 @@ module.exports = {
     host: "0.0.0.0"
   },
   plugins: [
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new HtmlWebpackPlugin({
       template: publicAssets + "/index.html",
       favicon: publicAssets + "/favicon.ico",
@@ -90,8 +91,8 @@ module.exports = {
       threshold: 10240,
       minRatio: 0.8
     }),
-    new CleanWebpackPlugin()
-    // new BundleAnalyzerPlugin()
+    new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin()
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
