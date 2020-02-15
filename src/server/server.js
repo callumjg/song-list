@@ -14,7 +14,7 @@ server.use(
 
 // Routes
 server.use("/api/v1", apiRouter);
-server.use(express.static(path.resolve(__dirname, "dist")));
+server.use(express.static(buildPath));
 server.use((req, res) => res.sendFile(buildPath + "/index.html"));
 
 module.exports = server;

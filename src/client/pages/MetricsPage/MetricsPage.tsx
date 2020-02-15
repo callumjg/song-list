@@ -6,6 +6,7 @@ import Loader from "../../components/Loader";
 import MetricsControls from "./MetricsControls";
 import MetricsTable from "./MetricsTable";
 import { useMetricsReducer } from "./useMetricsReducer";
+import SongDistribution from "../../components/SongDistribution";
 import "./Metrics.scss";
 import Song from "../../types/Song";
 
@@ -85,6 +86,9 @@ const Metrics: React.FC = () => {
         <Loader loading={isLoading}>
           {error && <div className="alert alert-danger">{error}</div>}
           <MetricsTable state={state} dispatch={dispatch} />
+          <div className="my-5">
+            <SongDistribution songs={filteredSongs} />
+          </div>
         </Loader>
       </section>
     </Layout>
