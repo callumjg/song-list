@@ -1,8 +1,12 @@
 import { useEffect } from "react";
 
-const body = document.querySelector("body");
+const noDocumentBody = { style: { overflow: "" } };
+const body =
+  typeof document !== "undefined"
+    ? document.querySelector("body")
+    : noDocumentBody;
 
-const useBodyScrollLock = (isLocked: boolean) => {
+const useBodyScrollLock = (isLocked) => {
   useEffect(() => {
     if (isLocked) {
       body.style.overflow = "hidden";
@@ -10,7 +14,9 @@ const useBodyScrollLock = (isLocked: boolean) => {
     if (!isLocked) {
       body.style.overflow = "";
     }
-    return () => (body.style.overflow = "");
+    return () => {
+      body.style.overflow = "";
+    };
   }, [isLocked]);
 };
 

@@ -1,7 +1,13 @@
 import "@babel/polyfill";
-
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/Router";
+import App from "./components/App";
+import { Router } from "react-router-dom";
+import history from "./constants/history";
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+ReactDOM.hydrate(
+  <Router history={history}>
+    <App />
+  </Router>,
+  document.querySelector("#root")
+);

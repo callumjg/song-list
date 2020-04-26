@@ -1,20 +1,20 @@
-const express = require("express");
-const path = require("path");
-const expressStaticGzip = require("express-static-gzip");
+import express from "express";
+import path from "path";
+import comp from "express-static-gzip";
+import apiRouter from "./routes/api";
+import renderApp from "./middleware/renderApp";
+
+const buildPath = path.join("dist/public");
 const server = express();
-const apiRouter = require("./routes/api");
-const buildPath = path.join(__dirname, "../../dist");
 
 // Middleware
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-server.use(
-  expressStaticGzip(buildPath, { enableBrotli: true, orderPreference: ["br"] })
-);
+server.use(comp(buildPath, { enableBrotli: true, orderPreference: ["br"] }));
+server.use(express.static("dist/public"));
 
 // Routes
 server.use("/api/v1", apiRouter);
-server.use(express.static(buildPath));
-server.use((req, res) => res.sendFile(buildPath + "/index.html"));
+server.get("*", renderApp);
 
-module.exports = server;
+export default server;

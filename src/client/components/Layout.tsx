@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { history } from "./Router";
+import history from "../constants/history";
 
 interface Props {
   header?: React.Component;
@@ -15,12 +15,12 @@ const Layout: React.FC<Props> = ({
   footer,
   children,
   noFooter,
-  noHeader
+  noHeader,
 }) => {
   const defaultLinks = [
     { onClick: () => history.push("/"), label: "Songs" },
     { onClick: () => history.push("/metrics"), label: "Metrics" },
-    { onClick: () => history.push("/services"), label: "Services" }
+    { onClick: () => history.push("/services"), label: "Services" },
   ];
   return (
     <>

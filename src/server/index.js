@@ -1,7 +1,7 @@
-const chalk = require("chalk");
-const server = require("./server");
-const connect = require("./db/mongoose");
-const PORT = process.env.PORT || 3001;
+import chalk from "chalk";
+import server from "./server";
+import connect from "./db/mongoose";
+const PORT = process.env.PORT || 3000;
 
 connect();
 

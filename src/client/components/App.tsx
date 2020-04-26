@@ -1,12 +1,6 @@
-import React, { Suspense, lazy } from "react";
-import Loader from "./Loader";
+import React from "react";
+import Router from "./Router";
 
-const Router = lazy(() => import("./Router"));
-
-const App = () => (
-  <Suspense fallback={<Loader loading />}>
-    <Router />
-  </Suspense>
-);
+const App = () => <Router />;
 
 export default App;
