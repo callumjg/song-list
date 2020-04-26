@@ -1,5 +1,5 @@
-import React from "react";
-import "./Hamburger.scss";
+import React from 'react';
+import './Hamburger.scss';
 
 interface Props {
   onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;

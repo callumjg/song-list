@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   range: number;
@@ -7,12 +7,12 @@ interface Props {
 
 const RangeButtons: React.FC<Props> = ({ range, setRange }) => {
   const rangeButtons: [String, undefined | number][] = [
-    ["Total", undefined],
-    ["2yrs", 24],
-    ["1yr", 12],
-    ["6mths", 6],
-    ["3mths", 3],
-    ["1mth", 1]
+    ['Total', undefined],
+    ['2yrs', 24],
+    ['1yr', 12],
+    ['6mths', 6],
+    ['3mths', 3],
+    ['1mth', 1],
   ];
   return (
     <div className="btn-group btn-group-toggle">
@@ -22,7 +22,7 @@ const RangeButtons: React.FC<Props> = ({ range, setRange }) => {
           type="button"
           onClick={() => setRange(r)}
           className={`btn btn-sm btn-outline-secondary no-glow${
-            range === r ? " active" : ""
+            range === r ? ' active' : ''
           }`}
         >
           {label}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   setCategory: (category: RegExp) => void;
@@ -9,8 +9,8 @@ type CategoryButton = [String, () => void];
 
 const CategoryButtons: React.FC<Props> = ({ setCategory, category }) => {
   const categoryButtons: CategoryButton[] = [
-    ["Category A", () => setCategory(/Category A/i)],
-    ["Category B (Hymn)", () => setCategory(/Category B/gi)]
+    ['Category A', () => setCategory(/Category A/i)],
+    ['Category B (Hymn)', () => setCategory(/Category B/gi)],
   ];
   return (
     <div className="btn-group btn-group-toggle">
@@ -20,7 +20,7 @@ const CategoryButtons: React.FC<Props> = ({ setCategory, category }) => {
           type="button"
           onClick={onClick}
           className={`btn btn-sm btn-outline-primary no-glow${
-            label.match(category) ? " active" : ""
+            label.match(category) ? ' active' : ''
           }`}
         >
           {label}

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import "./Sticky.scss";
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import './Sticky.scss';
 
 interface Props {
   children: (stuck: boolean) => JSX.Element;
@@ -15,9 +15,9 @@ const getAbsOffsetTop = (element) => {
   return top;
 };
 
-const Sticky: React.FC<Props> = ({ children, scrollTarget = "#root" }) => {
+const Sticky: React.FC<Props> = ({ children, scrollTarget = '#root' }) => {
   const [stuck, setStuck] = useState(false);
-  const stuckClassText = stuck ? " stuck" : "";
+  const stuckClassText = stuck ? ' stuck' : '';
   const element = useRef(null);
   const offsetHeight = element.current ? element.current.offsetHeight : 0;
   const absOffset = useMemo(() => getAbsOffsetTop(element.current), [
@@ -30,15 +30,15 @@ const Sticky: React.FC<Props> = ({ children, scrollTarget = "#root" }) => {
     function handleScroll() {
       scrollingElement.scrollTop > absOffset ? setStuck(true) : setStuck(false);
     }
-    scrollingElement.addEventListener("scroll", handleScroll);
+    scrollingElement.addEventListener('scroll', handleScroll);
 
-    return () => scrollingElement.removeEventListener("scroll", handleScroll);
+    return () => scrollingElement.removeEventListener('scroll', handleScroll);
   }, [element.current]);
 
   return (
     <>
       <div className={`sticky${stuckClassText}`} ref={element}>
-        {typeof children === "function" ? children(stuck) : children}
+        {typeof children === 'function' ? children(stuck) : children}
       </div>
       {stuck && <div style={{ height: offsetHeight }} />}
     </>

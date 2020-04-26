@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 const SongSearch: React.FC<{ search: any; setSearch: any }> = ({
   search,
-  setSearch
+  setSearch,
 }) => {
   return (
     <div className="">
@@ -11,7 +11,7 @@ const SongSearch: React.FC<{ search: any; setSearch: any }> = ({
         className="form-control "
         placeholder="Search title or author..."
         value={search}
-        onChange={e => setSearch(e.target.value)}
+        onChange={(e) => setSearch(e.target.value)}
       />
     </div>
   );

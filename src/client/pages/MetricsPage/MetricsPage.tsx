@@ -1,23 +1,23 @@
-import React, { useEffect, useMemo } from "react";
-import moment from "moment";
-import Layout from "../../components/Layout";
-import useResources from "../../hooks/useResource";
-import Loader from "../../components/Loader";
-import MetricsControls from "./MetricsControls";
-import MetricsTable from "./MetricsTable";
-import { useMetricsReducer } from "./useMetricsReducer";
-import SongDistribution from "../../components/SongDistribution";
-import "./Metrics.scss";
-import Song from "../../types/Song";
+import React, { useEffect, useMemo } from 'react';
+import moment from 'moment';
+import Layout from '../../components/Layout';
+import useResources from '../../hooks/useResource';
+import Loader from '../../components/Loader';
+import MetricsControls from './MetricsControls';
+import MetricsTable from './MetricsTable';
+import { useMetricsReducer } from './useMetricsReducer';
+import SongDistribution from '../../components/SongDistribution';
+import './Metrics.scss';
+import Song from '../../types/Song';
 
 const Metrics: React.FC = () => {
   // Define initial state
   const initialState = {
     range: 6, // value in months
     category: /Category A/i,
-    sortBy: "PLAYS",
+    sortBy: 'PLAYS',
     sort: -1,
-    songs: []
+    songs: [],
   };
 
   // Metrics reducer
@@ -26,7 +26,7 @@ const Metrics: React.FC = () => {
 
   // Fetch songs from api
   const [data, error, isLoading] = useResources(`/songs/metrics`, {
-    songs: []
+    songs: [],
   });
 
   const songs = data.songs as Song[];
@@ -34,37 +34,35 @@ const Metrics: React.FC = () => {
   // Run analysis
   const filteredSongs: Song[] = useMemo(() => {
     const startOfRange = range
-      ? moment()
-          .subtract(range, "months")
-          .valueOf()
+      ? moment().subtract(range, 'months').valueOf()
       : 0;
     let sortFuncs = [
       (a: Song, b: Song) => (b.weeksSincePlayed - a.weeksSincePlayed) * sort,
-      (a: Song, b: Song) => (a.plays - b.plays) * sort
+      (a: Song, b: Song) => (a.plays - b.plays) * sort,
     ];
 
-    sortFuncs = sortBy === "PLAYS" ? sortFuncs : sortFuncs.reverse();
+    sortFuncs = sortBy === 'PLAYS' ? sortFuncs : sortFuncs.reverse();
 
     return songs
-      .filter(song => song.tags.find(cat => cat.match(category)))
-      .map(song => {
+      .filter((song) => song.tags.find((cat) => cat.match(category)))
+      .map((song) => {
         const services = song.services.sort();
         const averagePlacement =
           song.totalIndices &&
           Math.round((100 * song.totalIndices) / services.length) / 100;
         const earliestService =
-          services.length && moment(services[0]).format("DD/MM/YYYY");
+          services.length && moment(services[0]).format('DD/MM/YYYY');
         const weeksSincePlayed = services.length
-          ? moment().diff(moment(services.reverse()[0]), "weeks")
+          ? moment().diff(moment(services.reverse()[0]), 'weeks')
           : Infinity;
-        const plays = services.filter(unix => unix >= startOfRange).length;
+        const plays = services.filter((unix) => unix >= startOfRange).length;
         return {
           ...song,
           services,
           plays,
           earliestService,
           averagePlacement,
-          weeksSincePlayed
+          weeksSincePlayed,
         };
       })
       .sort(sortFuncs[0])
@@ -74,8 +72,8 @@ const Metrics: React.FC = () => {
   // Update state with filtered songs
   useEffect(() => {
     dispatch({
-      type: "SET_SONGS",
-      payload: filteredSongs
+      type: 'SET_SONGS',
+      payload: filteredSongs,
     });
   }, [filteredSongs, dispatch]);
 

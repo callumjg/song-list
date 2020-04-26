@@ -1,6 +1,6 @@
-import React from "react";
-import SongRow from "./SongRow";
-import "./SongsTable.scss";
+import React from 'react';
+import SongRow from './SongRow';
+import './SongsTable.scss';
 
 const SongsTable: React.FC<{ songs: any[] }> = ({ songs }) => {
   return (
@@ -23,7 +23,7 @@ const SongsTable: React.FC<{ songs: any[] }> = ({ songs }) => {
         </tr>
       </thead>
       <tbody>
-        {songs.map(s => (
+        {songs.map((s) => (
           <SongRow key={s._id} song={s} />
         ))}
       </tbody>

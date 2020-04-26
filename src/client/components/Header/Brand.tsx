@@ -1,6 +1,6 @@
-import React from "react";
-import logo from "./logo.jpg";
-import "./Brand.scss";
+import React from 'react';
+import logo from './logo.jpg';
+import './Brand.scss';
 
 const Brand: React.FC = () => (
   <div className="brand">

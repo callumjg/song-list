@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 interface Props {
   setLimit: (...args: any[]) => void;
   limitButtons: (number | string)[];
@@ -9,7 +9,7 @@ const Limiter: React.FC<Props> = ({
   setLimit,
   limitButtons,
   setPage,
-  limit
+  limit,
 }) => {
   function onClick(v: number | string) {
     setLimit(v);
@@ -22,7 +22,7 @@ const Limiter: React.FC<Props> = ({
         {limitButtons.map((p: number, i: number) => (
           <button
             className={`btn btn-sm no-glow btn-outline-secondary${
-              limit === p ? " active" : ""
+              limit === p ? ' active' : ''
             }`}
             key={i}
             onClick={() => onClick(p)}

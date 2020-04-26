@@ -1,21 +1,21 @@
-import React, { useState, useMemo } from "react";
-import Layout from "../../components/Layout";
-import useResource from "../../hooks/useResource";
-import PageButtons from "../../components/PageButtons";
-import ServicesTable from "./ServicesTable";
-import ServiceForm from "./ServiceForm";
-import Limiter from "../../components/Limiter";
-import Loader from "../../components/Loader";
-import Modal from "../../components/Modal";
-import server from "../../apis/server";
-import Service from "../../types/Service";
+import React, { useState, useMemo } from 'react';
+import Layout from '../../components/Layout';
+import useResource from '../../hooks/useResource';
+import PageButtons from '../../components/PageButtons';
+import ServicesTable from './ServicesTable';
+import ServiceForm from './ServiceForm';
+import Limiter from '../../components/Limiter';
+import Loader from '../../components/Loader';
+import Modal from '../../components/Modal';
+import server from '../../apis/server';
+import Service from '../../types/Service';
 
 const ServicesPage: React.FC = () => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState('');
 
   const url = useMemo(() => {
     let url = `/services?limit=${limit}`;
@@ -25,7 +25,7 @@ const ServicesPage: React.FC = () => {
 
   const [data, error, isFetching, refreshServices] = useResource(url, {
     count: 0,
-    services: []
+    services: [],
   });
 
   const { count, services } = data as { count: number; services: Service[] };
@@ -33,7 +33,7 @@ const ServicesPage: React.FC = () => {
   const onSubmit = async (formValues: any) => {
     setIsLoading(true);
     try {
-      await server.post("/services", formValues);
+      await server.post('/services', formValues);
       setIsModalOpen(false);
       refreshServices();
     } catch (e) {

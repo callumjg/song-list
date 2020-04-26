@@ -1,6 +1,6 @@
-import React from "react";
-import moment from "moment";
-import "./ServicesTable.scss";
+import React from 'react';
+import moment from 'moment';
+import './ServicesTable.scss';
 
 interface Props {
   services: any[];
@@ -18,9 +18,9 @@ const ServicesTable: React.FC<Props> = ({ services, deleteService }) => (
       </tr>
     </thead>
     <tbody>
-      {services.map(service => (
+      {services.map((service) => (
         <tr key={service._id}>
-          <td>{moment(service.date).format("DD/MM/YYYY")}</td>
+          <td>{moment(service.date).format('DD/MM/YYYY')}</td>
           <td>
             <ol>
               {service.songs.map((song: any, i: number) => (

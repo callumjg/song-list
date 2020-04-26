@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import useListReducer from "../../hooks/useListReducer";
-import useResource from "../../hooks/useResource";
-import SongSelector from "./SongSelector";
-import "./ServiceForm.scss";
+import React, { useState } from 'react';
+import useListReducer from '../../hooks/useListReducer';
+import useResource from '../../hooks/useResource';
+import SongSelector from './SongSelector';
+import './ServiceForm.scss';
 
 interface Props {
   onSubmit: (...args: any[]) => void;
@@ -10,12 +10,12 @@ interface Props {
 }
 
 const ServiceForm: React.FC<Props> = (props) => {
-  const [search, setSearch] = useState("");
-  const [inputTag, setInputTag] = useState("");
-  const [date, setDate] = useState("");
+  const [search, setSearch] = useState('');
+  const [inputTag, setInputTag] = useState('');
+  const [date, setDate] = useState('');
 
   const [songs, songDispatch] = useListReducer([], {
-    target: "_id",
+    target: '_id',
   });
   const [tags, tagDispatch] = useListReducer([]);
   const url = search.length > 1 ? `/songs?limit=5&search=${search}` : null;
@@ -33,19 +33,19 @@ const ServiceForm: React.FC<Props> = (props) => {
   };
 
   const onSongSelect = (payload) => {
-    songDispatch({ type: "ADD", payload });
-    setSearch("");
+    songDispatch({ type: 'ADD', payload });
+    setSearch('');
   };
 
   const addTag = () => {
-    tagDispatch({ type: "ADD", payload: inputTag });
-    setInputTag("");
+    tagDispatch({ type: 'ADD', payload: inputTag });
+    setInputTag('');
   };
 
-  const removeTag = (payload: any) => tagDispatch({ type: "REMOVE", payload });
+  const removeTag = (payload: any) => tagDispatch({ type: 'REMOVE', payload });
 
   const onTagKeyPress = (e: any) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       e.preventDefault();
       addTag();
     }
@@ -106,7 +106,7 @@ const ServiceForm: React.FC<Props> = (props) => {
                     <i
                       className="ui trash icon"
                       onClick={() =>
-                        songDispatch({ type: "REMOVE", payload: _id })
+                        songDispatch({ type: 'REMOVE', payload: _id })
                       }
                     />
                   </button>
@@ -141,8 +141,8 @@ const ServiceForm: React.FC<Props> = (props) => {
         <button
           type="button"
           onClick={() => {
-            tagDispatch({ type: "CLEAR" });
-            songDispatch({ type: "CLEAR" });
+            tagDispatch({ type: 'CLEAR' });
+            songDispatch({ type: 'CLEAR' });
           }}
           className="btn btn-sm btn-outline-secondary"
         >

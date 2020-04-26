@@ -1,5 +1,5 @@
-import React from "react";
-import "./SongRow.scss";
+import React from 'react';
+import './SongRow.scss';
 
 const SongRow: React.FC<{ song: any }> = ({ song }) => {
   return (
@@ -12,7 +12,7 @@ const SongRow: React.FC<{ song: any }> = ({ song }) => {
           .filter(
             (t: any) => !t.match(/category a/i) && !t.match(/category b/i)
           )
-          .join(", ")}
+          .join(', ')}
       </td>
       <td>
         <a href={song.url} target="_blank" rel="noopener noreferrer">

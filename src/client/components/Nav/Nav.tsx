@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Hamburger from "./Hamburger";
-import useBodyScrollLock from "../../hooks/useBodyScrollLock";
-import "./Nav.scss";
+import React, { useState } from 'react';
+import Hamburger from './Hamburger';
+import useBodyScrollLock from '../../hooks/useBodyScrollLock';
+import './Nav.scss';
 
 export interface Link {
   onClick: () => void;
@@ -10,7 +10,7 @@ export interface Link {
 
 const Nav: React.FC<{ links: Link[] }> = ({ links = [] }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const navStatus = isNavOpen ? " open" : "";
+  const navStatus = isNavOpen ? ' open' : '';
 
   useBodyScrollLock(isNavOpen);
 

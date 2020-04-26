@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   page: number;
@@ -13,7 +13,7 @@ const PageButtons: React.FC<Props> = ({ page, pagesNum, setPage }) => {
     pages.push(
       <button
         className={`btn btn-sm no-glow btn-outline-secondary${
-          i === page + 1 ? " active" : ""
+          i === page + 1 ? ' active' : ''
         }`}
         onClick={() => setPage(i - 1)}
         key={i}

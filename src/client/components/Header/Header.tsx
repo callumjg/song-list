@@ -1,9 +1,9 @@
-import React from "react";
-import Nav from "../Nav/Nav";
-import Brand from "./Brand";
-import { Link } from "../Nav";
+import React from 'react';
+import Nav from '../Nav/Nav';
+import Brand from './Brand';
+import { Link } from '../Nav';
 
-import "./Header.scss";
+import './Header.scss';
 
 interface Props {
   navLinks: Link[];

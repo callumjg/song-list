@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Tags from "./Tags";
+import React, { useState } from 'react';
+import Tags from './Tags';
 
 interface Props {
   tags: any[];
@@ -9,13 +9,13 @@ interface Props {
 }
 const SongTags: React.FC<Props> = ({ tags, setTags, exclude, setExclude }) => {
   const T = new Tags(tags, exclude);
-  const [activeCat, setActiveCat] = useState("Category A");
-  const catButtons = ["Category A", "Category B (Hymn)"];
-  const buttonClasses = "btn btn-outline-primary no-glow btn-sm";
-  const [showArchived, setShowArchived] = useState("");
+  const [activeCat, setActiveCat] = useState('Category A');
+  const catButtons = ['Category A', 'Category B (Hymn)'];
+  const buttonClasses = 'btn btn-outline-primary no-glow btn-sm';
+  const [showArchived, setShowArchived] = useState('');
 
   function getCatClasses(c: string) {
-    return activeCat === c ? buttonClasses + " active" : buttonClasses;
+    return activeCat === c ? buttonClasses + ' active' : buttonClasses;
   }
   function handleCatClick(c: string) {
     setActiveCat(c);
@@ -40,12 +40,12 @@ const SongTags: React.FC<Props> = ({ tags, setTags, exclude, setExclude }) => {
         className={buttonClasses + showArchived}
         onClick={() => {
           if (!showArchived) {
-            setShowArchived(" active");
-            setTags(T.addTag("archived").getTags());
+            setShowArchived(' active');
+            setTags(T.addTag('archived').getTags());
             setExclude(T.getExclude());
           } else {
-            setShowArchived("");
-            setTags(T.addExclude("archived").getTags());
+            setShowArchived('');
+            setTags(T.addExclude('archived').getTags());
             setExclude(T.getExclude());
           }
         }}

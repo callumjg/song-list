@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./Collapsible.scss";
+import React, { Component } from 'react';
+import './Collapsible.scss';
 
 interface State {
   isOpen: boolean;
@@ -18,7 +18,7 @@ class Collapsible extends Component<Props, State> {
   }
 
   getChevron = () => {
-    return `ui angle icon ${this.state.isOpen ? " up" : " down"}`;
+    return `ui angle icon ${this.state.isOpen ? ' up' : ' down'}`;
   };
   render() {
     return (
@@ -31,7 +31,7 @@ class Collapsible extends Component<Props, State> {
           <i className={this.getChevron()} />
         </div>
         <div
-          className={`collapsible-content ${this.state.isOpen ? "open" : ""}`}
+          className={`collapsible-content ${this.state.isOpen ? 'open' : ''}`}
         >
           {this.props.children}
         </div>

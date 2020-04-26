@@ -12,24 +12,24 @@ class Tags {
   }
   _removeItem(inp, val) {
     let input = inp.toLowerCase();
-    this[val] = this[val].filter(x => x !== input);
+    this[val] = this[val].filter((x) => x !== input);
   }
   addTag(tag) {
-    this._addItem(tag, "tags");
+    this._addItem(tag, 'tags');
     this.removeExclude(tag);
     return this;
   }
   addExclude(exclude) {
-    this._addItem(exclude, "exclude");
+    this._addItem(exclude, 'exclude');
     this.removeTag(exclude);
     return this;
   }
   removeTag(tag) {
-    this._removeItem(tag, "tags");
+    this._removeItem(tag, 'tags');
     return this;
   }
   removeExclude(exclude) {
-    this._removeItem(exclude, "exclude");
+    this._removeItem(exclude, 'exclude');
     return this;
   }
   getTags() {

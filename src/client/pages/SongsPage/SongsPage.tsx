@@ -1,40 +1,41 @@
-import React, { useState, useMemo } from "react";
-import Layout from "../../components/Layout";
-import useResource from "../../hooks/useResource";
-import SongSearch from "./SongSearch";
-import PageButtons from "../../components/PageButtons";
-import SongsTable from "./SongsTable";
-import SongsControls from "./SongsControls";
-import useSongListReducer from "./useSongListReducer";
-import Loader from "../../components/Loader";
+import React, { useState, useMemo } from 'react';
+import Layout from '../../components/Layout';
+import useResource from '../../hooks/useResource';
+import SongSearch from './SongSearch';
+import PageButtons from '../../components/PageButtons';
+import SongsTable from './SongsTable';
+import SongsControls from './SongsControls';
+import useSongListReducer from './useSongListReducer';
+import Loader from '../../components/Loader';
 
 const SongsPage: React.FC = () => {
   const initialState = {
     limit: 50,
     page: 0,
-    tags: ["category a"],
-    exclude: ["archived", "deleted"],
-    search: ""
+    tags: ['category a'],
+    exclude: ['archived', 'deleted'],
+    search: '',
   };
   const [state, dispatch] = useSongListReducer(initialState);
   const { limit, page, tags, exclude, search } = state;
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
   const [isPending, setIsPending] = useState(false);
   const [timer, setTimer] = useState(null);
 
   const url = useMemo(() => {
     let url = `/songs?limit=${limit}`;
-    if (typeof limit === "number") url += `&skip=${limit * page}`;
-    if (tags.length) url += `&tags=${tags.map(t => t.toLowerCase()).join(",")}`;
+    if (typeof limit === 'number') url += `&skip=${limit * page}`;
+    if (tags.length)
+      url += `&tags=${tags.map((t) => t.toLowerCase()).join(',')}`;
     if (exclude.length)
-      url += `&exclude=${exclude.map(t => t.toLowerCase()).join(",")}`;
+      url += `&exclude=${exclude.map((t) => t.toLowerCase()).join(',')}`;
     if (search) url += `&search=${search}`;
     return url;
   }, [limit, page, tags, exclude, search]);
 
   const [{ count, songs }, error, isLoading] = useResource(url, {
     count: 0,
-    songs: []
+    songs: [],
   });
 
   function setSearchDelayed(payload) {
@@ -43,7 +44,7 @@ const SongsPage: React.FC = () => {
     clearTimeout(timer);
     setTimer(
       setTimeout(() => {
-        dispatch({ type: "SET_SEARCH", payload });
+        dispatch({ type: 'SET_SEARCH', payload });
         setIsPending(false);
       }, 200)
     );
@@ -68,7 +69,7 @@ const SongsPage: React.FC = () => {
           <PageButtons
             page={page}
             pagesNum={Math.ceil(count / limit)}
-            setPage={payload => dispatch({ type: "SET_PAGE", payload })}
+            setPage={(payload) => dispatch({ type: 'SET_PAGE', payload })}
           />
         </section>
       </div>

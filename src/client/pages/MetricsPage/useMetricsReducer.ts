@@ -1,5 +1,5 @@
-import { useReducer } from "react";
-import Song from "../../types/Song";
+import { useReducer } from 'react';
+import Song from '../../types/Song';
 
 export interface State {
   range: number | undefined;
@@ -10,12 +10,12 @@ export interface State {
 }
 
 type ActionType =
-  | "SET_RANGE"
-  | "SET_CATEGORY"
-  | "SET_SORT_BY"
-  | "SET_SORT"
-  | "TOGGLE_SORT"
-  | "SET_SONGS";
+  | 'SET_RANGE'
+  | 'SET_CATEGORY'
+  | 'SET_SORT_BY'
+  | 'SET_SORT'
+  | 'TOGGLE_SORT'
+  | 'SET_SONGS';
 
 export interface Action {
   type: ActionType;
@@ -31,17 +31,17 @@ export interface StateDispatchProps {
 function reducer(state: State, action: Action): State {
   const { type, payload } = action;
   switch (type) {
-    case "SET_RANGE":
+    case 'SET_RANGE':
       return { ...state, range: payload };
-    case "SET_CATEGORY":
+    case 'SET_CATEGORY':
       return { ...state, category: payload };
-    case "SET_SORT_BY":
+    case 'SET_SORT_BY':
       return { ...state, sortBy: payload };
-    case "SET_SORT":
+    case 'SET_SORT':
       return { ...state, sort: payload };
-    case "TOGGLE_SORT":
+    case 'TOGGLE_SORT':
       return { ...state, sort: state.sort * -1 };
-    case "SET_SONGS":
+    case 'SET_SONGS':
       return { ...state, songs: payload };
     default:
       return state;

@@ -1,25 +1,25 @@
-const router = require("express").Router();
-const moment = require("moment");
-const Song = require("../models/Song");
-const Service = require("../models/Service");
-const whiteListBody = require("../middleware/whitelistBody");
-const { escapeSpecialChar, commaSplit } = require("../../utils");
+const router = require('express').Router();
+const moment = require('moment');
+const Song = require('../models/Song');
+const Service = require('../models/Service');
+const whiteListBody = require('../middleware/whitelistBody');
+const { escapeSpecialChar, commaSplit } = require('../../utils');
 
 const allowedUpdates = [
-  "tags",
-  "notes",
-  "title",
-  "url",
-  "author",
-  "key",
-  "tempo",
-  "songSelectID",
-  "tagsAdd",
-  "tagsRemove"
+  'tags',
+  'notes',
+  'title',
+  'url',
+  'author',
+  'key',
+  'tempo',
+  'songSelectID',
+  'tagsAdd',
+  'tagsRemove',
 ];
 
 // Create song
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const song = await new Song(req.body).save();
     res.send({ song });
@@ -33,20 +33,18 @@ router.post("/", async (req, res) => {
 //
 
 // Get song metrics
-router.get("/metrics", async (req, res) => {
+router.get('/metrics', async (req, res) => {
   try {
     // destructure query params
     let { range } = req.query;
     if (range)
-      range = moment()
-        .subtract(parseInt(range), "months")
-        .toISOString();
+      range = moment().subtract(parseInt(range), 'months').toISOString();
 
     // get song _id and title
     const songFilter = { tags: { $not: /archived|deleted/i } };
-    const songs = await Song.find(songFilter, "_id title tags");
+    const songs = await Song.find(songFilter, '_id title tags');
     const songsObj = songs
-      .map(song => ({ ...song.toObject(), services: [] }))
+      .map((song) => ({ ...song.toObject(), services: [] }))
       .reduce((acc, song) => {
         acc[song._id] = { ...song, totalIndices: 0 };
         return acc;
@@ -55,11 +53,11 @@ router.get("/metrics", async (req, res) => {
     // get services
     const services = await Service.find(
       range ? { date: { $gte: range } } : {},
-      "songs date"
+      'songs date'
     );
 
     // Add services array to each song
-    services.forEach(service =>
+    services.forEach((service) =>
       service.songs.forEach((_id, i) => {
         if (!songsObj[_id]) return;
         songsObj[_id].services.push(moment(service.date).valueOf());
@@ -74,11 +72,11 @@ router.get("/metrics", async (req, res) => {
 });
 
 // Get song
-router.get("/:_id", async (req, res) => {
+router.get('/:_id', async (req, res) => {
   try {
     const song = await Song.findById(req.params._id);
     if (!song) {
-      let e = new Error("Unable to find song");
+      let e = new Error('Unable to find song');
       e.status = 404;
       throw e;
     }
@@ -90,13 +88,13 @@ router.get("/:_id", async (req, res) => {
 });
 
 // Get songs
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     // filter used to return results based on specific params
     const filter = {};
 
     // const filter = { tags: [] };
-    const select = ""; //select specific fields to return
+    const select = ''; //select specific fields to return
 
     // options object
     const options = { sort: { title: 1 } };
@@ -107,13 +105,13 @@ router.get("/", async (req, res) => {
 
     // set sort options
     if (req.query.sort) {
-      let parts = req.query.sort.split("_");
-      options.sort[parts[0]] = parts[1] === "desc" ? -1 : 1;
+      let parts = req.query.sort.split('_');
+      options.sort[parts[0]] = parts[1] === 'desc' ? -1 : 1;
     }
 
     // set search filter for author or title
     if (req.query.search) {
-      const regex = new RegExp(req.query.search, "i");
+      const regex = new RegExp(req.query.search, 'i');
       filter.$or = filter.$or
         ? [...filter.$or, { title: regex }, { author: regex }]
         : [{ title: regex }, { author: regex }];
@@ -122,11 +120,11 @@ router.get("/", async (req, res) => {
     // find by tags
     if (req.query.tags) {
       let $all = commaSplit(req.query.tags).map(
-        t => new RegExp(escapeSpecialChar(t), "i")
+        (t) => new RegExp(escapeSpecialChar(t), 'i')
       );
       filter.tags = {
         ...filter.tags,
-        $all
+        $all,
       };
     }
 
@@ -134,14 +132,14 @@ router.get("/", async (req, res) => {
     if (req.query.exclude) {
       let $not = new RegExp(
         commaSplit(req.query.exclude)
-          .map(t => escapeSpecialChar(t))
-          .join("|"),
-        "i"
+          .map((t) => escapeSpecialChar(t))
+          .join('|'),
+        'i'
       );
 
       filter.tags = {
         ...filter.tags,
-        $not
+        $not,
       };
     }
     // Count total available resources
@@ -158,39 +156,39 @@ router.get("/", async (req, res) => {
 });
 
 // Update song
-router.patch("/:_id", whiteListBody(allowedUpdates), async (req, res) => {
+router.patch('/:_id', whiteListBody(allowedUpdates), async (req, res) => {
   try {
     const updates = Object.keys(req.body);
     const { body, params } = req;
     const { tagsAdd, tagsRemove } = body;
 
-    if (updates.length === 0) throw new Error("No valid updates provided");
+    if (updates.length === 0) throw new Error('No valid updates provided');
 
     // Retrieve song and check resource exists
     const song = await Song.findById(params._id);
     if (!song) {
-      let e = new Error("Unable to find song");
+      let e = new Error('Unable to find song');
       e.status = 404;
       throw e;
     }
 
     // handle new tags
     if (tagsAdd) {
-      tagsAdd.forEach(t => {
-        let regex = new RegExp(`^${t}$`, "i");
+      tagsAdd.forEach((t) => {
+        let regex = new RegExp(`^${t}$`, 'i');
         if (!song.tags.includes(regex)) song.tags.push(t);
       });
       delete req.body.tagsAdd;
     }
 
     if (tagsRemove) {
-      tagsRemove.forEach(t => {
-        let regex = new RegExp(`^${t}$`, "i");
-        song.tags = song.tags.filter(st => !st.match(regex));
+      tagsRemove.forEach((t) => {
+        let regex = new RegExp(`^${t}$`, 'i');
+        song.tags = song.tags.filter((st) => !st.match(regex));
       });
       delete req.body.tagsRemove;
     }
-    updates.forEach(u => (song[u] = req.body[u]));
+    updates.forEach((u) => (song[u] = req.body[u]));
     await song.save();
     res.send(song);
   } catch (e) {
@@ -200,11 +198,11 @@ router.patch("/:_id", whiteListBody(allowedUpdates), async (req, res) => {
 });
 
 // Delete song
-router.delete("/:_id", async (req, res) => {
+router.delete('/:_id', async (req, res) => {
   try {
     const song = await Song.findById(req.params._id);
     if (!song) {
-      let e = new Error("Unable to find song");
+      let e = new Error('Unable to find song');
       e.status = 404;
       throw e;
     }

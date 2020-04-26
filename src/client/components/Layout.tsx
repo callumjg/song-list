@@ -1,7 +1,7 @@
-import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import history from "../constants/history";
+import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
+import history from '../constants/history';
 
 interface Props {
   header?: React.Component;
@@ -18,9 +18,9 @@ const Layout: React.FC<Props> = ({
   noHeader,
 }) => {
   const defaultLinks = [
-    { onClick: () => history.push("/"), label: "Songs" },
-    { onClick: () => history.push("/metrics"), label: "Metrics" },
-    { onClick: () => history.push("/services"), label: "Services" },
+    { onClick: () => history.push('/'), label: 'Songs' },
+    { onClick: () => history.push('/metrics'), label: 'Metrics' },
+    { onClick: () => history.push('/services'), label: 'Services' },
   ];
   return (
     <>

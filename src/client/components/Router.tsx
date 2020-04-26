@@ -1,10 +1,10 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import SongsPage from "../pages/SongsPage";
-import ServicesPage from "../pages/ServicesPage";
-import MetricsPage from "../pages/MetricsPage";
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import SongsPage from '../pages/SongsPage';
+import ServicesPage from '../pages/ServicesPage';
+import MetricsPage from '../pages/MetricsPage';
 
-import "./App.scss";
+import './App.scss';
 // import "../styles/layout-dev.scss";
 
 const Router = () => (

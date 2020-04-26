@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
-import ModalHeader from "./ModalHeader";
-import ModalFooter from "./ModalFooter";
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import ModalHeader from './ModalHeader';
+import ModalFooter from './ModalFooter';
 
 /* 
 	Modal component using bootstrap classes but without jquery.
@@ -24,35 +24,35 @@ const Modal: React.FC<Props> = ({
   footer,
   large,
   small,
-  children
+  children,
 }) => {
-  const body = document.querySelector("body");
-  const [display, setDisplay] = useState("none");
-  const [show, setShow] = useState("");
+  const body = document.querySelector('body');
+  const [display, setDisplay] = useState('none');
+  const [show, setShow] = useState('');
 
   useEffect(() => {
     if (isOpen) {
-      body.classList.add("modal-open");
+      body.classList.add('modal-open');
       transitionIn();
     }
     if (!isOpen) {
       transitionOut();
-      body.classList.remove("modal-open");
+      body.classList.remove('modal-open');
     }
-    return () => body.classList.remove("modal-open");
+    return () => body.classList.remove('modal-open');
   }, [isOpen, body.classList]);
 
   const transitionIn = () => {
-    setDisplay("block");
+    setDisplay('block');
     setTimeout(() => {
-      setShow(" show");
+      setShow(' show');
     }, 50);
   };
 
   const transitionOut = () => {
-    setShow("");
+    setShow('');
     setTimeout(() => {
-      setDisplay("none");
+      setDisplay('none');
     }, 100);
   };
 
@@ -66,11 +66,11 @@ const Modal: React.FC<Props> = ({
       >
         <div
           className={`modal-dialog modal-dialog-centered ${
-            large ? "modal-lg" : ""
-          } ${small ? "modal-sm" : ""}`}
-          onClick={e => e.stopPropagation()}
+            large ? 'modal-lg' : ''
+          } ${small ? 'modal-sm' : ''}`}
+          onClick={(e) => e.stopPropagation()}
         >
-          <div className="modal-content" onSubmit={e => e.stopPropagation()}>
+          <div className="modal-content" onSubmit={(e) => e.stopPropagation()}>
             <ModalHeader title={title} onDismiss={onDismiss} />
             <div className="modal-body">{children}</div>
             <ModalFooter footer={footer} />
@@ -79,7 +79,7 @@ const Modal: React.FC<Props> = ({
       </div>
     </div>
   );
-  return ReactDOM.createPortal(renderModal(), document.querySelector("#modal"));
+  return ReactDOM.createPortal(renderModal(), document.querySelector('#modal'));
 };
 
 export default Modal;
