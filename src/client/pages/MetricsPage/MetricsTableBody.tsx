@@ -1,5 +1,4 @@
 import React from "react";
-import Song from "../../types/Song";
 import { StateDispatchProps } from "./useMetricsReducer";
 
 const MetricsTableBody: React.FC<StateDispatchProps> = ({ state }) => {
@@ -9,14 +8,14 @@ const MetricsTableBody: React.FC<StateDispatchProps> = ({ state }) => {
 
   return (
     <tbody>
-      {songs.map(song => {
+      {songs.map((song) => {
         const {
           _id,
           title,
           plays,
           earliestService,
           averagePlacement,
-          weeksSincePlayed
+          weeksSincePlayed,
         } = song;
         return (
           <tr key={_id} className={plays < avPlays ? "text-danger" : ""}>

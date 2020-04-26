@@ -3,20 +3,19 @@ import useListReducer from "../../hooks/useListReducer";
 import useResource from "../../hooks/useResource";
 import SongSelector from "./SongSelector";
 import "./ServiceForm.scss";
-import Song from "../../types/Song";
 
 interface Props {
   onSubmit: (...args: any[]) => void;
   onDismiss: () => void;
 }
 
-const ServiceForm: React.FC<Props> = props => {
+const ServiceForm: React.FC<Props> = (props) => {
   const [search, setSearch] = useState("");
   const [inputTag, setInputTag] = useState("");
   const [date, setDate] = useState("");
 
   const [songs, songDispatch] = useListReducer([], {
-    target: "_id"
+    target: "_id",
   });
   const [tags, tagDispatch] = useListReducer([]);
   const url = search.length > 1 ? `/songs?limit=5&search=${search}` : null;
@@ -33,7 +32,7 @@ const ServiceForm: React.FC<Props> = props => {
     }
   };
 
-  const onSongSelect = payload => {
+  const onSongSelect = (payload) => {
     songDispatch({ type: "ADD", payload });
     setSearch("");
   };
@@ -61,7 +60,7 @@ const ServiceForm: React.FC<Props> = props => {
           type="date"
           required
           value={date}
-          onChange={e => setDate(e.target.value)}
+          onChange={(e) => setDate(e.target.value)}
         />
       </section>
 
@@ -85,7 +84,7 @@ const ServiceForm: React.FC<Props> = props => {
           <input
             type="text"
             value={inputTag}
-            onChange={e => setInputTag(e.target.value)}
+            onChange={(e) => setInputTag(e.target.value)}
             onKeyPress={onTagKeyPress}
             className="form-control"
             placeholder="Add tag..."
@@ -120,7 +119,7 @@ const ServiceForm: React.FC<Props> = props => {
         <input
           type="text"
           value={search}
-          onChange={e => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           className="form-control"
           placeholder="Search songs..."
         />
