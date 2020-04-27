@@ -93,12 +93,12 @@ const makeConfig = (name) => (env) => {
   return {
     mode: isProduction ? 'production' : 'development',
     entry: {
-      [name]: `${__dirname}/src/${name}/${isServer ? 'index.js' : 'index.tsx'}`,
+      [name]: `${__dirname}/src/${name}/${isServer ? 'index.ts' : 'index.tsx'}`,
     },
     output: {
       filename: '[name].js',
-      path: isServer ? __dirname + '/dist' : __dirname + '/dist/public',
-      publicPath: isServer ? '/public' : '/',
+      path: isServer ? __dirname + '/dist/' : __dirname + '/dist/public/',
+      publicPath: '/',
     },
     module: {
       rules,

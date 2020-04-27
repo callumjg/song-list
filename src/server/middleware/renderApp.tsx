@@ -1,5 +1,5 @@
 import ReactDOMServer from 'react-dom/server';
-import { StaticRouter } from 'react-router';
+import { StaticRouter } from 'react-router-dom';
 import React from 'react';
 import fs from 'fs';
 import path from 'path';
@@ -14,7 +14,7 @@ const template =
       );
 
 const renderApp = (req, res) => {
-  const content = ReactDOMServer.renderToString(
+  const content = ReactDOMServer.renderToStaticMarkup(
     <StaticRouter location={req.url} context={{}}>
       <App />
     </StaticRouter>

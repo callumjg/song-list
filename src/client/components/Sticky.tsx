@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Sticky.scss';
 
 interface Props {
@@ -20,12 +20,9 @@ const Sticky: React.FC<Props> = ({ children, scrollTarget = '#root' }) => {
   const stuckClassText = stuck ? ' stuck' : '';
   const element = useRef(null);
   const offsetHeight = element.current ? element.current.offsetHeight : 0;
-  const absOffset = useMemo(() => getAbsOffsetTop(element.current), [
-    element.current,
-  ]);
+  const absOffset = getAbsOffsetTop(element.current);
 
   useEffect(() => {
-    if (!document) return;
     const scrollingElement = document.querySelector(scrollTarget);
     function handleScroll() {
       scrollingElement.scrollTop > absOffset ? setStuck(true) : setStuck(false);
@@ -33,7 +30,7 @@ const Sticky: React.FC<Props> = ({ children, scrollTarget = '#root' }) => {
     scrollingElement.addEventListener('scroll', handleScroll);
 
     return () => scrollingElement.removeEventListener('scroll', handleScroll);
-  }, [element.current]);
+  }, [absOffset, scrollTarget]);
 
   return (
     <>

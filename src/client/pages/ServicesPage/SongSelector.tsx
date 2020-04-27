@@ -5,7 +5,7 @@ import './SongSelector.scss';
 interface Props {
   songs: any[];
   isLoading: boolean;
-  onSelect: (arg: any) => void;
+  onSelect: (args: any[]) => void;
 }
 const SongSelector: React.FC<Props> = ({ songs, isLoading, onSelect }) => {
   const [open, setOpen] = useState(' open');

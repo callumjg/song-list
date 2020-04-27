@@ -17,6 +17,9 @@ interface Props {
   large?: boolean;
   small?: boolean;
 }
+
+const isServer = typeof window === 'undefined';
+
 const Modal: React.FC<Props> = ({
   isOpen,
   onDismiss,
@@ -26,7 +29,9 @@ const Modal: React.FC<Props> = ({
   small,
   children,
 }) => {
-  const body = document.querySelector('body');
+  const body = isServer
+    ? { classList: { add() {}, remove() {} } }
+    : document.querySelector('body');
   const [display, setDisplay] = useState('none');
   const [show, setShow] = useState('');
 
@@ -79,7 +84,12 @@ const Modal: React.FC<Props> = ({
       </div>
     </div>
   );
-  return ReactDOM.createPortal(renderModal(), document.querySelector('#modal'));
+  return isServer
+    ? null
+    : ReactDOM.createPortal(
+        renderModal(),
+        document ? document.querySelector('#modal') : null
+      );
 };
 
 export default Modal;
