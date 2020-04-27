@@ -1,0 +1,1415 @@
+[
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c4e" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace32839" },
+      { "$oid": "5d70e60125cc4b47083bce36" },
+      { "$oid": "5d70883cfeb6060eace32874" }
+    ],
+    "tags": ["Communion"],
+    "date": { "$date": "2018-01-07T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c4f" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284f" },
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace32875" },
+      { "$oid": "5d70883cfeb6060eace32855" }
+    ],
+    "tags": [],
+    "date": { "$date": "2018-01-14T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c50" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace32894" },
+      { "$oid": "5d70883cfeb6060eace32850" },
+      { "$oid": "5d70883cfeb6060eace32836" }
+    ],
+    "tags": [],
+    "date": { "$date": "2018-01-21T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c51" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32851" },
+      { "$oid": "5d70883cfeb6060eace32892" },
+      { "$oid": "5d70883cfeb6060eace32842" },
+      { "$oid": "5d70883cfeb6060eace32868" }
+    ],
+    "tags": [],
+    "date": { "$date": "2018-01-28T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c52" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace3283c" },
+      { "$oid": "5d70883cfeb6060eace32836" },
+      { "$oid": "5d70883cfeb6060eace32866" }
+    ],
+    "tags": [
+      "Vision Sunday - Making Disciples",
+      "Luke 24:44-49; Acts 1:8",
+      "Communion"
+    ],
+    "date": { "$date": "2018-02-04T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c53" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32898" },
+      { "$oid": "5d70e63725cc4b47083bce37" },
+      { "$oid": "5d70883cfeb6060eace32867" },
+      { "$oid": "5d70883cfeb6060eace3283e" }
+    ],
+    "tags": [
+      "1st Missionary Journey Part 1",
+      "Acts 13:13-52",
+      "Small band",
+      "cello"
+    ],
+    "date": { "$date": "2018-02-11T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c54" },
+    "songs": [
+      { "$oid": "5d70e64b25cc4b47083bce38" },
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace32870" },
+      { "$oid": "5d70e66725cc4b47083bce39" }
+    ],
+    "tags": ["1st Missionary Journey Part 2", "Acts 14:1-28", "Big band"],
+    "date": { "$date": "2018-02-18T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c55" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace32855" },
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace32871" }
+    ],
+    "tags": ["A watershed moment", "Acts 15:1-35", "Big band"],
+    "date": { "$date": "2018-02-25T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c56" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace32852" },
+      { "$oid": "5d70e60125cc4b47083bce36" },
+      { "$oid": "5d70883cfeb6060eace32880" }
+    ],
+    "tags": ["Missionary principles", "Acts 15:36-16:10", "Communion"],
+    "date": { "$date": "2018-03-04T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c57" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace3284e" },
+      { "$oid": "5d70883cfeb6060eace32866" }
+    ],
+    "tags": ["3 Philippian conversions", "Acts 16:11-40"],
+    "date": { "$date": "2018-03-11T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c58" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32851" },
+      { "$oid": "5d70883cfeb6060eace3283c" },
+      { "$oid": "5d70883cfeb6060eace32863" },
+      { "$oid": "5d70883cfeb6060eace32848" }
+    ],
+    "tags": ["Thessalonica & Berea", "Acts 17:1-15"],
+    "date": { "$date": "2018-03-18T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c59" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32892" },
+      { "$oid": "5d70883cfeb6060eace32865" },
+      { "$oid": "5d70883cfeb6060eace3284e" },
+      { "$oid": "5d70883cfeb6060eace32857" }
+    ],
+    "tags": ["Connecting with a secular world", "Acts 17:16-34"],
+    "date": { "$date": "2018-03-25T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c5a" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32845" },
+      { "$oid": "5d70e63725cc4b47083bce37" },
+      { "$oid": "5d70883cfeb6060eace32865" },
+      { "$oid": "5d70883cfeb6060eace3287c" }
+    ],
+    "tags": [],
+    "date": { "$date": "2018-03-30T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c5b" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32855" },
+      { "$oid": "5d70883cfeb6060eace3284a" },
+      { "$oid": "5d70883cfeb6060eace32838" },
+      { "$oid": "5d70883cfeb6060eace32874" }
+    ],
+    "tags": ["Easter Sunday"],
+    "date": { "$date": "2018-04-01T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c5c" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace3283c" },
+      { "$oid": "5d70883cfeb6060eace32868" }
+    ],
+    "tags": ["Acts 18:1-18", "The Gospel Comes to Corinth"],
+    "date": { "$date": "2018-04-08T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c5d" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace32872" },
+      { "$oid": "5d70883cfeb6060eace32875" }
+    ],
+    "tags": ["Acts 18:18-28", "The Body at Work"],
+    "date": { "$date": "2018-04-15T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c5e" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32851" },
+      { "$oid": "5d70883cfeb6060eace3283e" },
+      { "$oid": "5d70883cfeb6060eace32863" },
+      { "$oid": "5d70883cfeb6060eace32857" }
+    ],
+    "tags": ["Acts 19:1-20", "A Powerful Name"],
+    "date": { "$date": "2018-04-22T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c5f" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace3283c" },
+      { "$oid": "5d70883cfeb6060eace32856" },
+      { "$oid": "5d70883cfeb6060eace32866" }
+    ],
+    "tags": ["Acts 19:21-41", "Trouble in Ephesus"],
+    "date": { "$date": "2018-04-29T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c60" },
+    "songs": [
+      { "$oid": "5d70e64b25cc4b47083bce38" },
+      { "$oid": "5d70883cfeb6060eace32848" },
+      { "$oid": "5d70883cfeb6060eace32865" },
+      { "$oid": "5d70883cfeb6060eace3283e" }
+    ],
+    "tags": ["Matthew 5:1-6", "The Good Life Pt 1"],
+    "date": { "$date": "2018-05-06T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c61" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace3284e" },
+      { "$oid": "5d70883cfeb6060eace32863" }
+    ],
+    "tags": ["Matthew 5:7-12", "The Good Life Pt 2"],
+    "date": { "$date": "2018-05-13T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c62" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32855" },
+      { "$oid": "5d70e68025cc4b47083bce3a" },
+      { "$oid": "5d70883cfeb6060eace32846" },
+      { "$oid": "5d70883cfeb6060eace32876" }
+    ],
+    "tags": ["Matthew 5:13-16", "Salt & Light"],
+    "date": { "$date": "2018-05-20T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c63" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284f" },
+      { "$oid": "5d70883cfeb6060eace3284a" },
+      { "$oid": "5d70e60125cc4b47083bce36" },
+      { "$oid": "5d70883cfeb6060eace328c2" }
+    ],
+    "tags": ["Matthew 5:17-20", "Jesus fulfils the Law"],
+    "date": { "$date": "2018-05-27T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c64" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32855" },
+      { "$oid": "5d70883cfeb6060eace3283b" },
+      { "$oid": "5d70883cfeb6060eace32869" },
+      { "$oid": "5d70883cfeb6060eace32846" }
+    ],
+    "tags": ["Ian to pick"],
+    "date": { "$date": "2018-06-03T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c65" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace3283b" },
+      { "$oid": "5d70e63725cc4b47083bce37" },
+      { "$oid": "5d70883cfeb6060eace3286f" }
+    ],
+    "tags": [],
+    "date": { "$date": "2018-06-10T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c66" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace32849" },
+      { "$oid": "5d70883cfeb6060eace3287a" },
+      { "$oid": "5d70e64b25cc4b47083bce38" }
+    ],
+    "tags": [],
+    "date": { "$date": "2018-06-17T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c67" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace32849" },
+      { "$oid": "5d70883cfeb6060eace328ae" },
+      { "$oid": "5d70883cfeb6060eace32862" }
+    ],
+    "tags": [],
+    "date": { "$date": "2018-06-24T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c68" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3283b" },
+      { "$oid": "5d70883cfeb6060eace32851" },
+      { "$oid": "5d70883cfeb6060eace3283f" },
+      { "$oid": "5d70883cfeb6060eace3287f" }
+    ],
+    "tags": [],
+    "date": { "$date": "2018-07-01T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c69" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3286a" },
+      { "$oid": "5d70883cfeb6060eace32837" },
+      { "$oid": "5d70883cfeb6060eace3283f" },
+      { "$oid": "5d70883cfeb6060eace32836" }
+    ],
+    "tags": ["Lord's Prayer", "Matt 6:9-15"],
+    "date": { "$date": "2018-07-08T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c6a" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace32849" },
+      { "$oid": "5d70883cfeb6060eace3284e" },
+      { "$oid": "5d70883cfeb6060eace32860" }
+    ],
+    "tags": ["Treasures in heaven", "Matt 6:19-24"],
+    "date": { "$date": "2018-07-15T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c6b" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32857" },
+      { "$oid": "5d70883cfeb6060eace32837" },
+      { "$oid": "5d70883cfeb6060eace32872" },
+      { "$oid": "5d70883cfeb6060eace32834" }
+    ],
+    "tags": ["Seek first God's kingdom", "Matt 6:25-34"],
+    "date": { "$date": "2018-07-22T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c6c" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace3283f" },
+      { "$oid": "5d70883cfeb6060eace3285c" }
+    ],
+    "tags": ["Judgment & hypocrisy", "Matt 7:1-6"],
+    "date": { "$date": "2018-07-29T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c6d" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70883cfeb6060eace3284f" },
+      { "$oid": "5d70883cfeb6060eace32864" },
+      { "$oid": "5d70883cfeb6060eace32841" }
+    ],
+    "tags": ["Authentic discipleship", "Matthew 7:12-29"],
+    "date": { "$date": "2018-08-05T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c6e" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32851" },
+      { "$oid": "5d70883cfeb6060eace32837" },
+      { "$oid": "5d70883cfeb6060eace3284a" },
+      { "$oid": "5d70883cfeb6060eace3286b" }
+    ],
+    "tags": ["Faith, love & hope", "1 Thessalonians 1:1-10"],
+    "date": { "$date": "2018-08-12T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c6f" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70883cfeb6060eace32860" },
+      { "$oid": "5d70883cfeb6060eace3283c" }
+    ],
+    "tags": ["Walk worthily", "1 Thessalonians 2:1-16"],
+    "date": { "$date": "2018-08-19T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c70" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace32875" },
+      { "$oid": "5d70883cfeb6060eace32857" }
+    ],
+    "tags": ["A hope worth having", "1 Corinthians 15"],
+    "date": { "$date": "2018-08-26T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c71" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70883cfeb6060eace3284a" },
+      { "$oid": "5d70883cfeb6060eace32876" },
+      { "$oid": "5d70883cfeb6060eace32836" }
+    ],
+    "tags": ["Standing firm", "1 Thess 2:17-3:13", "Communion?"],
+    "date": { "$date": "2018-09-02T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c72" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32837" },
+      { "$oid": "5d70883cfeb6060eace3284b" },
+      { "$oid": "5d70883cfeb6060eace3284e" },
+      { "$oid": "5d70883cfeb6060eace32878" }
+    ],
+    "tags": ["Holiness in private & public", "1 Thess 4:1-12"],
+    "date": { "$date": "2018-09-09T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c73" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3283b" },
+      { "$oid": "5d70883cfeb6060eace3284b" },
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace32877" }
+    ],
+    "tags": ["Hope beyond the grave", "1 Thess 4:13-18"],
+    "date": { "$date": "2018-09-16T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c74" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284f" },
+      { "$oid": "5d70883cfeb6060eace3287e" },
+      { "$oid": "5d70883cfeb6060eace32865" },
+      { "$oid": "5d70883cfeb6060eace3289d" }
+    ],
+    "tags": ["Living in the Light", "1 Thess 5:1-11"],
+    "date": { "$date": "2018-09-23T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c75" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace32871" },
+      { "$oid": "5d70883cfeb6060eace32841" }
+    ],
+    "tags": ["Comprehensive holiness", "1 Thess 5:12-28", "Kids club service"],
+    "date": { "$date": "2018-09-30T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c76" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace32894" },
+      { "$oid": "5d70883cfeb6060eace32850" },
+      { "$oid": "5d70883cfeb6060eace32860" }
+    ],
+    "tags": ["Return to God - his love", "Malachi 1:1-5", "Communion - Ian"],
+    "date": { "$date": "2018-10-07T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c77" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace32847" },
+      { "$oid": "5d70883cfeb6060eace32850" },
+      { "$oid": "5d70883cfeb6060eace3287e" }
+    ],
+    "tags": ["Return to God - his honour", "Malachi 1:6-2:9"],
+    "date": { "$date": "2018-10-14T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c78" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace32855" },
+      { "$oid": "5d70883cfeb6060eace328c3" },
+      { "$oid": "5d70883cfeb6060eace32843" }
+    ],
+    "tags": [
+      "Return to God - his faithfulness",
+      "Jeremiah 31:31-34",
+      "Bush service"
+    ],
+    "date": { "$date": "2018-10-21T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c79" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3283b" },
+      { "$oid": "5d70883cfeb6060eace32837" },
+      { "$oid": "5d70883cfeb6060eace32849" },
+      { "$oid": "5d70883cfeb6060eace32868" }
+    ],
+    "tags": ["Return to God - his faithfulness", "Malachi 2:10-16"],
+    "date": { "$date": "2018-10-28T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c7a" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284b" },
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace3284e" },
+      { "$oid": "5d70883cfeb6060eace32874" }
+    ],
+    "tags": ["Return to God - his coming", "Malachi 2:17-3:5", "Communion"],
+    "date": { "$date": "2018-11-04T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c7b" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70e64b25cc4b47083bce38" },
+      { "$oid": "5d70883cfeb6060eace3283f" },
+      { "$oid": "5d70883cfeb6060eace3287b" }
+    ],
+    "tags": ["Return to God - he does not change", "Malachi 3:6-12"],
+    "date": { "$date": "2018-11-11T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c7c" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32851" },
+      { "$oid": "5d70883cfeb6060eace32847" },
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace32872" }
+    ],
+    "tags": ["Return to God - his judgement", "Malachi 3:13-4:6"],
+    "date": { "$date": "2018-11-18T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c7d" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace32856" },
+      { "$oid": "5d70883cfeb6060eace32878" }
+    ],
+    "tags": ["Evidence of faith", "2 Thess 1:1-12"],
+    "date": { "$date": "2018-11-25T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c7e" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace3283c" },
+      { "$oid": "5d70883cfeb6060eace3286f" }
+    ],
+    "tags": [
+      "Believing truth, rejecting wickedness",
+      "2 Thess 2:1-17",
+      "Communion"
+    ],
+    "date": { "$date": "2018-12-02T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c7f" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace3283f" },
+      { "$oid": "5d70883cfeb6060eace32874" }
+    ],
+    "tags": ["The dangers of laziness", "2 Thess 3:1-18"],
+    "date": { "$date": "2018-12-09T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c80" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3283b" },
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace32858" },
+      { "$oid": "5d70e70a25cc4b47083bce3b" }
+    ],
+    "tags": ["Advent"],
+    "date": { "$date": "2018-12-16T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c81" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70e76d25cc4b47083bce3c" },
+      { "$oid": "5d70883cfeb6060eace32868" },
+      { "$oid": "5d70883cfeb6060eace32848" }
+    ],
+    "tags": ["Advent"],
+    "date": { "$date": "2018-12-23T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c82" },
+    "songs": [
+      { "$oid": "5d70e76d25cc4b47083bce3c" },
+      { "$oid": "5d70e7a225cc4b47083bce3d" },
+      { "$oid": "5d70e7e125cc4b47083bce3e" },
+      { "$oid": "5d70e81b25cc4b47083bce3f" }
+    ],
+    "tags": ["Advent", "Surprise, surprise!", "Luke 1:26-38"],
+    "date": { "$date": "2018-12-25T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c83" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32851" },
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace32861" },
+      { "$oid": "5d70883cfeb6060eace32853" }
+    ],
+    "tags": ["Ian to pick passage"],
+    "date": { "$date": "2018-12-30T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c84" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace32837" },
+      { "$oid": "5d70883cfeb6060eace32865" },
+      { "$oid": "5d70883cfeb6060eace32860" }
+    ],
+    "tags": ["Finding true blessing in 2019", "Psalm 1:1-6"],
+    "date": { "$date": "2019-01-06T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c85" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace32858" },
+      { "$oid": "5d70883cfeb6060eace32863" }
+    ],
+    "tags": ["How long, Lord?", "Psalm 13"],
+    "date": { "$date": "2019-01-13T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c86" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace3287e" },
+      { "$oid": "5d70883cfeb6060eace32842" },
+      { "$oid": "5d70883cfeb6060eace32847" }
+    ],
+    "tags": ["Lord, have mercy", "Psalm 51", "2 songs after sermon"],
+    "date": { "$date": "2019-01-20T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c87" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32855" },
+      { "$oid": "5d70883cfeb6060eace32868" },
+      { "$oid": "5d70e68025cc4b47083bce3a" },
+      { "$oid": "5d70883cfeb6060eace3283e" }
+    ],
+    "tags": ["A Besieged Plea", "Psalm 17"],
+    "date": { "$date": "2019-01-27T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c88" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284f" },
+      { "$oid": "5d70e64b25cc4b47083bce38" },
+      { "$oid": "5d70883cfeb6060eace32846" },
+      { "$oid": "5d70883cfeb6060eace32866" }
+    ],
+    "tags": [
+      "Vision & Mission - Making Disciples",
+      "Matthew 28:16-20",
+      "Communion"
+    ],
+    "date": { "$date": "2019-02-03T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c89" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace32848" },
+      { "$oid": "5d70883cfeb6060eace32849" },
+      { "$oid": "5d70883cfeb6060eace3285c" }
+    ],
+    "tags": ["Connect", "Luke 5:27-32"],
+    "date": { "$date": "2019-02-10T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c8a" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace32850" },
+      { "$oid": "5d70883cfeb6060eace3284e" },
+      { "$oid": "5d70883cfeb6060eace32878" }
+    ],
+    "tags": ["Grow", "Colossians 1:1-14"],
+    "date": { "$date": "2019-02-17T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c8b" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284b" },
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70883cfeb6060eace3287a" },
+      { "$oid": "5d70883cfeb6060eace32837" }
+    ],
+    "tags": ["Serve", "1 Corinthians 12:1-31"],
+    "date": { "$date": "2019-02-24T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c8c" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32860" },
+      { "$oid": "5d70883cfeb6060eace32852" },
+      { "$oid": "5d70883cfeb6060eace32857" },
+      { "$oid": "5d70883cfeb6060eace32845" }
+    ],
+    "tags": ["The Promised King", "Matthew 1:1-25", "Communion"],
+    "date": { "$date": "2019-03-03T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c8d" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32851" },
+      { "$oid": "5d70883cfeb6060eace32837" },
+      { "$oid": "5d70883cfeb6060eace32861" },
+      { "$oid": "5d70883cfeb6060eace3283c" }
+    ],
+    "tags": ["The King who Divides", "Matthew 2:1-23"],
+    "date": { "$date": "2019-03-10T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c8e" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace3286d" },
+      { "$oid": "5d70883cfeb6060eace32839" }
+    ],
+    "tags": ["Preparing for the King", "Matthew 3:1-17"],
+    "date": { "$date": "2019-03-17T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c8f" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace32875" },
+      { "$oid": "5d70883cfeb6060eace32877" }
+    ],
+    "tags": ["Induction Service - Guard the Gospel", "2 Timothy 1:13-2:7"],
+    "date": { "$date": "2019-03-24T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c90" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace3287e" },
+      { "$oid": "5d70883cfeb6060eace32858" },
+      { "$oid": "5d70883cfeb6060eace3283f" }
+    ],
+    "tags": ["The King under Temptation", "Matthew 4:1-11"],
+    "date": { "$date": "2019-03-31T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c91" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3286a" },
+      { "$oid": "5d70883cfeb6060eace32847" },
+      { "$oid": "5d70883cfeb6060eace3284e" },
+      { "$oid": "5d70883cfeb6060eace32836" }
+    ],
+    "tags": ["The King of the Light", "Matthew 4:12-17", "Communion"],
+    "date": { "$date": "2019-04-07T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c92" },
+    "songs": [
+      { "$oid": "5d70e64b25cc4b47083bce38" },
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace32863" },
+      { "$oid": "5d70883cfeb6060eace32865" }
+    ],
+    "tags": ["The King to Follow", "Matthew 4:18-25"],
+    "date": { "$date": "2019-04-14T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c93" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32845" },
+      { "$oid": "5d70883cfeb6060eace32847" },
+      { "$oid": "5d70883cfeb6060eace32880" },
+      { "$oid": "5d70883cfeb6060eace3287c" }
+    ],
+    "tags": ["Good Friday", "4 songs"],
+    "date": { "$date": "2019-04-19T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c94" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32855" },
+      { "$oid": "5d70883cfeb6060eace3284a" },
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace32874" }
+    ],
+    "tags": ["Easter Sunday"],
+    "date": { "$date": "2019-04-21T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c95" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70883cfeb6060eace3284b" },
+      { "$oid": "5d70883cfeb6060eace32850" },
+      { "$oid": "5d70883cfeb6060eace32878" }
+    ],
+    "tags": ["Unstoppable despite disobedience", "Haggai 1:1-15"],
+    "date": { "$date": "2018-04-28T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c96" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace32837" },
+      { "$oid": "5d70883cfeb6060eace32849" }
+    ],
+    "tags": ["Unstoppable despite inability", "Haggai 2:1-9", "Communion"],
+    "date": { "$date": "2019-05-05T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c97" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284b" },
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace32842" },
+      { "$oid": "5d70883cfeb6060eace32861" }
+    ],
+    "tags": ["Unstoppable despite uncleanness", "Haggai 2:10-19"],
+    "date": { "$date": "2019-05-12T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c98" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284f" },
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace32857" },
+      { "$oid": "5d70883cfeb6060eace32864" }
+    ],
+    "tags": ["Unstoppable despite failed leadership", "Haggai 2:20-23"],
+    "date": { "$date": "2018-05-19T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c99" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3283b" },
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace32856" },
+      { "$oid": "5d70883cfeb6060eace3285d" }
+    ],
+    "tags": ["Riches of Grace", "Ephesians 1:1-14"],
+    "date": { "$date": "2019-05-26T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c9a" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70883cfeb6060eace32838" },
+      { "$oid": "5d70883cfeb6060eace3284b" },
+      { "$oid": "5d70883cfeb6060eace32872" }
+    ],
+    "tags": ["Grace-driven prayer", "Ephesians 1:15-23"],
+    "date": { "$date": "2019-06-02T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c9b" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32854" },
+      { "$oid": "5d70883cfeb6060eace3283c" },
+      { "$oid": "5d70883cfeb6060eace32860" },
+      { "$oid": "5d70883cfeb6060eace32839" }
+    ],
+    "tags": ["Saved by Grace", "Ephesians 2:1-10"],
+    "date": { "$date": "2019-06-09T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c9c" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284f" },
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace32875" },
+      { "$oid": "5d70883cfeb6060eace3288a" }
+    ],
+    "tags": ["United by Grace", "Ephesians 2:11-22"],
+    "date": { "$date": "2019-06-16T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c9d" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace3285a" },
+      { "$oid": "5d70883cfeb6060eace32847" },
+      { "$oid": "5d70883cfeb6060eace3286b" }
+    ],
+    "tags": ["The mystery of grace", "Ephesians 3:1-13"],
+    "date": { "$date": "2019-06-23T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c9e" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3285a" },
+      { "$oid": "5d70883cfeb6060eace32854" },
+      { "$oid": "5d70883cfeb6060eace32863" },
+      { "$oid": "5d70883cfeb6060eace3283f" }
+    ],
+    "tags": ["Praying to the Gracious God", "Ephesians 3:14-21", "Communion"],
+    "date": { "$date": "2019-06-30T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7c9f" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32855" },
+      { "$oid": "5d70883cfeb6060eace3284b" },
+      { "$oid": "5d70883cfeb6060eace32859" },
+      { "$oid": "5d70883cfeb6060eace32877" }
+    ],
+    "tags": [],
+    "date": { "$date": "2019-07-07T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7ca0" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3283b" },
+      { "$oid": "5d70883cfeb6060eace32868" },
+      { "$oid": "5d70883cfeb6060eace32859" },
+      { "$oid": "5d70883cfeb6060eace3285a" }
+    ],
+    "tags": ["1 Samuel 17", "David & Goliath"],
+    "date": { "$date": "2019-07-14T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7ca1" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace32857" },
+      { "$oid": "5d70883cfeb6060eace32872" }
+    ],
+    "tags": ["Why do you allow so much suffering in the world?"],
+    "date": { "$date": "2019-07-21T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7ca2" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace3287e" },
+      { "$oid": "5d70883cfeb6060eace3285b" },
+      { "$oid": "5d70883cfeb6060eace3284e" }
+    ],
+    "tags": ["Why can't I be free to live how I want to?"],
+    "date": { "$date": "2019-07-28T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7ca3" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3285a" },
+      { "$oid": "5d70883cfeb6060eace32877" },
+      { "$oid": "5d70883cfeb6060eace3283e" },
+      { "$oid": "5d70883cfeb6060eace3285b" }
+    ],
+    "tags": ["How can you be loving & send people to Hell?", "Communion"],
+    "date": { "$date": "2019-08-04T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7ca4" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32854" },
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace32862" },
+      { "$oid": "5d70883cfeb6060eace3284b" }
+    ],
+    "tags": ["Can I trust the Bible?"],
+    "date": { "$date": "2019-08-11T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7ca5" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace32858" },
+      { "$oid": "5d70883cfeb6060eace32875" },
+      { "$oid": "5d70883cfeb6060eace32859" }
+    ],
+    "tags": ["Ephesians 4:1-16", "The Healthy Body"],
+    "date": { "$date": "2019-08-18T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7ca6" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3285a" },
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70883cfeb6060eace3287a" },
+      { "$oid": "5d70883cfeb6060eace32847" }
+    ],
+    "tags": ["Ephesians 4:17-32", "The New You"],
+    "date": { "$date": "2019-08-25T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7ca7" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32851" },
+      { "$oid": "5d70883cfeb6060eace3283b" },
+      { "$oid": "5d70883cfeb6060eace3286b" },
+      { "$oid": "5d70883cfeb6060eace32850" }
+    ],
+    "tags": ["Ephesians 6:1-4", "Fatherhood"],
+    "date": { "$date": "2019-09-01T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7ca8" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284f" },
+      { "$oid": "5d70883cfeb6060eace32837" },
+      { "$oid": "5d70883cfeb6060eace32881" },
+      { "$oid": "5d70883cfeb6060eace3284e" }
+    ],
+    "tags": ["Ephesians 5:1-20", "Light & Darkness"],
+    "date": { "$date": "2019-09-08T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7ca9" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32855" },
+      { "$oid": "5d70883cfeb6060eace3285a" },
+      { "$oid": "5d70883cfeb6060eace32881" },
+      { "$oid": "5d70883cfeb6060eace32859" }
+    ],
+    "tags": ["Ephesians 5:21-33", "Marriage"],
+    "date": { "$date": "2019-09-15T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7caa" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace3284b" },
+      { "$oid": "5d70883cfeb6060eace3285b" },
+      { "$oid": "5d70883cfeb6060eace32860" }
+    ],
+    "tags": ["Ephesians 6:5-9", "Work"],
+    "date": { "$date": "2019-09-22T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5d70ecd69c85fe02e09a7cab" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace32857" },
+      { "$oid": "5d70883cfeb6060eace32849" },
+      { "$oid": "5d70883cfeb6060eace32880" }
+    ],
+    "tags": ["QTC Sunday"],
+    "date": { "$date": "2019-09-29T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5db683a959a40f0b0c6bcb6e" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32852" },
+      { "$oid": "5d70883cfeb6060eace3285a" },
+      { "$oid": "5d70883cfeb6060eace32846" },
+      { "$oid": "5d70883cfeb6060eace328c9" }
+    ],
+    "tags": ["Ephesians 6:10-24", "Armour of God"],
+    "date": { "$date": "2019-10-06T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5db68417e0b6af0b182a3c7c" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32891" },
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace32846" },
+      { "$oid": "5d70883cfeb6060eace3287d" }
+    ],
+    "tags": ["Genesis 1", "Creation"],
+    "date": { "$date": "2019-10-13T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5db6845ce0b6af0b182a3c7d" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32834" },
+      { "$oid": "5d70883cfeb6060eace32855" },
+      { "$oid": "5d70883cfeb6060eace3287f" },
+      { "$oid": "5d70883cfeb6060eace32849" }
+    ],
+    "tags": ["Luke 15:1-7", "Bush Service", "The Lost Sheep"],
+    "date": { "$date": "2019-10-20T00:00:00Z" },
+    "__v": 2
+  },
+  {
+    "_id": { "$oid": "5db68b158974d80c0e4c66f5" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace3285a" },
+      { "$oid": "5d70883cfeb6060eace32881" },
+      { "$oid": "5d70883cfeb6060eace3283e" }
+    ],
+    "tags": ["Genesis 2", "Humanity & Marriage"],
+    "date": { "$date": "2019-10-27T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5dd3a1a08c43d20788c69472" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace32851" },
+      { "$oid": "5d70883cfeb6060eace32878" },
+      { "$oid": "5d70883cfeb6060eace32836" }
+    ],
+    "tags": ["Genesis 3", "The Fall"],
+    "date": { "$date": "2019-11-03T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5dd3a1e58c43d20788c69473" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace32854" },
+      { "$oid": "5d70883cfeb6060eace3287b" },
+      { "$oid": "5d70883cfeb6060eace32856" }
+    ],
+    "tags": ["Genesis 4:1-26", "Cain and Abel"],
+    "date": { "$date": "2019-11-10T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5dd3a2118c43d20788c69474" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32848" },
+      { "$oid": "5d70883cfeb6060eace3287e" },
+      { "$oid": "5d70883cfeb6060eace3285b" },
+      { "$oid": "5d70883cfeb6060eace32850" }
+    ],
+    "tags": ["Genesis 6:1-8:19", "Noah and the Flood"],
+    "date": { "$date": "2019-11-17T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5dd3afd05a373d4f5813f3f9" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32838" },
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70883cfeb6060eace32835" },
+      { "$oid": "5d70883cfeb6060eace32874" }
+    ],
+    "tags": ["Genesis 8:20-9:28", "Noah and the Flood Cont."],
+    "date": { "$date": "2019-11-27T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5e0dcf88111ba70017e3df86" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284b" },
+      { "$oid": "5d70883cfeb6060eace32837" },
+      { "$oid": "5d70883cfeb6060eace32878" },
+      { "$oid": "5d70883cfeb6060eace32857" }
+    ],
+    "tags": ["Genesis 10:1-11:9", "Glory Theives"],
+    "date": { "$date": "2019-12-01T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5e0dd028111ba70017e3df88" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3285a" },
+      { "$oid": "5d70883cfeb6060eace3283b" },
+      { "$oid": "5d70883cfeb6060eace32863" },
+      { "$oid": "5d70883cfeb6060eace32862" }
+    ],
+    "tags": ["Genesis 11:10-12:9", "Hope of Promise"],
+    "date": { "$date": "2019-12-08T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5e0dd061111ba70017e3df89" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace32855" },
+      { "$oid": "5d70883cfeb6060eace32859" },
+      { "$oid": "5d70e81b25cc4b47083bce3f" }
+    ],
+    "tags": ["Luke 1:39-56", "Mary's Song"],
+    "date": { "$date": "2019-12-15T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5e10656ee335410ca26a2089" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace3283c" },
+      { "$oid": "5e106536e335410ca26a2088" },
+      { "$oid": "5d70883cfeb6060eace32848" }
+    ],
+    "tags": ["Luke 1:67-80", "Zechariah's Song"],
+    "date": { "$date": "2019-12-22T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5e106628e335410ca26a208b" },
+    "songs": [
+      { "$oid": "5d70e76d25cc4b47083bce3c" },
+      { "$oid": "5e10660be335410ca26a208a" },
+      { "$oid": "5d70e70a25cc4b47083bce3b" },
+      { "$oid": "5d70e81b25cc4b47083bce3f" }
+    ],
+    "tags": ["Luke 2:18-40", "The Angels' Song", "Christmas Day Service"],
+    "date": { "$date": "2019-12-25T00:00:00Z" },
+    "__v": 3
+  },
+  {
+    "_id": { "$oid": "5e10a00614850b190319d5e3" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32844" },
+      { "$oid": "5d70883cfeb6060eace32852" },
+      { "$oid": "5d70883cfeb6060eace3284e" },
+      { "$oid": "5d70883cfeb6060eace3286d" }
+    ],
+    "tags": ["Luke 2:25-35", "A sight for tired eyes"],
+    "date": { "$date": "2019-12-29T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5e2f6498f2b1aa0c8eb2e53a" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3285a" },
+      { "$oid": "5d70883cfeb6060eace32868" },
+      { "$oid": "5d70883cfeb6060eace32859" },
+      { "$oid": "5d70883cfeb6060eace32834" }
+    ],
+    "tags": ["Jonah 1:1-16", "Running from a relentless God"],
+    "date": { "$date": "2020-01-05T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5e2f64c8f2b1aa0c8eb2e53b" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace32837" },
+      { "$oid": "5d70883cfeb6060eace3287a" },
+      { "$oid": "5d70883cfeb6060eace32850" }
+    ],
+    "tags": ["Jonah 1:17-2:10"],
+    "date": { "$date": "2020-01-12T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5e2f6506f2b1aa0c8eb2e53d" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32847" },
+      { "$oid": "5d70883cfeb6060eace32858" },
+      { "$oid": "5d70883cfeb6060eace32878" },
+      { "$oid": "5d70883cfeb6060eace32849" }
+    ],
+    "tags": ["Jonah 3:1-16"],
+    "date": { "$date": "2020-01-19T00:00:00Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5e2f6553f2b1aa0c8eb2e53f" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32851" },
+      { "$oid": "5d70883cfeb6060eace3283b" },
+      { "$oid": "5d70883cfeb6060eace32846" },
+      { "$oid": "5d70883cfeb6060eace32875" }
+    ],
+    "tags": ["Jonah 4:1-11"],
+    "date": { "$date": "2020-01-26T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5e48352e6e210f089947d10e" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32843" },
+      { "$oid": "5d70883cfeb6060eace3284b" },
+      { "$oid": "5d70883cfeb6060eace3287c" },
+      { "$oid": "5d70883cfeb6060eace32856" }
+    ],
+    "tags": ["Matthew 8:1-17", "Jesus Restores"],
+    "date": { "$date": "2020-02-02T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5e4835836e210f089947d10f" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32840" },
+      { "$oid": "5d70883cfeb6060eace3283e" },
+      { "$oid": "5d70883cfeb6060eace32865" },
+      { "$oid": "5d70883cfeb6060eace32839" }
+    ],
+    "tags": ["Matthew 8:18-34", "Jesus Calls"],
+    "date": { "$date": "2020-02-09T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5e4835b66e210f089947d110" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace32854" },
+      { "$oid": "5d70883cfeb6060eace3284d" },
+      { "$oid": "5d70883cfeb6060eace32874" },
+      { "$oid": "5d70883cfeb6060eace3285b" }
+    ],
+    "tags": ["Matthew 9:1-17", "Jesus Forgives"],
+    "date": { "$date": "2020-02-16T00:00:00Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5e4835ee6e210f089947d111" },
+    "songs": [
+      { "$oid": "5d70883cfeb6060eace3284c" },
+      { "$oid": "5d70883cfeb6060eace3283d" },
+      { "$oid": "5d70883cfeb6060eace3285d" },
+      { "$oid": "5d70883cfeb6060eace32859" }
+    ],
+    "tags": ["Matthew 9:18-34", "Jesus Reverses The Curse"],
+    "date": { "$date": "2020-02-23T00:00:00Z" },
+    "__v": 0
+  }
+]

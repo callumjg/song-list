@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS songs (
   author text,
   "key" text,
   tempo text,
-  song_select_id text
+  song_select_id text,
+  is_deleted boolean DEFAULT FALSE,
+  is_archived boolean DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS tags (
@@ -21,7 +23,8 @@ CREATE TABLE IF NOT EXISTS song_tags (
 
 CREATE TABLE IF NOT EXISTS song_notes (
   song_note_id serial PRIMARY KEY,
-  song_id int REFERENCES songs ON DELETE CASCADE note text NOT NULL
+  song_id int REFERENCES songs ON DELETE CASCADE,
+  note text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS services (

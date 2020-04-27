@@ -18,6 +18,7 @@
     "moment": "^2.24.0",
     "mongodb": "^3.5.6",
     "mongoose": "^5.9.10",
+    "pg": "^8.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router": "^5.1.2",
