@@ -7,7 +7,7 @@ import ServiceForm from './ServiceForm';
 import Limiter from '../../components/Limiter';
 import Loader from '../../components/Loader';
 import Modal from '../../components/Modal';
-import server from '../../apis/server';
+import server from '../../../apis/server';
 import Service from '../../types/Service';
 
 const ServicesPage: React.FC = () => {
