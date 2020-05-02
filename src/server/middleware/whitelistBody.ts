@@ -11,4 +11,4 @@ const whitelistBody = (arr) => {
   };
 };
 
-module.exports = whitelistBody;
+export default whitelistBody;
