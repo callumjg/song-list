@@ -2,13 +2,20 @@ import pool from '../../db';
 import Resource from '../Resource';
 import findSongSql from './findSongSql';
 import SongType from '../../../types/Song';
+import { SongSchema } from '../../schemas/song';
 
-class Song extends Resource {
+class Song extends Resource implements SongType {
   songId: number;
-
-  constructor(props: SongType) {
-    super(props);
-  }
+  title: string;
+  url: string;
+  author: string;
+  key: string;
+  tempo: string;
+  songSelectId: string;
+  isArchived: boolean;
+  isDeleted: boolean;
+  tags: string[];
+  static schema = SongSchema;
 
   static async find(v) {
     // TODO: replace this line
@@ -26,8 +33,7 @@ class Song extends Resource {
       false,
       v.search,
     ]);
-    return { songs, count: rowCount };
-    // return { songs: songs.map((s) => new Song(s)), count: rowCount };
+    return { songs: songs.map((s) => new Song(s)), count: rowCount };
   }
   static findById(songId) {
     return {} as Song;
@@ -37,8 +43,16 @@ class Song extends Resource {
     return Song.deleteById(this.songId);
   }
 
-  static deleteById(songId) {
-    return 1;
+  static async deleteById(songId) {
+    const { rowCount } = await pool.query(
+      `
+        UPDATE songs set is_deleted = true
+        where song_id = $1
+        and is_deleted = false
+      `,
+      [songId]
+    );
+    return rowCount;
   }
 
   static updateById(songId) {

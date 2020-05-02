@@ -14,15 +14,15 @@ class Resource {
   }
 
   constructor(values) {
-    const validated = this.validate(values) || {};
+    const validated = this.validate(values);
     Object.keys(values).forEach((key) => {
       this[key] = validated[key];
     });
   }
 
-  async validate(values) {
-    const validated = await (this
-      .constructor as typeof Resource).schema.validate();
+  validate(values) {
+    const { schema } = this.constructor as typeof Resource;
+    const validated = schema.validateSync(values);
     return validated;
   }
 

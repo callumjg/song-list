@@ -20,14 +20,12 @@ const SongsPage: React.FC = () => {
       search,
       isArchived,
     });
-    console.log(`/songs?${str}`);
     return `/songs?${str}`;
   }, [category, search, isArchived]);
 
   const [{ songs }, error, isFetching] = useResource(url, {
     songs: [],
   });
-  console.log(songs);
 
   return (
     <Layout>

@@ -61,12 +61,14 @@ const makeConfig = (name) => (env) => {
       include: src,
       use: ['ts-loader'],
       include: src,
+      exclude: /node_modules/,
     },
     {
       test: /\.jsx?$/,
       include: src,
       use: ['babel-loader'],
       include: src,
+      exclude: /node_modules/,
     },
     {
       test: /\.(s[ac]|c)ss$/i,
@@ -78,6 +80,7 @@ const makeConfig = (name) => (env) => {
       test: /\.(png|jpe?g|gif)$/i,
       use: 'file-loader',
       include: src,
+      exclude: /node_modules/,
     },
   ];
 
