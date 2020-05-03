@@ -1,25 +1,50 @@
+import * as yup from 'yup';
 import pool from '../../db';
 import Resource from '../Resource';
 import findSongSql from './findSongSql';
 import SongType from '../../../types/Song';
-import { SongSchema } from '../../schemas/song';
 
 class Song extends Resource implements SongType {
   songId: number;
-  title: string;
-  url: string;
-  author: string;
-  key: string;
-  tempo: string;
-  songSelectId: string;
-  isArchived: boolean;
-  isDeleted: boolean;
-  tags: string[];
-  static schema = SongSchema;
 
-  static async find(v) {
-    // TODO: replace this line
-    v.isArchived = v.isArchived === 'true';
+  title: string;
+
+  url: string;
+
+  author: string;
+
+  key: string;
+
+  tempo: string;
+
+  songSelectId: string;
+
+  isArchived: boolean;
+
+  isDeleted: boolean;
+
+  tags: string[];
+
+  static schema = yup.object().shape({
+    songId: yup.number().integer(),
+    title: yup.string(),
+    url: yup.string().nullable(),
+    author: yup.string().nullable(),
+    key: yup.string().nullable(),
+    tempo: yup.string().nullable(),
+    songSelectId: yup.string().nullable(),
+    isArchived: yup.boolean(),
+    isDeleted: yup.boolean(),
+    tags: yup.array().of(yup.string()),
+  });
+
+  static async find(input) {
+    const v = Song.schema
+      .shape({
+        search: yup.string(),
+      })
+      .validateSync(input);
+
     const { rows: songs, rowCount } = await pool.query(findSongSql, [
       v.tags,
       v.songId,
