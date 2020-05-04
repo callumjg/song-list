@@ -12,7 +12,12 @@ const ErrorMessage: React.FC<Props> = ({
   ...props
 }) =>
   error && !isHidden ? (
-    <div {...props} className={`alert alert-danger ${className}`} role="alert">
+    <div
+      {...props}
+      className={`alert alert-danger ${className}`}
+      role="alert"
+      style={{ marginBottom: 0 }}
+    >
       {error}
     </div>
   ) : null;

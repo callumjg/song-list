@@ -16,3 +16,7 @@
 @mixin boxShadowRaised {
   box-shadow: 1.5px 1.5px 9px 7px rgba(150, 150, 150, 0.2);
 }
+
+@mixin boxShadowInset {
+  box-shadow: inset 1.5px 1.5px 9px 7px rgba(150, 150, 150, 0.1);
+}

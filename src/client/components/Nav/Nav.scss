@@ -1,9 +1,9 @@
-@import "../../styles/colors";
-@import "../../styles/mixins";
+@import '../../styles/colors';
+@import '../../styles/mixins';
 
-@import "../../../../node_modules/bootstrap/scss/functions";
-@import "../../../../node_modules/bootstrap/scss/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import '../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../node_modules/bootstrap/scss/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins/breakpoints';
 
 nav {
   .nav-container {
@@ -96,8 +96,8 @@ nav {
             &:hover {
               background-color: inherit;
               color: inherit;
-              border-bottom: 0.1rem solid $accent;
-              padding-bottom: 0.4rem;
+              border-bottom: 0.2rem solid $accent;
+              padding-bottom: 0.2rem;
             }
           }
         }

@@ -112,3 +112,9 @@ i {
 #load-overlay {
   display: none;
 }
+
+.spaced {
+  & > *:not(:first-child) {
+    margin-top: 1rem;
+  }
+}

@@ -6,6 +6,7 @@ import useResource from '../hooks/useResource';
 import SongTable from '../components/SongTable';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
+import Collapsible from '../components/Collapsible';
 
 const SongsPage: React.FC = () => {
   const [isSearching, setSearching] = useState(false);
@@ -29,50 +30,57 @@ const SongsPage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="container py-3">
-        <ErrorMessage error={error} className="mb-3" />
-        <SearchInput
-          callback={setSearch}
-          delay={300}
-          setLoading={setSearching}
-          placeholder="Search title..."
-          className="form-control"
-        />
-        <div className="py-3 d-flex justify-content-between">
-          <div className="btn-group btn-group-toggle" data-toggle="buttons">
+      <ErrorMessage error={error} />
+      <Collapsible>
+        <div className="spaced container-fluid" style={{ padding: '2rem' }}>
+          <SearchInput
+            callback={setSearch}
+            delay={300}
+            setLoading={setSearching}
+            placeholder="Search title..."
+            className="form-control"
+          />
+          <div className="">
+            <div className="btn-group btn-group-toggle" data-toggle="buttons">
+              <button
+                type="button"
+                className={`btn btn-outline-primary btn-sm${
+                  category === 'A' ? ' active' : ''
+                }`}
+                onClick={() => setCategory('A')}
+              >
+                Category A
+              </button>
+              <button
+                type="button"
+                className={`btn btn-outline-primary btn-sm${
+                  category === 'B' ? ' active' : ''
+                }`}
+                onClick={() => setCategory('B')}
+              >
+                Category B (Hymn)
+              </button>
+            </div>
             <button
               type="button"
-              className={`btn btn-outline-primary btn-sm${
-                category === 'A' ? ' active' : ''
+              className={`btn btn-outline-primary ml-3 btn-sm${
+                isArchived ? ' active' : ''
               }`}
-              onClick={() => setCategory('A')}
+              onClick={() => setArchived(!isArchived)}
             >
-              Category A
-            </button>
-            <button
-              type="button"
-              className={`btn btn-outline-primary btn-sm${
-                category === 'B' ? ' active' : ''
-              }`}
-              onClick={() => setCategory('B')}
-            >
-              Category B (Hymn)
+              {isArchived ? 'Hide archived' : 'Show archived'}
             </button>
           </div>
-          <button
-            type="button"
-            className={`btn btn-outline-primary btn-sm${
-              isArchived ? ' active' : ''
-            }`}
-            onClick={() => setArchived(!isArchived)}
-          >
-            {isArchived ? 'Hide archived' : 'Show archived'}
-          </button>
         </div>
-        <div className="relative">
-          <Loader loading={isFetching || isSearching} />
-          <SongTable songs={songs} />
-        </div>
+      </Collapsible>
+
+      <div className="relative">
+        <Loader
+          loading={isFetching || isSearching}
+          backgroundStyle={{ backgroundColor: 'rgba(100,100,100, .5)' }}
+          light
+        />
+        <SongTable songs={songs} className="table-striped table-dark" />
       </div>
     </Layout>
   );

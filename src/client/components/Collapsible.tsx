@@ -1,43 +1,45 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './Collapsible.scss';
 
-interface State {
-  isOpen: boolean;
-}
-
 type Props = {
-  defaultOpen: boolean;
-  heading: string;
+  defaultOpen?: boolean;
+  heading?: ((isOpen: boolean) => JSX.Element | String) | JSX.Element | string;
+  headingTop?: boolean;
 };
 
-class Collapsible extends Component<Props, State> {
-  state: State = { isOpen: false };
+const Collapsible: React.FC<Props> = ({
+  defaultOpen,
+  heading,
+  children,
+  headingTop,
+}) => {
+  const [isOpen, setOpen] = useState(defaultOpen);
 
-  componentDidMount() {
-    if (this.props.defaultOpen) this.setState({ isOpen: true });
-  }
-
-  getChevron = () => {
-    return `ui angle icon ${this.state.isOpen ? ' up' : ' down'}`;
+  const renderHeadingContent = () => {
+    if (!heading)
+      return (
+        <div className="default-heading">
+          <ion-icon
+            name={isOpen ? 'chevron-up-outline' : 'ellipsis-horizontal-outline'}
+          />
+        </div>
+      );
+    return typeof heading === 'function' ? heading(isOpen) : heading;
   };
-  render() {
-    return (
-      <div className="collapsible">
-        <div
-          className="collapsible-heading"
-          onClick={() => this.setState({ isOpen: !this.state.isOpen })}
-        >
-          <h5>{this.props.heading}</h5>
-          <i className={this.getChevron()} />
-        </div>
-        <div
-          className={`collapsible-content ${this.state.isOpen ? 'open' : ''}`}
-        >
-          {this.props.children}
-        </div>
-      </div>
-    );
-  }
-}
 
+  const renderHeading = () => (
+    <div className="collapsible-heading" onClick={() => setOpen(!isOpen)}>
+      {renderHeadingContent()}
+    </div>
+  );
+  return (
+    <div className="collapsible">
+      {headingTop && renderHeading()}
+      <div className={`collapsible-content ${isOpen ? 'open' : ''}`}>
+        {children}
+      </div>
+      {headingTop || renderHeading()}
+    </div>
+  );
+};
 export default Collapsible;

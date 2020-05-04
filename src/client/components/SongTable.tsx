@@ -1,56 +1,45 @@
 import React from 'react';
 import SongType from '../../types/Song';
-
+import { Column, Table } from './Table';
 interface Props {
   songs: SongType[];
   className?: string;
 }
 const SongTable: React.FC<Props> = ({ songs, className }) => {
-  let classes = 'table table-sm table-borderless song-table';
-  if (className) classes += ` ${className}`;
+  const columns: Column[] = [
+    {
+      target: 'title',
+      header: <ion-icon name="musical-notes-outline" />,
+      style: { paddingLeft: '2%' },
+    },
+    { target: 'author', header: <ion-icon name="person-outline" /> },
+    { target: 'key', header: <ion-icon name="key-outline" /> },
+    {
+      target: 'tags',
+      header: <ion-icon name="pricetags-outline" />,
+      render: (tags) =>
+        tags.filter((t) => !t.match(/Category [AB]/)).join(', '),
+    },
+    {
+      target: 'url',
+      header: <ion-icon name="link-outline" />,
+      render: (url) =>
+        url ? (
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            <ion-icon name="logo-youtube" />
+          </a>
+        ) : (
+          '-'
+        ),
+    },
+  ];
   return (
-    <table className={classes} style={{ fontSize: '90%' }}>
-      <thead className="">
-        <tr>
-          <th>
-            <ion-icon name="musical-notes-outline" />
-          </th>
-          <th>
-            <ion-icon name="person-outline" />
-          </th>
-          <th>
-            <ion-icon name="key-outline" />
-          </th>
-          <th>
-            <ion-icon name="pricetags-outline" />
-          </th>
-          <th>
-            <ion-icon name="link-outline" />
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {songs.map((song) => (
-          <tr key={song.songId}>
-            <td className="align-middle">{song.title}</td>
-            <td className="align-middle">{song.author}</td>
-            <td className="align-middle">{song.key}</td>
-            <td className="align-middle">
-              {song.tags.filter((t) => !t.match(/Category [AB]/)).join(', ')}
-            </td>
-            <td className="align-middle">
-              {song.url ? (
-                <a href={song.url} target="_blank" rel="noopener noreferrer">
-                  <ion-icon name="logo-youtube" />
-                </a>
-              ) : (
-                '-'
-              )}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <Table
+      data={songs}
+      keyId="songId"
+      columns={columns}
+      className={className}
+    />
   );
 };
 

@@ -7,6 +7,8 @@ interface Props {
   diameter?: string;
   noStretch?: boolean;
   light?: boolean;
+  backgroundStyle?: React.CSSProperties;
+  spinnerStyle?: React.CSSProperties;
 }
 
 const Loader: React.FC<Props> = ({
@@ -16,6 +18,8 @@ const Loader: React.FC<Props> = ({
   diameter = '2rem',
   noStretch,
   light,
+  backgroundStyle = {},
+  spinnerStyle = {},
 }) => {
   if (!loading) return (children as React.ReactElement<any>) || null;
 
@@ -34,9 +38,10 @@ const Loader: React.FC<Props> = ({
             ? 'rgba(0,0,0,0)'
             : 'rgba(255,255,255,0.7)',
           position: noStretch ? undefined : 'absolute',
+          ...backgroundStyle,
         }}
       >
-        <div style={style} />
+        <div style={{ ...style, ...spinnerStyle }} />
       </div>
       {children}
     </div>
