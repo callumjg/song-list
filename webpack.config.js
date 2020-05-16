@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 const NodeExternals = require('webpack-node-externals');
@@ -11,14 +12,17 @@ const src = path.resolve(__dirname, 'src');
 const makeConfig = (name) => (env) => {
   const isServer = name === 'server';
   const isProduction = !!env.production;
+  const sharedPlugins = [new webpack.IgnorePlugin(/\.\/locale$/, /moment$/)];
   let plugins = isServer
     ? [
+        ...sharedPlugins,
         new Nodemon({
           script: './dist/server.js',
           watch: path.resolve(__dirname, './dist'),
         }),
       ]
     : [
+        ...sharedPlugins,
         new HtmlWebpackPlugin({
           template: __dirname + '/src/server/public/index.html',
           favicon: __dirname + '/src/server/public/favicon.ico',

@@ -1,7 +1,0 @@
-@import "../styles/mixins";
-
-.song-distribution {
-  flex: 1;
-  @include flex();
-  flex-flow: row wrap;
-}

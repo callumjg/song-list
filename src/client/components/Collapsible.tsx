@@ -5,6 +5,7 @@ type Props = {
   defaultOpen?: boolean;
   heading?: ((isOpen: boolean) => JSX.Element | String) | JSX.Element | string;
   headingTop?: boolean;
+  defaultHeadingStyle?: React.CSSProperties;
 };
 
 const Collapsible: React.FC<Props> = ({
@@ -12,13 +13,14 @@ const Collapsible: React.FC<Props> = ({
   heading,
   children,
   headingTop,
+  defaultHeadingStyle,
 }) => {
   const [isOpen, setOpen] = useState(defaultOpen);
 
   const renderHeadingContent = () => {
     if (!heading)
       return (
-        <div className="default-heading">
+        <div className="default-heading" style={defaultHeadingStyle}>
           <ion-icon
             name={isOpen ? 'chevron-up-outline' : 'ellipsis-horizontal-outline'}
           />

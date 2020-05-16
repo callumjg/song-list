@@ -21,8 +21,8 @@ export const createSong = asyncCatchWrapper(async (req, res) => {
 });
 
 export const getMetrics = asyncCatchWrapper(async (req, res) => {
-  // TODO: update metrics route
-  res.send('TODO');
+  const songs = await Song.getMetrics(req.query);
+  res.send({ songs });
 });
 
 export const getSong = asyncCatchWrapper(async (req, res) => {

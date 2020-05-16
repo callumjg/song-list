@@ -17,12 +17,12 @@ const ServicesPage: React.FC = () => {
       header: 'Date',
       target: 'date',
       render: (date) => moment(date).format('DD/MM/YYYY'),
-      style: { minWidth: '20%', paddingLeft: '2%' },
+      style: { minWidth: '25%', paddingLeft: '2%' },
     },
     {
       header: 'Notes',
       target: 'notes',
-      style: { width: '20%' },
+      style: { width: '35%' },
       render: (notes) =>
         notes.map((n) => (
           <p key={n} style={{ marginBottom: 0 }}>
@@ -33,7 +33,7 @@ const ServicesPage: React.FC = () => {
     {
       header: 'Songs',
       target: 'songs',
-      style: { width: '60%' },
+      style: { width: '40%' },
       render: (songs) => (
         <ol style={{ padding: 0, margin: 0 }}>
           {songs.map((s) => (
@@ -48,14 +48,15 @@ const ServicesPage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="relative">
+      <ErrorMessage error={error} />
+      <div className="relative container py-4">
         <Loader loading={isFetching} />
-        <ErrorMessage error={error} />
         <Table
           data={services}
           keyId="serviceId"
           columns={columns}
-          className="table-striped table-dark"
+          className="table-sm"
+          style={{ fontSize: '90%' }}
         />
       </div>
     </Layout>

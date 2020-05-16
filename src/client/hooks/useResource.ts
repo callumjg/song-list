@@ -24,5 +24,10 @@ export default function useResource(url: string, defaultData = {}) {
       setIsLoading(false);
     })();
   }, [url, nonce]);
-  return [url ? data : defaultData, error, isLoading, refresh];
+  return [
+    (url ? data : defaultData) as any,
+    error as string,
+    isLoading as boolean,
+    refresh,
+  ];
 }

@@ -22,7 +22,7 @@ export const updateService = asyncCatchWrapper(async (req, res) => {
   const serviceId = await yup.number().integer().validate(req.params.serviceId);
   const { newValues: service, count } = await Service.updateById(serviceId);
   if (!count) throw new Error('NotFound');
-  res.send({ Service });
+  res.send({ service });
 });
 
 export const deleteService = asyncCatchWrapper(async (req, res) => {

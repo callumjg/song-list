@@ -1,11 +1,13 @@
 import React from 'react';
 import SongType from '../../types/Song';
 import { Column, Table } from './Table';
+
 interface Props {
   songs: SongType[];
   className?: string;
+  style?: React.CSSProperties;
 }
-const SongTable: React.FC<Props> = ({ songs, className }) => {
+const SongTable: React.FC<Props> = ({ songs, ...props }) => {
   const columns: Column[] = [
     {
       target: 'title',
@@ -33,14 +35,7 @@ const SongTable: React.FC<Props> = ({ songs, className }) => {
         ),
     },
   ];
-  return (
-    <Table
-      data={songs}
-      keyId="songId"
-      columns={columns}
-      className={className}
-    />
-  );
+  return <Table data={songs} keyId="songId" columns={columns} {...props} />;
 };
 
 export default SongTable;

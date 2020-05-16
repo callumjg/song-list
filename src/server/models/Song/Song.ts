@@ -1,8 +1,10 @@
+import moment from 'moment';
 import * as yup from 'yup';
 import pool from '../../db';
 import Resource from '../Resource';
-import findSongSql from './findSongSql';
 import SongType from '../../../types/Song';
+import findSongSql from './findSongSql';
+import getSongMetricsSql from './getSongMetricsSql';
 
 class Song extends Resource implements SongType {
   songId: number;
@@ -88,6 +90,32 @@ class Song extends Resource implements SongType {
     // });
     // await song.save();
     return { newValues: {}, count: 1 };
+  }
+
+  static async getMetrics(filter) {
+    const v = await yup
+      .object()
+      .shape({
+        tags: yup.array().of(yup.string()).default([]),
+        isArchived: yup.boolean().default(false),
+        months: yup.number().integer().default(6),
+      })
+      .validateSync(filter);
+    const from = moment().subtract(v.months, 'months').toDate();
+    const { rows } = await pool.query(getSongMetricsSql, [
+      v.tags,
+      v.isArchived,
+      from,
+    ]);
+
+    return rows.map((song) => {
+      song.plays = parseInt(song.plays, 10);
+      if (song.sincePlayed)
+        song.weeksSincePlayed = Math.round(song.sincePlayed.days / 7);
+
+      delete song.sincePlayed;
+      return song;
+    });
   }
 }
 

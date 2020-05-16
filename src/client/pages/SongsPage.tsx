@@ -6,7 +6,6 @@ import useResource from '../hooks/useResource';
 import SongTable from '../components/SongTable';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
-import Collapsible from '../components/Collapsible';
 
 const SongsPage: React.FC = () => {
   const [isSearching, setSearching] = useState(false);
@@ -30,9 +29,9 @@ const SongsPage: React.FC = () => {
 
   return (
     <Layout>
-      <ErrorMessage error={error} />
-      <Collapsible>
-        <div className="spaced container-fluid" style={{ padding: '2rem' }}>
+      <div className="container py-4">
+        <ErrorMessage error={error} />
+        <div className="spaced pb-4">
           <SearchInput
             callback={setSearch}
             delay={300}
@@ -72,15 +71,15 @@ const SongsPage: React.FC = () => {
             </button>
           </div>
         </div>
-      </Collapsible>
 
-      <div className="relative">
-        <Loader
-          loading={isFetching || isSearching}
-          backgroundStyle={{ backgroundColor: 'rgba(100,100,100, .5)' }}
-          light
-        />
-        <SongTable songs={songs} className="table-striped table-dark" />
+        <div className="relative">
+          <Loader loading={isFetching || isSearching} />
+          <SongTable
+            songs={songs}
+            className="table-sm"
+            style={{ fontSize: '90%' }}
+          />
+        </div>
       </div>
     </Layout>
   );

@@ -3,10 +3,12 @@
 
 .header {
   @include boxShadow();
-  @include flex(space-between, flex-end);
   background-color: white;
   color: $primary;
   cursor: default;
-  padding: 0.5rem 0;
+  padding: 0.3rem 0;
   flex: 1;
+  .container {
+    @include flex(space-between);
+  }
 }
