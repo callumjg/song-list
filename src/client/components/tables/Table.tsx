@@ -24,6 +24,7 @@ export interface Props {
   columns: Column[];
   className?: string;
   style?: React.CSSProperties;
+  trClassNames?: (row: any, index?: number) => string | undefined;
 }
 
 export const Table: React.FC<Props> = ({
@@ -32,6 +33,7 @@ export const Table: React.FC<Props> = ({
   columns,
   className,
   style: tableStyle,
+  trClassNames,
 }) => {
   let tableClassName = 'table';
   if (className) tableClassName += ` ${className}`;
@@ -117,7 +119,9 @@ export const Table: React.FC<Props> = ({
 
   const renderBody = () =>
     sorted.map((row, index) => (
-      <tr key={row[keyId]}>{columns.map(renderColumn(row, index))}</tr>
+      <tr key={row[keyId]} className={trClassNames && trClassNames(row, index)}>
+        {columns.map(renderColumn(row, index))}
+      </tr>
     ));
 
   return (

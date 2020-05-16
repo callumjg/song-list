@@ -1,5 +1,5 @@
 import React from 'react';
-import SongType from '../../types/Song';
+import SongType from '../../../types/Song';
 import { Column, Table } from './Table';
 
 interface Props {

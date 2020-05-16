@@ -3,7 +3,7 @@ import qs from 'qs';
 import Layout from '../components/Layout';
 import SearchInput from '../components/SearchInput';
 import useResource from '../hooks/useResource';
-import SongTable from '../components/SongTable';
+import SongTable from '../components/tables/SongTable';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 

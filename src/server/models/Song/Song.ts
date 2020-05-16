@@ -98,10 +98,11 @@ class Song extends Resource implements SongType {
       .shape({
         tags: yup.array().of(yup.string()).default([]),
         isArchived: yup.boolean().default(false),
-        months: yup.number().integer().default(6),
+        months: yup.number().integer().default(38),
       })
       .validateSync(filter);
     const from = moment().subtract(v.months, 'months').toDate();
+
     const { rows } = await pool.query(getSongMetricsSql, [
       v.tags,
       v.isArchived,

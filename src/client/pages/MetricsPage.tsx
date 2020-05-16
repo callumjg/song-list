@@ -1,67 +1,82 @@
-import React from 'react';
-import moment from 'moment';
-
-// import qs from 'qs';
+import React, { useState, useMemo } from 'react';
+import qs from 'qs';
 import Layout from '../components/Layout';
-// import SearchInput from '../components/SearchInput';
 import useResource from '../hooks/useResource';
-import { Column, Table } from '../components/Table';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
-// import Collapsible from '../components/Collapsible';
+import MetricsTable from '../components/tables/MetricsTable';
+
+const monthButtons = [
+  ['All', undefined],
+  ['2yr', 24],
+  ['1yr', 12],
+  ['6mth', 6],
+  ['3mth', 3],
+  ['1mth', 1],
+];
 
 const MetricsPage = () => {
-  const [{ songs }, error, isLoading] = useResource('/songs/metrics', {
+  const [category, setCategory] = useState('A');
+  const [months, setMonths] = useState(6);
+
+  const url = useMemo(() => {
+    const cat = category === 'A' ? 'Category A' : 'Category B (Hymn)';
+    const str = qs.stringify({
+      tags: [cat],
+      months,
+    });
+    return `/songs/metrics?${str}`;
+  }, [category, months]);
+
+  const [{ songs }, error, isLoading] = useResource(url, {
     songs: [],
   });
 
-  // Average placement
-  const columns: Column[] = [
-    {
-      header: 'Title',
-      target: 'title',
-      sortFunc: (a, b) => (a > b ? 1 : -1),
-    },
-    {
-      header: 'Earliest Service',
-      target: 'earliestService',
-      render: (v) => moment(v).format('DD/MM/YYYY'),
-      placeholder: '-',
-      style: { textAlign: 'center' },
-      sortFunc: (a, b) => (moment(a || 0).isBefore(moment(b || 0)) ? -1 : 1),
-      sortDefault: -1,
-    },
-    {
-      header: 'Plays',
-      target: 'plays',
-      placeholder: '0',
-      style: { textAlign: 'center' },
-      sortFunc: (a, b) => a - b,
-      sortDefault: -1,
-      sortPriority: 2,
-    },
-    {
-      header: 'Wks Since Played',
-      target: 'weeksSincePlayed',
-      placeholder: '∞',
-      style: { textAlign: 'center' },
-      sortFunc: (a, b) => (a || Infinity) - (b || Infinity),
-      sortPriority: 1,
-    },
-  ];
   return (
     <Layout>
       <div className="relative">
         <Loader loading={isLoading} />
         <ErrorMessage error={error} />
-        <div className="container py-4">
-          <Table
-            data={songs}
-            keyId="songId"
-            columns={columns}
-            className="table-sm"
-            style={{ fontSize: '90%' }}
-          />
+        <div className="container my-4">
+          <div className="d-flex justify-content-between">
+            <div
+              className="btn-group btn-group-toggle mb-4"
+              data-toggle="buttons"
+            >
+              <button
+                type="button"
+                className={`btn btn-outline-primary btn-sm${
+                  category === 'A' ? ' active' : ''
+                }`}
+                onClick={() => setCategory('A')}
+                children="Category A"
+              />
+              <button
+                type="button"
+                className={`btn btn-outline-primary btn-sm${
+                  category === 'B' ? ' active' : ''
+                }`}
+                onClick={() => setCategory('B')}
+                children="Category B (Hymn)"
+              />
+            </div>
+            <div
+              className="btn-group btn-group-toggle mb-4"
+              data-toggle="buttons"
+            >
+              {monthButtons.map(([label, m]) => (
+                <button
+                  key={label}
+                  className={`btn btn-outline-primary btn-sm${
+                    m === months ? ' active' : ''
+                  }`}
+                  onClick={() => setMonths(m as number)}
+                  children={label}
+                />
+              ))}
+            </div>
+          </div>
+          <MetricsTable songs={songs} />
         </div>
       </div>
     </Layout>
