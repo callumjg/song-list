@@ -39,7 +39,7 @@ const SongsPage: React.FC = () => {
             placeholder="Search title..."
             className="form-control"
           />
-          <div className="">
+          <div className="d-flex justify-content-between">
             <div className="btn-group btn-group-toggle" data-toggle="buttons">
               <button
                 type="button"
