@@ -22,12 +22,12 @@ const isServer = typeof window === 'undefined';
 
 const Modal: React.FC<Props> = ({
   isOpen,
-  onDismiss,
   title,
   footer,
   large,
   small,
   children,
+  ...props
 }) => {
   const body = isServer
     ? { classList: { add() {}, remove() {} } }
@@ -39,8 +39,7 @@ const Modal: React.FC<Props> = ({
     if (isOpen) {
       body.classList.add('modal-open');
       transitionIn();
-    }
-    if (!isOpen) {
+    } else {
       transitionOut();
       body.classList.remove('modal-open');
     }
@@ -56,9 +55,18 @@ const Modal: React.FC<Props> = ({
 
   const transitionOut = () => {
     setShow('');
-    setTimeout(() => {
-      setDisplay('none');
-    }, 100);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setDisplay('none');
+        resolve();
+      }, 100);
+    });
+  };
+
+  // wait for transition effect before executing callback
+  const onDismiss = async () => {
+    await transitionOut();
+    props.onDismiss();
   };
 
   const renderModal = () => (

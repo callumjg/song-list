@@ -6,6 +6,7 @@ import useResource from '../hooks/useResource';
 import SongTable from '../components/tables/SongTable';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
+import history from '../constants/history';
 
 const SongsPage: React.FC = () => {
   const [isSearching, setSearching] = useState(false);
@@ -47,28 +48,34 @@ const SongsPage: React.FC = () => {
                   category === 'A' ? ' active' : ''
                 }`}
                 onClick={() => setCategory('A')}
-              >
-                Category A
-              </button>
+                children="Category A"
+              />
               <button
                 type="button"
                 className={`btn btn-outline-primary btn-sm${
                   category === 'B' ? ' active' : ''
                 }`}
                 onClick={() => setCategory('B')}
-              >
-                Category B (Hymn)
-              </button>
+                children="Category B (Hymn)"
+              />
             </div>
-            <button
-              type="button"
-              className={`btn btn-outline-primary ml-3 btn-sm${
-                isArchived ? ' active' : ''
-              }`}
-              onClick={() => setArchived(!isArchived)}
-            >
-              {isArchived ? 'Hide archived' : 'Show archived'}
-            </button>
+            <div className="d-flex justify-content-between">
+              <button
+                className="btn btn-outline-primary btn-sm mx-2"
+                type="button"
+                onClick={() => history.push('/songs/add')}
+              >
+                <ion-icon name="add" />
+              </button>
+              <button
+                type="button"
+                className={`btn btn-outline-primary btn-sm${
+                  isArchived ? ' active' : ''
+                }`}
+                onClick={() => setArchived(!isArchived)}
+                children={isArchived ? 'Hide archived' : 'Show archived'}
+              />
+            </div>
           </div>
         </div>
 
