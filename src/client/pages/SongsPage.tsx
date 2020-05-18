@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import qs from 'qs';
+import { connect } from 'react-redux';
 import Layout from '../components/Layout';
 import SearchInput from '../components/SearchInput';
 import useResource from '../hooks/useResource';
@@ -7,13 +8,13 @@ import SongTable from '../components/tables/SongTable';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 import history from '../constants/history';
+import { setSongs } from '../actions/songs';
 
-const SongsPage: React.FC = () => {
+const SongsPage = ({ songs, setSongs, ...props }) => {
   const [isSearching, setSearching] = useState(false);
   const [search, setSearch] = useState('');
   const [isArchived, setArchived] = useState(false);
   const [category, setCategory] = useState('A');
-
   const url = useMemo(() => {
     const cat = category === 'A' ? 'Category A' : 'Category B (Hymn)';
     const str = qs.stringify({
@@ -24,9 +25,13 @@ const SongsPage: React.FC = () => {
     return `/songs?${str}`;
   }, [category, search, isArchived]);
 
-  const [{ songs }, error, isFetching] = useResource(url, {
+  const [{ songs: fetchedSongs }, error, isFetching] = useResource(url, {
     songs: [],
   });
+
+  useEffect(() => {
+    setSongs(fetchedSongs);
+  }, [fetchedSongs]);
 
   return (
     <Layout>
@@ -92,4 +97,8 @@ const SongsPage: React.FC = () => {
   );
 };
 
-export default SongsPage;
+const mapStateToProps = (state) => ({
+  songs: state.songs,
+});
+
+export default connect(mapStateToProps, { setSongs })(SongsPage);
