@@ -5,11 +5,11 @@ class Resource {
 
   static find;
 
-  protected async put(...args: any[]) {
+  protected async put() {
     return this;
   }
 
-  protected async insert(...args: any[]) {
+  protected async insert() {
     return this;
   }
 
@@ -20,17 +20,16 @@ class Resource {
     });
   }
 
-  validate(values) {
+  validate(values?) {
     const { schema } = this.constructor as typeof Resource;
-    const validated = schema.validateSync(values);
+    const validated = schema.validateSync(values || this);
     return validated;
   }
 
   async save() {
-    const validated = this.validate(this);
     const { name } = this.constructor;
     const idName = `${name.substr(0, 1).toLowerCase()}${name.substr(1)}Id`;
-    return validated[idName] ? this.put(validated) : this.insert(validated);
+    return this[idName] ? this.put() : this.insert();
   }
 
   static validateId(_id) {

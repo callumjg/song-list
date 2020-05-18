@@ -32,6 +32,7 @@ export default function errorHandler(e, req, res, next) {
     case 'TypeError':
     case 'URIError':
     default:
+      if (e.error) e.note = e.error;
       e.status = 500;
       e.error = 'Internal server error';
   }

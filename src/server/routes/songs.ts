@@ -5,9 +5,9 @@ const router = Router();
 
 router.post('/', c.createSong);
 router.get('/metrics', c.getMetrics);
-router.get('/:_id', c.getSong);
+router.get('/:songId', c.getSong);
 router.get('/', c.getSongs);
-router.patch('/:_id', c.updateSong);
-router.delete('/:_id', c.deleteSong);
+router.patch('/:songId', c.updateSong);
+router.delete('/:songId', c.deleteSong);
 
 export default router;

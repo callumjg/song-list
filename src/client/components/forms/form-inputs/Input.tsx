@@ -1,6 +1,6 @@
 import React from 'react';
 import { useField, FieldConfig } from 'formik';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../../ErrorMessage';
 
 interface Props extends React.InputHTMLAttributes<any> {
   label?: string;
