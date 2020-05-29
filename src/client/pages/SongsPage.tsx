@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import qs from 'qs';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Layout from '../components/Layout';
 import SearchInput from '../components/SearchInput';
 import useResource from '../hooks/useResource';
@@ -10,11 +10,20 @@ import ErrorMessage from '../components/ErrorMessage';
 import history from '../constants/history';
 import { setSongs } from '../actions/songs';
 
-const SongsPage = ({ songs, setSongs, ...props }) => {
+const selectSongs = (state) => state.songs;
+
+const SongsPage = () => {
   const [isSearching, setSearching] = useState(false);
   const [search, setSearch] = useState('');
   const [isArchived, setArchived] = useState(false);
   const [category, setCategory] = useState('A');
+  const songs = useSelector(selectSongs);
+  const dispatch = useDispatch();
+  const onChange = useCallback(({ songs }) => dispatch(setSongs(songs)), [
+    dispatch,
+  ]);
+
+  // Get url with query string
   const url = useMemo(() => {
     const cat = category === 'A' ? 'Category A' : 'Category B (Hymn)';
     const str = qs.stringify({
@@ -25,13 +34,12 @@ const SongsPage = ({ songs, setSongs, ...props }) => {
     return `/songs?${str}`;
   }, [category, search, isArchived]);
 
-  const [{ songs: fetchedSongs }, error, isFetching] = useResource(url, {
-    songs: [],
-  });
-
-  useEffect(() => {
-    setSongs(fetchedSongs);
-  }, [fetchedSongs]);
+  // Get songs
+  const { error, isLoading: isFetching } = useResource(
+    url,
+    { songs: [] },
+    { onChange }
+  );
 
   return (
     <Layout>
@@ -97,8 +105,4 @@ const SongsPage = ({ songs, setSongs, ...props }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  songs: state.songs,
-});
-
-export default connect(mapStateToProps, { setSongs })(SongsPage);
+export default SongsPage;

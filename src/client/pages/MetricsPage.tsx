@@ -28,7 +28,11 @@ const MetricsPage = () => {
     return `/songs/metrics?${str}`;
   }, [category, months]);
 
-  const [{ songs }, error, isLoading] = useResource(url, {
+  const {
+    data: { songs },
+    error,
+    isLoading,
+  } = useResource(url, {
     songs: [],
   });
 
