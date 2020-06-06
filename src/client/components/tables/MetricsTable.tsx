@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Column, Table } from './Table';
 import Song from '../../types/Song';
+import sortAlphabetically from '../../../utils/sortAlphabetically';
 
 interface Props {
   songs: Song[];
@@ -15,7 +16,7 @@ const MetricsTable: React.FC<Props> = ({ songs }) => {
     {
       header: 'Title',
       target: 'title',
-      sortFunc: (a, b) => (a > b ? 1 : -1),
+      sortFunc: sortAlphabetically,
     },
     {
       header: 'Earliest Service',

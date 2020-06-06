@@ -43,19 +43,23 @@ const parseSubmitValues = (v) => {
   return { ...v, notes, tags };
 };
 
-const SongForm: React.FC<Props> = ({ initialValues: iv = {}, isEditForm }) => {
+const SongForm: React.FC<Props> = ({
+  initialValues: iv = {},
+  isEditForm,
+  onSubmit,
+}) => {
   const initialValues = parseInitialValues(iv);
   const isAddForm = !isEditForm || !iv.songId;
   const submitText = isAddForm ? 'Submit' : 'Save';
-  const onSubmit = (values, actions) => {
-    console.log(parseSubmitValues(values));
+  const wrapOnSubmit = (values, actions) => {
+    onSubmit(parseSubmitValues(values), actions);
   };
 
   return (
     <Formik
       initialValues={initialValues}
       validate={validate}
-      onSubmit={onSubmit}
+      onSubmit={wrapOnSubmit}
     >
       {({ isSubmitting }) => (
         <Form className="login-form">

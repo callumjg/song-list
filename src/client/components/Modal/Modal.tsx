@@ -69,6 +69,8 @@ const Modal: React.FC<Props> = ({
     props.onDismiss();
   };
 
+  const wrapCallback = (func) => (...args) => func(...args, { onDismiss });
+
   const renderModal = () => (
     <div>
       <div className={`modal-backdrop fade${show}`} style={{ display }} />
@@ -85,7 +87,11 @@ const Modal: React.FC<Props> = ({
         >
           <div className="modal-content" onSubmit={(e) => e.stopPropagation()}>
             <ModalHeader title={title} onDismiss={onDismiss} />
-            <div className="modal-body">{children}</div>
+            <div className="modal-body">
+              {typeof children === 'function'
+                ? children({ onDismiss, wrapCallback })
+                : children}
+            </div>
             <ModalFooter footer={footer} />
           </div>
         </div>

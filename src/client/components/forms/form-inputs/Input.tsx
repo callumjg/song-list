@@ -17,11 +17,14 @@ const FormGroupWrap: React.FC<{ isWrapped: boolean }> = ({
 const Input: React.FC<Props> = ({ label, onChange, skinny, ...props }) => {
   const [field, meta, helpers] = useField(props as FieldConfig);
   if (onChange) field.onChange = (e) => onChange(e, helpers);
-  const hash = String(Date.now() + Math.random());
   return (
     <FormGroupWrap isWrapped={!skinny}>
-      {label && <label htmlFor={hash}>{label}</label>}
-      <input id={hash} className="form-control" {...props} {...field} />
+      <div className="d-flex align-items-center">
+        {label && <div style={{ flex: 10, flexGrow: 1 }}>{label}</div>}
+        <div style={{ width: '75%' }}>
+          <input className="form-control" {...props} {...field} />
+        </div>
+      </div>
       <ErrorMessage error={meta.error} isHidden={!meta.touched} />
     </FormGroupWrap>
   );
