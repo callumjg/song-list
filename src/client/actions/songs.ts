@@ -17,12 +17,22 @@ export const setSongs = (payload: Song[]) => ({ type: 'SET', payload });
 
 export const resetSongs = () => ({ type: 'RESET' });
 
-export const postSong = (song) => async (dispatch) => {
+export const postSong = async (song) => {
   const { data } = await server.post('/songs', song);
-  dispatch(addSong(data.song));
+  return data.song;
 };
 
-export const patchSong = (song) => async (dispatch) => {
+export const patchSong = async (song) => {
   const { data } = await server.patch('/songs', song);
-  dispatch(replaceSongById(data.song.songId, data.song));
+  return data.song;
+};
+
+export const postAndAddSong = (song) => async (dispatch) => {
+  const newSong = await postSong(song);
+  dispatch(addSong(newSong));
+};
+
+export const patchAndAddSong = (song) => async (dispatch) => {
+  const newSong = await patchSong(song);
+  dispatch(replaceSongById(newSong.songId, newSong));
 };

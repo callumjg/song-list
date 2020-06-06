@@ -9,7 +9,7 @@ import validate from './validate';
 interface Props {
   isEditForm?: boolean;
   onSubmit?: (values, actions) => void;
-  initialValues?: Song;
+  initialValues?: Partial<Song>;
 }
 
 const defaultValues = {
@@ -43,6 +43,7 @@ const parseSubmitValues = (v) => {
   return { ...v, notes, tags };
 };
 
+// Component
 const SongForm: React.FC<Props> = ({
   initialValues: iv = {},
   isEditForm,

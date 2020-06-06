@@ -16,18 +16,18 @@ const SongsPage = () => {
   const [isSearching, setSearching] = useState(false);
   const [search, setSearch] = useState('');
   const [isArchived, setArchived] = useState(false);
-  const [category, setCategory] = useState('A');
+  const [cat, setCategory] = useState('A');
   const songs = useSelector(selectSongs);
   const dispatch = useDispatch();
   const onChange = useCallback(({ songs }) => dispatch(setSongs(songs)), [
     dispatch,
   ]);
+  const category = cat === 'A' ? 'Category A' : 'Category B (Hymn)';
 
   // Get url with query string
   const url = useMemo(() => {
-    const cat = category === 'A' ? 'Category A' : 'Category B (Hymn)';
     const str = qs.stringify({
-      tags: [cat],
+      tags: [category],
       search,
       isArchived,
     });
@@ -58,7 +58,7 @@ const SongsPage = () => {
               <button
                 type="button"
                 className={`btn btn-outline-primary btn-sm${
-                  category === 'A' ? ' active' : ''
+                  cat === 'A' ? ' active' : ''
                 }`}
                 onClick={() => setCategory('A')}
                 children="Category A"
@@ -66,7 +66,7 @@ const SongsPage = () => {
               <button
                 type="button"
                 className={`btn btn-outline-primary btn-sm${
-                  category === 'B' ? ' active' : ''
+                  cat === 'B' ? ' active' : ''
                 }`}
                 onClick={() => setCategory('B')}
                 children="Category B (Hymn)"
@@ -76,7 +76,7 @@ const SongsPage = () => {
               <button
                 className="btn btn-outline-primary btn-sm mx-2"
                 type="button"
-                onClick={() => history.push('/songs/add')}
+                onClick={() => history.push(`/songs/add?category=${category}`)}
               >
                 <ion-icon name="add" />
               </button>
