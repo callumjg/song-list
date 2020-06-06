@@ -47,7 +47,7 @@ FROM
   LEFT JOIN note_arrays na ON fs.song_id = na.song_id
 WHERE (s.song_id = $2
   OR nullif ($2::text, '(none)') IS NULL)
-AND (s.title = $3
+AND (s.title ilike $3
   OR nullif ($3::text, '(none)') IS NULL)
 AND (s.url = $4
   OR nullif ($4::text, '(none)') IS NULL)

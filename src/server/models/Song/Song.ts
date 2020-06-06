@@ -64,12 +64,46 @@ class Song extends Resource implements SongType {
     ]);
     return { songs: songs.map((s) => new Song(s)), count: rowCount };
   }
+
   static async findById(songId) {
     const {
       rows: [song],
       rowCount,
     } = await pool.query(findByIdSql, [songId]);
     return rowCount ? new Song(song) : null;
+  }
+
+  static async findByTitleAndId(song) {
+    const { rows } = await pool.query(
+      `
+        select s.song_id "songId", s.title
+        from songs s
+        WHERE (s.song_id = $1
+          OR nullif ($1::text, '(none)') IS NULL)
+        AND (s.title ilike $2
+          OR nullif ($2::text, '(none)') IS NULL)
+        limit 1
+      `,
+      [song.songId, song.title]
+    );
+    return rows[0] || null;
+  }
+
+  static async findManyByTitleAndId(inputSongs) {
+    if (!inputSongs) return {};
+    let missing;
+
+    const songs = await Promise.all(
+      inputSongs.map((song) => Song.findByTitleAndId(song))
+    );
+
+    if (songs.some((s) => !s)) {
+      missing = songs
+        .map((s, i) => (s ? null : i)) // get index of any null values
+        .filter((v) => v || v === 0) // filter values that were found
+        .map((i) => inputSongs[i]);
+    }
+    return { missing, songs: songs.filter((s) => s) as Song[] };
   }
 
   async delete() {
@@ -105,7 +139,7 @@ class Song extends Resource implements SongType {
     return this;
   }
 
-  static async updateById(songId, values) {
+  static async updateById(songId: number, values) {
     const song = await Song.findById(songId);
     if (!song) return null;
     const updates = Song.schema

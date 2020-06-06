@@ -1,4 +1,4 @@
-import yup from 'yup';
+import * as yup from 'yup';
 import { asyncCatchWrapper } from '../../utils';
 import { Service, NamedError } from '../models';
 
@@ -9,9 +9,9 @@ export const createService = asyncCatchWrapper(async (req, res) => {
 });
 
 export const getService = asyncCatchWrapper(async (req, res) => {
-  const service = await Service.findById(req.params.id);
-  if (!service) return res.status(404).send();
-  res.send(service);
+  const service = await Service.findById(req.params.serviceId);
+  if (!service) throw new NamedError('NotFound');
+  res.send({ service });
 });
 
 export const getServices = asyncCatchWrapper(async (req, res) => {
@@ -20,8 +20,8 @@ export const getServices = asyncCatchWrapper(async (req, res) => {
 });
 export const updateService = asyncCatchWrapper(async (req, res) => {
   const serviceId = await yup.number().integer().validate(req.params.serviceId);
-  const { newValues: service, count } = await Service.updateById(serviceId);
-  if (!count) throw new Error('NotFound');
+  const service = await Service.updateById(serviceId, req.body);
+  if (!service) throw new Error('NotFound');
   res.send({ service });
 });
 
