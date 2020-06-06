@@ -41,11 +41,16 @@ const MetricsTable: React.FC<Props> = ({ songs }) => {
       target: 'weeksSincePlayed',
       placeholder: '∞',
       style: { textAlign: 'center' },
-      sortFunc: (a, b) => (a || Infinity) - (b || Infinity),
+      sortFunc: (a, b) => {
+        a = a === 0 ? 0 : a || Infinity;
+        b = b === 0 ? 0 : b || Infinity;
+        return a - b;
+      },
       sortPriority: 1,
     },
   ];
 
+  console.log(songs);
   return (
     <Table
       data={songs}

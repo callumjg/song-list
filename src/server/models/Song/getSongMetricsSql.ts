@@ -33,7 +33,7 @@ plays AS (
 metrics AS (
   SELECT
     fs.song_id,
-    (CURRENT_TIMESTAMP - max(se.date)) since_played,
+    extract (epoch from (CURRENT_TIMESTAMP - max(se.date)) / 604800) since_played,
     min(se.date) earliest_service
   FROM
     filtered_songs fs

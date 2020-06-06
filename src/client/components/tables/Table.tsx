@@ -91,7 +91,7 @@ export const Table: React.FC<Props> = ({
   const renderColumn = (row, rowIndex) => (col, columnIndex) => {
     const coord = [rowIndex, columnIndex];
     let content = col.placeholder;
-    if (row[col.target])
+    if (row[col.target] !== undefined && row[col.target] !== null)
       content = col.render
         ? col.render(row[col.target], row, coord)
         : row[col.target];

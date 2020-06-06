@@ -171,8 +171,7 @@ class Song extends Resource implements SongType {
     return rows.map((song) => {
       song.plays = parseInt(song.plays, 10);
       if (song.sincePlayed)
-        song.weeksSincePlayed = Math.round(song.sincePlayed.days / 7);
-
+        song.weeksSincePlayed = Math.round(song.sincePlayed);
       delete song.sincePlayed;
       return song;
     });
