@@ -11,7 +11,7 @@ export const createService = asyncCatchWrapper(async (req, res) => {
 export const getService = asyncCatchWrapper(async (req, res) => {
   const service = await Service.findById(req.params.id);
   if (!service) return res.status(404).send();
-  res.send(service);
+  res.send({ service });
 });
 
 export const getServices = asyncCatchWrapper(async (req, res) => {

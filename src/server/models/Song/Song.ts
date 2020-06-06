@@ -105,7 +105,7 @@ class Song extends Resource implements SongType {
     return this;
   }
 
-  static async updateById(songId, values) {
+  static async updateById(songId: Number, values) {
     const song = await Song.findById(songId);
     if (!song) return null;
     const updates = Song.schema
