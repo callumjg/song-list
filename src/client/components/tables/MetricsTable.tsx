@@ -50,7 +50,6 @@ const MetricsTable: React.FC<Props> = ({ songs }) => {
     },
   ];
 
-  console.log(songs);
   return (
     <Table
       data={songs}
