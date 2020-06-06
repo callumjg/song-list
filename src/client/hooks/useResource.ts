@@ -1,12 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import server from '../../apis/server';
 
-export default function useResource(url: string, defaultData = {}) {
+interface Options {
+  onChange?: (args: any) => void;
+}
+
+export default function useResource(
+  url: string,
+  defaultData: any = {},
+  options: Options = {}
+) {
   const [data, setData] = useState(defaultData);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [nonce, setNonce] = useState(0);
-
+  const onChange = useCallback(options.onChange, []);
   const refresh = () => setNonce(nonce + 1);
 
   useEffect(() => {
@@ -16,6 +24,7 @@ export default function useResource(url: string, defaultData = {}) {
       try {
         const response = await server.get(url);
         setData(response.data);
+        if (onChange) onChange(response.data);
       } catch (e) {
         console.error(e);
         let message = e.response ? e.response.data.message : e.message;
@@ -23,11 +32,12 @@ export default function useResource(url: string, defaultData = {}) {
       }
       setIsLoading(false);
     })();
-  }, [url, nonce]);
-  return [
-    (url ? data : defaultData) as any,
-    error as string,
-    isLoading as boolean,
+  }, [url, nonce, onChange]);
+
+  return {
+    data: url ? data : defaultData,
+    error: error as string,
+    isLoading: isLoading as boolean,
     refresh,
-  ];
+  };
 }

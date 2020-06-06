@@ -1,22 +1,10 @@
-import yup from 'yup';
+import * as yup from 'yup';
 import { asyncCatchWrapper } from '../../utils';
 import { Song, NamedError } from '../models';
 
-// const allowedUpdates = [
-//   'tags',
-//   'notes',
-//   'title',
-//   'url',
-//   'author',
-//   'key',
-//   'tempo',
-//   'songSelectID',
-//   'tagsAdd',
-//   'tagsRemove',
-// ];
-
 export const createSong = asyncCatchWrapper(async (req, res) => {
-  const song = await new Song(req.body).save();
+  const song = new Song(req.body);
+  await song.save();
   res.send({ song });
 });
 
@@ -26,7 +14,7 @@ export const getMetrics = asyncCatchWrapper(async (req, res) => {
 });
 
 export const getSong = asyncCatchWrapper(async (req, res) => {
-  const song = await Song.findById(req.params._id);
+  const song = await Song.findById(req.params.songId);
   if (!song) throw new NamedError('NotFound');
   res.send({ song });
 });
@@ -38,8 +26,8 @@ export const getSongs = asyncCatchWrapper(async (req, res) => {
 
 export const updateSong = asyncCatchWrapper(async (req, res) => {
   const songId = await yup.number().integer().validate(req.params.songId);
-  const { newValues: song, count } = await Song.updateById(songId);
-  if (!count) throw new Error('NotFound');
+  const song = await Song.updateById(songId, req.body);
+  if (!song) throw new NamedError('NotFound');
   res.send({ song });
 });
 

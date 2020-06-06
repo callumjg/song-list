@@ -1,6 +1,7 @@
 import React from 'react';
 import SongType from '../../../types/Song';
 import { Column, Table } from './Table';
+import sortAlphabetically from '../../../utils/sortAlphabetically';
 
 interface Props {
   songs: SongType[];
@@ -13,6 +14,7 @@ const SongTable: React.FC<Props> = ({ songs, ...props }) => {
       target: 'title',
       header: <ion-icon name="musical-notes-outline" />,
       style: { paddingLeft: '2%' },
+      sortFunc: sortAlphabetically,
     },
     { target: 'author', header: <ion-icon name="person-outline" /> },
     { target: 'key', header: <ion-icon name="key-outline" /> },

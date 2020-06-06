@@ -6,7 +6,11 @@ import ServiceTable from '../components/tables/ServiceTable';
 import ErrorMessage from '../components/ErrorMessage';
 
 const ServicesPage: React.FC = () => {
-  const [{ services }, error, isFetching] = useResource('/services', {
+  const {
+    data: { services },
+    error,
+    isLoading: isFetching,
+  } = useResource('/services', {
     count: 0,
     services: [],
   });

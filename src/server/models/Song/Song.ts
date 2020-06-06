@@ -4,7 +4,11 @@ import pool from '../../db';
 import Resource from '../Resource';
 import SongType from '../../../types/Song';
 import findSongSql from './findSongSql';
+import findByIdSql from './findByIdSql';
 import getSongMetricsSql from './getSongMetricsSql';
+import insertSongSql from './insertSongSql';
+import updateSongSql from './updateSongSql';
+import NamedError from '../NamedError';
 
 class Song extends Resource implements SongType {
   songId: number;
@@ -27,6 +31,8 @@ class Song extends Resource implements SongType {
 
   tags: string[];
 
+  notes: string[];
+
   static schema = yup.object().shape({
     songId: yup.number().integer(),
     title: yup.string(),
@@ -38,15 +44,11 @@ class Song extends Resource implements SongType {
     isArchived: yup.boolean(),
     isDeleted: yup.boolean(),
     tags: yup.array().of(yup.string()),
+    notes: yup.array().of(yup.string()),
   });
 
   static async find(input) {
-    const v = Song.schema
-      .shape({
-        search: yup.string(),
-      })
-      .validateSync(input);
-
+    const v = Song.schema.shape({ search: yup.string() }).validateSync(input);
     const { rows: songs, rowCount } = await pool.query(findSongSql, [
       v.tags,
       v.songId,
@@ -62,8 +64,12 @@ class Song extends Resource implements SongType {
     ]);
     return { songs: songs.map((s) => new Song(s)), count: rowCount };
   }
-  static findById(songId) {
-    return {} as Song;
+  static async findById(songId) {
+    const {
+      rows: [song],
+      rowCount,
+    } = await pool.query(findByIdSql, [songId]);
+    return rowCount ? new Song(song) : null;
   }
 
   async delete() {
@@ -82,14 +88,33 @@ class Song extends Resource implements SongType {
     return rowCount;
   }
 
-  static updateById(songId) {
-    // const validated = req.body;
-    // const song = await Song.findById(songId);
-    // Object.keys(validated).forEach((key) => {
-    //   song[key] = validated[key];
-    // });
-    // await song.save();
-    return { newValues: {}, count: 1 };
+  async put() {
+    const { rowCount } = await pool.query(updateSongSql, [
+      this.songId,
+      this.tags,
+      this.notes,
+      this.title,
+      this.url,
+      this.key,
+      this.author,
+      this.tempo,
+      this.songSelectId,
+      this.isArchived,
+    ]);
+    if (!rowCount) throw new NamedError('Server', 'Failed to update song');
+    return this;
+  }
+
+  static async updateById(songId, values) {
+    const song = await Song.findById(songId);
+    if (!song) return null;
+    const updates = Song.schema
+      .shape({ songId: undefined })
+      .validateSync(values, { stripUnknown: true });
+    Object.keys(updates).forEach((key) => {
+      song[key] = updates[key];
+    });
+    return song.save();
   }
 
   static async getMetrics(filter) {
@@ -117,6 +142,24 @@ class Song extends Resource implements SongType {
       delete song.sincePlayed;
       return song;
     });
+  }
+
+  async insert() {
+    this.validate();
+    const {
+      rows: [{ songId }],
+    } = await pool.query(insertSongSql, [
+      this.title,
+      this.url,
+      this.author,
+      this.key,
+      this.tempo,
+      this.songSelectId,
+      this.tags,
+      this.notes,
+    ]);
+    this.songId = songId;
+    return this;
   }
 }
 

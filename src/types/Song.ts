@@ -9,4 +9,5 @@ export default interface SongType {
   isArchived?: boolean;
   isDeleted?: boolean;
   tags?: string[];
+  notes?: string[];
 }
