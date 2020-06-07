@@ -17,6 +17,7 @@ filtered_songs AS (
   HAVING (count(t.tag) = nt.num
     OR nt.num IS NULL)
   AND is_archived = $2
+  AND is_deleted = false
 ),
 plays AS (
   SELECT
