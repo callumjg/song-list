@@ -46,10 +46,10 @@ const SongsPage = () => {
     setCategory(tab);
   };
   return (
-    <Layout noHeader>
-      <div className="py-5">
+    <Layout>
+      <div>
         <ErrorMessage error={error} />
-        <div className="spaced pb-4">
+        <div className="pt-4 container">
           {/* <SearchInput
             callback={setSearch}
             delay={300}
@@ -57,37 +57,42 @@ const SongsPage = () => {
             placeholder="Search title..."
             className="form-control"
           /> */}
-          <Tabs tabs={['Category A', 'Hymn']} onClick={onTabSelect} leadingLine>
-            <button
-              className="btn btn-outline-primary btn-sm mx-2"
-              type="button"
-              onClick={() => history.push(`/songs/add?category=${category}`)}
-              title="Add new song"
-              style={{ minWidth: '2.5rem' }}
-            >
-              <ion-icon name="add" />
-            </button>
-            <button
-              type="button"
-              className={`btn btn-outline-primary btn-sm${
-                isArchived ? ' active' : ''
-              }`}
-              onClick={() => setArchived(!isArchived)}
-              title={`${isArchived ? 'Hide' : 'Show'} archived songs`}
-              style={{ minWidth: '2.5rem' }}
-            >
-              <ion-icon name="albums"></ion-icon>
-            </button>
+          <Tabs
+            tabs={['Category A', 'Hymn']}
+            onClick={onTabSelect}
+            leftWidth="1rem"
+            className="mb-4"
+          >
+            <div className="d-flex align-items-start">
+              <button
+                className="btn btn-outline-primary btn-sm mx-2"
+                type="button"
+                onClick={() => history.push(`/songs/add?category=${category}`)}
+                title="Add new song"
+              >
+                <ion-icon name="add" />
+              </button>
+              <button
+                type="button"
+                className={`btn btn-outline-primary btn-sm${
+                  isArchived ? ' active' : ''
+                }`}
+                onClick={() => setArchived(!isArchived)}
+                title={`${isArchived ? 'Hide' : 'Show'} archived songs`}
+              >
+                <ion-icon name="albums"></ion-icon>
+              </button>
+            </div>
           </Tabs>
-        </div>
 
-        <div className="relative">
-          <Loader loading={isFetching || isSearching} />
-          <SongTable
-            songs={songs}
-            className="table-sm table-dark"
-            style={{ fontSize: '90%' }}
-          />
+          <div className="relative">
+            <Loader loading={isFetching || isSearching} />
+            <SongTable
+              songs={songs}
+              className="table-sm"
+              style={{ fontSize: '90%', borderTopWidth: 0 }}
+            />
+          </div>
         </div>
       </div>
     </Layout>

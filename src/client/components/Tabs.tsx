@@ -5,7 +5,7 @@ interface Props {
   tabs: string[];
   onClick: (tab: string) => void;
   className?: string;
-  leadingLine?: boolean;
+  leftWidth?: string;
 }
 
 const Tabs: React.FC<Props> = ({
@@ -13,7 +13,7 @@ const Tabs: React.FC<Props> = ({
   onClick,
   className,
   children,
-  leadingLine,
+  leftWidth,
 }) => {
   const [active, setActive] = useState(tabs[0]);
   let classes = 'tab-container';
@@ -25,7 +25,7 @@ const Tabs: React.FC<Props> = ({
   };
   return (
     <div className={classes}>
-      {leadingLine && <div />}
+      <div style={{ width: leftWidth || 0 }} />
       {tabs.map((tab) => (
         <button
           className={`tab${tab === active ? ' active' : ''}`}

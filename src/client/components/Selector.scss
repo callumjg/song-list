@@ -1,0 +1,33 @@
+@import '../styles/colors';
+
+.selector-dropdown {
+  text-align: center;
+  cursor: pointer;
+  padding: 0.2rem;
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+  border-radius: 0.2rem;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: inherit;
+  color: $primary;
+  border: 1px solid $primary;
+  transition: background-color 100ms ease-in-out;
+
+  &::-ms-expand {
+    display: none;
+  }
+  &:hover {
+    background-color: $primary;
+    color: white;
+  }
+  &:focus {
+    outline: none;
+  }
+  & option {
+    font-weight: normal;
+  }
+}

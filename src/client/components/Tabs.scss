@@ -9,11 +9,11 @@ $width: 1px;
 .tab-container {
   @include flex(flex-start, stretch);
   & > button {
+    @include flex();
     color: $color;
     background-color: white;
     border: none;
     border-bottom: $width solid $color;
-    @include flex();
     min-width: 7rem;
     padding: 0.5rem;
     font-size: 90%;
@@ -27,7 +27,9 @@ $width: 1px;
   }
   & > div {
     border-bottom: $width solid $color;
-    @include flex(flex-end);
-    flex: 1;
+    @include flex(flex-end, stretch);
+    &:last-child {
+      flex: 1;
+    }
   }
 }
