@@ -5,15 +5,19 @@ import useResource from '../hooks/useResource';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 import MetricsTable from '../components/tables/MetricsTable';
+import Tabs from '../components/Tabs';
+import Selector from '../components/Selector';
 
-const monthButtons = [
-  ['All', undefined],
-  ['2yr', 24],
-  ['1yr', 12],
-  ['6mth', 6],
-  ['3mth', 3],
-  ['1mth', 1],
-];
+const monthLabels = {
+  All: undefined,
+  '2yr': 24,
+  '1yr': 12,
+  '6mth': 6,
+  '3mth': 3,
+  '1mth': 1,
+};
+
+const tabs = ['Category A', 'Hymns'];
 
 const MetricsPage = () => {
   const [category, setCategory] = useState('A');
@@ -36,50 +40,35 @@ const MetricsPage = () => {
     songs: [],
   });
 
+  const onSelectTab = (selected) => {
+    const tab = selected === 'Category A' ? 'A' : 'B';
+    setCategory(tab);
+  };
+
+  const onSelectMonth = (selected) => {
+    setMonths(selected === 'All' ? undefined : selected);
+  };
+
   return (
     <Layout>
       <div className="relative">
         <Loader loading={isLoading} />
         <ErrorMessage error={error} />
         <div className="container my-4">
-          <div className="d-flex justify-content-between">
-            <div
-              className="btn-group btn-group-toggle mb-4"
-              data-toggle="buttons"
-            >
-              <button
-                type="button"
-                className={`btn btn-outline-primary btn-sm${
-                  category === 'A' ? ' active' : ''
-                }`}
-                onClick={() => setCategory('A')}
-                children="Category A"
-              />
-              <button
-                type="button"
-                className={`btn btn-outline-primary btn-sm${
-                  category === 'B' ? ' active' : ''
-                }`}
-                onClick={() => setCategory('B')}
-                children="Category B (Hymn)"
+          <Tabs
+            tabs={tabs}
+            onClick={onSelectTab}
+            className="mb-4"
+            leftWidth="1rem"
+          >
+            <div>
+              <Selector
+                options={monthLabels}
+                onSelect={onSelectMonth}
+                selected={months}
               />
             </div>
-            <div
-              className="btn-group btn-group-toggle mb-4"
-              data-toggle="buttons"
-            >
-              {monthButtons.map(([label, m]) => (
-                <button
-                  key={label}
-                  className={`btn btn-outline-primary btn-sm${
-                    m === months ? ' active' : ''
-                  }`}
-                  onClick={() => setMonths(m as number)}
-                  children={label}
-                />
-              ))}
-            </div>
-          </div>
+          </Tabs>
           <MetricsTable songs={songs} />
         </div>
       </div>

@@ -7,6 +7,7 @@ import useResource from '../hooks/useResource';
 import SongTable from '../components/tables/SongTable';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
+import Tabs from '../components/Tabs';
 import history from '../constants/history';
 import { setSongs } from '../actions/songs';
 
@@ -40,43 +41,34 @@ const SongsPage = () => {
     { songs: [] },
     { onChange }
   );
-
+  const onTabSelect = (selected) => {
+    const tab = selected === 'Category A' ? 'A' : 'B';
+    setCategory(tab);
+  };
   return (
     <Layout>
-      <div className="container py-4">
+      <div>
         <ErrorMessage error={error} />
-        <div className="spaced pb-4">
-          <SearchInput
+        <div className="pt-4 container">
+          {/* <SearchInput
             callback={setSearch}
             delay={300}
             setLoading={setSearching}
             placeholder="Search title..."
             className="form-control"
-          />
-          <div className="d-flex justify-content-between">
-            <div className="btn-group btn-group-toggle" data-toggle="buttons">
-              <button
-                type="button"
-                className={`btn btn-outline-primary btn-sm${
-                  cat === 'A' ? ' active' : ''
-                }`}
-                onClick={() => setCategory('A')}
-                children="Category A"
-              />
-              <button
-                type="button"
-                className={`btn btn-outline-primary btn-sm${
-                  cat === 'B' ? ' active' : ''
-                }`}
-                onClick={() => setCategory('B')}
-                children="Category B (Hymn)"
-              />
-            </div>
-            <div className="d-flex justify-content-between">
+          /> */}
+          <Tabs
+            tabs={['Category A', 'Hymn']}
+            onClick={onTabSelect}
+            leftWidth="1rem"
+            className="mb-4"
+          >
+            <div className="d-flex align-items-start">
               <button
                 className="btn btn-outline-primary btn-sm mx-2"
                 type="button"
                 onClick={() => history.push(`/songs/add?category=${category}`)}
+                title="Add new song"
               >
                 <ion-icon name="add" />
               </button>
@@ -86,19 +78,21 @@ const SongsPage = () => {
                   isArchived ? ' active' : ''
                 }`}
                 onClick={() => setArchived(!isArchived)}
-                children={isArchived ? 'Hide archived' : 'Show archived'}
-              />
+                title={`${isArchived ? 'Hide' : 'Show'} archived songs`}
+              >
+                <ion-icon name="albums"></ion-icon>
+              </button>
             </div>
-          </div>
-        </div>
+          </Tabs>
 
-        <div className="relative">
-          <Loader loading={isFetching || isSearching} />
-          <SongTable
-            songs={songs}
-            className="table-sm"
-            style={{ fontSize: '90%' }}
-          />
+          <div className="relative">
+            <Loader loading={isFetching || isSearching} />
+            <SongTable
+              songs={songs}
+              className="table-sm"
+              style={{ fontSize: '90%', borderTopWidth: 0 }}
+            />
+          </div>
         </div>
       </div>
     </Layout>

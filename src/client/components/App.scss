@@ -118,3 +118,7 @@ i {
     margin-top: 1rem;
   }
 }
+
+.no-focus *:focus {
+  outline: none !important;
+}
