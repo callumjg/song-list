@@ -1,62 +1,34 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import qs from 'qs';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import useSWR from 'swr';
 import Layout from '../components/Layout';
-import SearchInput from '../components/SearchInput';
-import useResource from '../hooks/useResource';
 import SongTable from '../components/tables/SongTable';
-import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 import Tabs from '../components/Tabs';
 import history from '../constants/history';
-import { setSongs } from '../actions/songs';
-
-const selectSongs = (state) => state.songs;
 
 const SongsPage = () => {
-  const [isSearching, setSearching] = useState(false);
-  const [search, setSearch] = useState('');
   const [isArchived, setArchived] = useState(false);
   const [cat, setCategory] = useState('A');
-  const songs = useSelector(selectSongs);
-  const dispatch = useDispatch();
-  const onChange = useCallback(({ songs }) => dispatch(setSongs(songs)), [
-    dispatch,
-  ]);
   const category = cat === 'A' ? 'Category A' : 'Category B (Hymn)';
+  const { data, error, isValidating } = useSWR('/songs');
 
-  // Get url with query string
-  const url = useMemo(() => {
-    const str = qs.stringify({
-      tags: [category],
-      search,
-      isArchived,
-    });
-    return `/songs?${str}`;
-  }, [category, search, isArchived]);
+  const songs = data?.songs.filter((song) => {
+    const pattern = new RegExp(`Category ${cat}`, 'i');
+    const matchCat = song.tags.some((t) => t.match(pattern));
+    const matchArchived = song.isArchived === isArchived;
+    return matchCat && matchArchived;
+  });
 
-  // Get songs
-  const { error, isLoading: isFetching } = useResource(
-    url,
-    { songs: [] },
-    { onChange }
-  );
   const onTabSelect = (selected) => {
     const tab = selected === 'Category A' ? 'A' : 'B';
     setCategory(tab);
   };
+
   return (
     <Layout>
       <div>
         <ErrorMessage error={error} />
         <div className="pt-4 container">
-          {/* <SearchInput
-            callback={setSearch}
-            delay={300}
-            setLoading={setSearching}
-            placeholder="Search title..."
-            className="form-control"
-          /> */}
           <Tabs
             tabs={['Category A', 'Hymn']}
             onClick={onTabSelect}
@@ -86,11 +58,12 @@ const SongsPage = () => {
           </Tabs>
 
           <div className="relative">
-            <Loader loading={isFetching || isSearching} />
             <SongTable
               songs={songs}
               className="table-sm"
               style={{ fontSize: '90%', borderTopWidth: 0 }}
+              isValidating={isValidating}
+              placeholderRows={30}
             />
           </div>
         </div>

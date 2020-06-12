@@ -58,7 +58,7 @@ class Song extends Resource implements SongType {
       v.key,
       v.tempo,
       v.songSelectId,
-      !!v.isArchived,
+      v.isArchived,
       false,
       v.search,
     ]);

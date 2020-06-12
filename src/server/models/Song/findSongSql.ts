@@ -59,7 +59,8 @@ AND (s.tempo = $7
   OR nullif ($7::text, '(none)') IS NULL)
 AND (s.song_select_id = $8
   OR nullif ($8::text, '(none)') IS NULL)
-AND s.is_archived = $9
+AND (s.is_archived = $9
+  OR nullif ($9::text, '(none)') IS NULL)
 AND s.is_deleted = $10
 AND (s.title ILIKE concat('%', $11::text, '%')
   OR nullif ($11::text, '(none)') IS NULL)

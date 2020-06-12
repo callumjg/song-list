@@ -1,26 +1,17 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import useResource from '../hooks/useResource';
-import Loader from '../components/Loader';
 import ServiceTable from '../components/tables/ServiceTable';
 import ErrorMessage from '../components/ErrorMessage';
+import useSWR from 'swr';
 
 const ServicesPage: React.FC = () => {
-  const {
-    data: { services },
-    error,
-    isLoading: isFetching,
-  } = useResource('/services', {
-    count: 0,
-    services: [],
-  });
+  const { data, error } = useSWR('/services');
 
   return (
     <Layout>
       <ErrorMessage error={error} />
       <div className="relative container py-4">
-        <Loader loading={isFetching} />
-        <ServiceTable services={services} />
+        <ServiceTable services={data?.services} placeholderRows={30} />
       </div>
     </Layout>
   );

@@ -25,6 +25,7 @@
     "react-dom": "^16.13.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "swr": "^0.2.2",
     "yup": "^0.28.5"
   },
   "devDependencies": {
@@ -69,7 +70,6 @@
     "prettier": "^2.0.5",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
     "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.2.1",

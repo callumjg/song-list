@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { SWRConfig } from 'swr';
 import Router from './Router';
+import api from '../../apis/server';
 import './App.scss';
 
 const App: React.FC = () => {
@@ -35,7 +37,15 @@ const App: React.FC = () => {
   useEffect(() => {
     document.body.classList.toggle('no-focus', !isFocusOn);
   }, [isFocusOn]);
-  return <Router />;
+  return (
+    <SWRConfig
+      value={{
+        fetcher: (url) => api.get(url).then((r) => r.data),
+      }}
+    >
+      <Router />
+    </SWRConfig>
+  );
 };
 
 export default App;

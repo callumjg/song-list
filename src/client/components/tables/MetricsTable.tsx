@@ -3,12 +3,13 @@ import moment from 'moment';
 import { Column, Table } from './Table';
 import Song from '../../types/Song';
 import sortAlphabetically from '../../../utils/sortAlphabetically';
+import { Props as TableProps } from './Table';
 
-interface Props {
+interface Props extends Partial<TableProps> {
   songs: Song[];
 }
 
-const MetricsTable: React.FC<Props> = ({ songs }) => {
+const MetricsTable: React.FC<Props> = ({ songs = [], ...props }) => {
   const avPlays = songs.length
     ? songs.reduce((acc, item) => item.plays + acc, 0) / songs.length
     : 0;
@@ -58,6 +59,7 @@ const MetricsTable: React.FC<Props> = ({ songs }) => {
       className="table-sm"
       style={{ fontSize: '90%' }}
       trClassNames={(row) => (row.plays < avPlays ? 'text-danger' : '')}
+      {...props}
     />
   );
 };

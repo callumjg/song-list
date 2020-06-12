@@ -2,11 +2,14 @@ import React from 'react';
 import SongType from '../../../types/Song';
 import { Column, Table } from './Table';
 import sortAlphabetically from '../../../utils/sortAlphabetically';
+import { Props as TableProps } from './Table';
 
-interface Props {
+interface Props extends Partial<TableProps> {
   songs: SongType[];
   className?: string;
   style?: React.CSSProperties;
+  isValidating?: boolean;
+  placeholderRows?: number;
 }
 const SongTable: React.FC<Props> = ({ songs, ...props }) => {
   const columns: Column[] = [

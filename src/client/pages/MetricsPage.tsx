@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import qs from 'qs';
+import useSWR from 'swr';
 import Layout from '../components/Layout';
-import useResource from '../hooks/useResource';
-import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 import MetricsTable from '../components/tables/MetricsTable';
 import Tabs from '../components/Tabs';
@@ -32,13 +31,7 @@ const MetricsPage = () => {
     return `/songs/metrics?${str}`;
   }, [category, months]);
 
-  const {
-    data: { songs },
-    error,
-    isLoading,
-  } = useResource(url, {
-    songs: [],
-  });
+  const { data, error } = useSWR(url);
 
   const onSelectTab = (selected) => {
     const tab = selected === 'Category A' ? 'A' : 'B';
@@ -52,7 +45,6 @@ const MetricsPage = () => {
   return (
     <Layout>
       <div className="relative">
-        <Loader loading={isLoading} />
         <ErrorMessage error={error} />
         <div className="container my-4">
           <Tabs
@@ -69,7 +61,7 @@ const MetricsPage = () => {
               />
             </div>
           </Tabs>
-          <MetricsTable songs={songs} />
+          <MetricsTable songs={data?.songs} placeholderRows={30} />
         </div>
       </div>
     </Layout>

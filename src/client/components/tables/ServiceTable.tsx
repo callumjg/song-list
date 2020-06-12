@@ -2,11 +2,13 @@ import React from 'react';
 import Service from '../../types/Service';
 import { Table, Column } from './Table';
 import moment from 'moment';
-interface Props {
+import { Props as TableProps } from './Table';
+
+interface Props extends Partial<TableProps> {
   services: Service[];
 }
 
-const ServiceTable = ({ services }) => {
+const ServiceTable: React.FC<Props> = ({ services, ...props }) => {
   const columns: Column[] = [
     {
       header: 'Date',
@@ -47,6 +49,7 @@ const ServiceTable = ({ services }) => {
       columns={columns}
       className="table-sm"
       style={{ fontSize: '90%' }}
+      {...props}
     />
   );
 };

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Placeholder from '../Placeholder';
+import './Table.scss';
 
 export interface Column {
   header: string | JSX.Element | null;
@@ -25,6 +27,8 @@ export interface Props {
   className?: string;
   style?: React.CSSProperties;
   trClassNames?: (row: any, index?: number) => string | undefined;
+  placeholderRows?: number;
+  isValidating?: boolean;
 }
 
 export const Table: React.FC<Props> = ({
@@ -34,6 +38,8 @@ export const Table: React.FC<Props> = ({
   className,
   style: tableStyle,
   trClassNames,
+  placeholderRows,
+  isValidating = false,
 }) => {
   let tableClassName = 'table';
   if (className) tableClassName += ` ${className}`;
@@ -117,20 +123,38 @@ export const Table: React.FC<Props> = ({
 
   const sorted = sortData(data, 0);
 
-  const renderBody = () =>
-    sorted.map((row, index) => (
+  const renderBody = () => {
+    if (!sorted.length) {
+      let placeholder = [];
+      let count = placeholderRows;
+      while (count) {
+        placeholder.push(
+          <tr key={count}>
+            <td colSpan={Object.keys(columns).length}>
+              <Placeholder style={{ margin: '0.3rem', height: '1.5rem' }} />
+            </td>
+          </tr>
+        );
+        count--;
+      }
+      return placeholder;
+    }
+    return sorted.map((row, index) => (
       <tr key={row[keyId]} className={trClassNames && trClassNames(row, index)}>
         {columns.map(renderColumn(row, index))}
       </tr>
     ));
+  };
 
   return (
-    <table className={tableClassName} style={tableStyle}>
-      <thead>
-        <tr>{renderHeadings()}</tr>
-      </thead>
-      <tbody>{renderBody()}</tbody>
-    </table>
+    <div className="table-container">
+      <table className={tableClassName} style={tableStyle}>
+        <thead>
+          <tr>{renderHeadings()}</tr>
+        </thead>
+        <tbody>{renderBody()}</tbody>
+      </table>
+    </div>
   );
 };
 

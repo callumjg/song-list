@@ -4,32 +4,23 @@ import qs from 'qs';
 import Modal from '../../Modal';
 import SongForm from './SongForm';
 import history from '../../../constants/history';
-import { useDispatch } from 'react-redux';
-import {
-  postSong,
-  patchSong,
-  postAndAddSong,
-  patchAndAddSong,
-} from '../../../actions/songs';
 import Song from '../../../../types/Song';
+import server from '../../../../apis/server';
+import { mutate } from 'swr';
 
 const SongFormModal = () => {
   const { id } = useParams();
   const location = useLocation();
   const query = qs.parse(location.search, { ignoreQueryPrefix: true });
   const isEditForm = !!id;
-  const dispatch = useDispatch();
 
   const onSubmit = async (values, actions, modalActions) => {
-    const isSamePage = values.tags.find((t) => t === query.category);
-    if (isSamePage) {
-      isEditForm
-        ? await dispatch(patchAndAddSong(values))
-        : await dispatch(postAndAddSong(values));
-    } else {
-      isEditForm ? await patchSong(values) : await postSong(values);
-    }
-
+    const method = isEditForm ? 'patch' : 'post';
+    const { data } = await server[method]('/songs', values);
+    mutate('/songs', (state) => {
+      state.songs = [...state.songs, data.song];
+      return state;
+    });
     actions.setSubmitting(false);
     modalActions.onDismiss();
   };
