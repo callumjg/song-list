@@ -18,6 +18,7 @@ export const getServices = asyncCatchWrapper(async (req, res) => {
   const { services, count } = await Service.find(req.query);
   res.send({ services, count });
 });
+
 export const updateService = asyncCatchWrapper(async (req, res) => {
   const serviceId = await yup.number().integer().validate(req.params.serviceId);
   const service = await Service.updateById(serviceId, req.body);
