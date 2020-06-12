@@ -28,6 +28,15 @@ class Service extends Resource implements ServiceType {
   });
 
   static async find(input) {
+    const v = yup
+      .object()
+      .shape({
+        limit: yup.number().integer(),
+        from: yup.date(),
+        year: yup.string().matches(/^\d{4}$/),
+      })
+      .validateSync(input);
+
     const { rows: services, rowCount } = await pool.query(findServiceSql);
     return { services: services.map((s) => new Service(s)), count: rowCount };
   }
