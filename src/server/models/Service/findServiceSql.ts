@@ -33,6 +33,11 @@ FROM
   services s
   LEFT JOIN sn ON s.service_id = sn.service_id
   LEFT JOIN json_songs js ON s.service_id = js.service_id
+WHERE (EXTRACT(year FROM s.date) = $1
+  OR nullif ($1::text, '(none)') IS NULL)
+AND (s.date < $2
+  OR nullif ($2::text, '(none)') IS NULL)
 ORDER BY
   s.date DESC
+LIMIT $3
 `;

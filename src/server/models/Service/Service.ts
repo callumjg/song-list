@@ -1,5 +1,6 @@
 // import moment from 'moment'
 import * as yup from 'yup';
+import moment from 'moment';
 import Resource from '../Resource';
 import pool from '../../db';
 import findServiceSql from './findServiceSql';
@@ -28,7 +29,21 @@ class Service extends Resource implements ServiceType {
   });
 
   static async find(input) {
-    const { rows: services, rowCount } = await pool.query(findServiceSql);
+    const v = yup
+      .object()
+      .shape({
+        limit: yup.number().integer(),
+        from: yup.date(),
+        year: yup.string().matches(/^\d{4}$/),
+      })
+      .validateSync(input);
+
+    const { rows: services, rowCount } = await pool.query(findServiceSql, [
+      v.year,
+      v.from,
+      v.limit,
+    ]);
+
     return { services: services.map((s) => new Service(s)), count: rowCount };
   }
 
