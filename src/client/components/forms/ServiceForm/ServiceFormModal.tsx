@@ -1,19 +1,19 @@
 import React from 'react';
-import { useParams, useLocation } from 'react-router';
-import qs from 'qs';
+import { useParams } from 'react-router';
+// import qs from 'qs';
 import Modal from '../../Modal';
 import ServiceForm from './ServiceForm';
 import history from '../../../constants/history';
 import Service from '../../../../types/Service';
-import server from '../../../../apis/server';
-import { mutate } from 'swr';
+// import server from '../../../../apis/server';
+// import { mutate } from 'swr';
 
 const ServiceFormModal = () => {
   const { id } = useParams();
   const isEditForm = !!id;
 
   const onSubmit = async (values, actions, modalActions) => {
-    const method = isEditForm ? 'patch' : 'post';
+    // const method = isEditForm ? 'patch' : 'post';
     console.log(values);
     // const { data } = await server[method]('/songs', values);
     // mutate('/songs', (state) => {
