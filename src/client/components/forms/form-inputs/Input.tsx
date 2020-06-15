@@ -6,6 +6,7 @@ interface Props extends React.InputHTMLAttributes<any> {
   label?: string;
   skinny?: boolean;
   onChange?: (...args: any[]) => void;
+  notInline?: boolean;
 }
 
 const FormGroupWrap: React.FC<{ isWrapped: boolean }> = ({
@@ -14,14 +15,20 @@ const FormGroupWrap: React.FC<{ isWrapped: boolean }> = ({
 }) =>
   isWrapped ? <div className="form-group">{children}</div> : <>{children}</>;
 
-const Input: React.FC<Props> = ({ label, onChange, skinny, ...props }) => {
+const Input: React.FC<Props> = ({
+  label,
+  onChange,
+  skinny,
+  notInline,
+  ...props
+}) => {
   const [field, meta, helpers] = useField(props as FieldConfig);
   if (onChange) field.onChange = (e) => onChange(e, helpers);
   return (
     <FormGroupWrap isWrapped={!skinny}>
-      <div className="d-flex align-items-center">
+      <div className={notInline ? '' : 'd-flex align-items-center'}>
         {label && <div style={{ flex: 10, flexGrow: 1 }}>{label}</div>}
-        <div style={{ width: '75%' }}>
+        <div style={{ width: notInline ? undefined : '75%' }}>
           <input className="form-control" {...props} {...field} />
         </div>
       </div>

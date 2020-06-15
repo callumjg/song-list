@@ -1,0 +1,8 @@
+@import '../styles/mixins';
+@import '../styles/colors';
+
+.divider {
+  width: 100%;
+  border-top: 1px solid $gray-300;
+  margin: 1.5rem 0;
+}

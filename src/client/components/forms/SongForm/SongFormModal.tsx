@@ -38,7 +38,7 @@ const SongFormModal = () => {
   };
 
   return (
-    <Modal title={getTitle()} isOpen={true} onDismiss={() => history.push('/')}>
+    <Modal title={getTitle()} isOpen onDismiss={() => history.push('/')} large>
       {({ wrapCallback }) => (
         <SongForm
           isEditForm={isEditForm}

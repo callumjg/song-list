@@ -3,13 +3,13 @@ import Placeholder from '../Placeholder';
 import './Table.scss';
 
 export interface Column {
-  header: string | JSX.Element | null;
+  target: string;
+  header?: string | JSX.Element | null;
   render?: (
     value: any,
     row: any,
     coords: number[]
   ) => string | number | JSX.Element | null;
-  target?: string;
   className?: string;
   bodyStyle?: React.CSSProperties;
   headStyle?: React.CSSProperties;
@@ -29,6 +29,7 @@ export interface Props {
   trClassNames?: (row: any, index?: number) => string | undefined;
   placeholderRows?: number;
   isValidating?: boolean;
+  noHeader?: boolean;
 }
 
 export const Table: React.FC<Props> = ({
@@ -39,7 +40,7 @@ export const Table: React.FC<Props> = ({
   style: tableStyle,
   trClassNames,
   placeholderRows,
-  isValidating = false,
+  noHeader,
 }) => {
   let tableClassName = 'table';
   if (className) tableClassName += ` ${className}`;
@@ -65,6 +66,7 @@ export const Table: React.FC<Props> = ({
   };
 
   const renderHeadings = () =>
+    !noHeader &&
     columns.map((col, i) => {
       const sortIndex = sortFunctions.map((v) => v.target).indexOf(col.target);
       const sortable = sortIndex >= 0;
@@ -107,7 +109,14 @@ export const Table: React.FC<Props> = ({
       <td
         className={classes}
         key={coord.join(',')}
-        style={{ ...col.style, ...col.bodyStyle }}
+        style={{
+          overflowWrap: 'break-word',
+          wordWrap: 'break-word',
+          whiteSpace: 'normal',
+          wordBreak: 'break-word',
+          ...col.style,
+          ...col.bodyStyle,
+        }}
       >
         {content}
       </td>
