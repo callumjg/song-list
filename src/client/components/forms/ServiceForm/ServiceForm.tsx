@@ -3,24 +3,18 @@ import { Form, Formik } from 'formik';
 import Loader from '../../Loader';
 import Input from '../form-inputs/Input';
 import InputArray from '../form-inputs/InputArray';
-import Divider from '../../Divider';
-import Song from '../../../../types/Song';
+import Service from '../../../../types/Service';
 import validate from './validate';
 
 interface Props {
   isEditForm?: boolean;
   onSubmit?: (values, actions) => void;
-  initialValues?: Partial<Song>;
+  initialValues?: Partial<Service>;
 }
 
 const defaultValues = {
-  title: '',
-  url: '',
-  author: '',
-  key: '',
-  tempo: 120,
-  songSelectId: '',
-  tags: [],
+  date: '',
+  songs: [],
   notes: [],
 };
 
@@ -29,29 +23,28 @@ const parseInitialValues = (iv) => {
     current: '',
     values: iv.notes || defaultValues.notes,
   };
-  const tags = {
+  const songs = {
     current: '',
-    values: iv.tags || defaultValues.tags,
+    values: iv.songs || defaultValues.songs,
   };
-  return { ...defaultValues, ...iv, notes, tags };
+  return { ...defaultValues, ...iv, notes, songs };
 };
 
 const parseSubmitValues = (v) => {
   const notes = [...v.notes.values];
-  const tags = [...v.tags.values];
+  const songs = [...v.songs.values];
   if (v.notes.current) notes.push(v.notes.current);
-  if (v.tags.current) tags.push(v.tags.current);
-  return { ...v, notes, tags };
+  return { ...v, notes, songs };
 };
 
 // Component
-const SongForm: React.FC<Props> = ({
+const ServiceForm: React.FC<Props> = ({
   initialValues: iv = {},
   isEditForm,
   onSubmit,
 }) => {
   const initialValues = parseInitialValues(iv);
-  const isAddForm = !isEditForm || !iv.songId;
+  const isAddForm = !isEditForm || !iv.serviceId;
   const submitText = isAddForm ? 'Submit' : 'Save';
   const wrapOnSubmit = (values, actions) => {
     onSubmit(parseSubmitValues(values), actions);
@@ -65,13 +58,9 @@ const SongForm: React.FC<Props> = ({
     >
       {({ isSubmitting }) => (
         <Form className="login-form">
-          <Input label="Title" name="title" />
-          <Input label="Author" name="author" />
-          <Input label="Key" name="key" />
-          <Input label="Tempo" name="tempo" />
-          <Input label="Song Select ID" name="songSelectId" />
-          <Input label="URL" name="url" />
-          <InputArray label="Tags" name="tags" />
+          <Input label="Date" name="date" type="date" notInline />
+
+          <InputArray label="Songs" name="songs" />
           <InputArray label="Notes" name="notes" />
           <button
             className="btn btn-primary btn-block relative d-flex justify-content-center"
@@ -93,4 +82,4 @@ const SongForm: React.FC<Props> = ({
   );
 };
 
-export default SongForm;
+export default ServiceForm;

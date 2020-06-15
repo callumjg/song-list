@@ -20,7 +20,11 @@ const SongTable: React.FC<Props> = ({ songs, ...props }) => {
       sortFunc: sortAlphabetically,
     },
     { target: 'author', header: <ion-icon name="person-outline" /> },
-    { target: 'key', header: <ion-icon name="key-outline" /> },
+    {
+      target: 'key',
+      header: <ion-icon name="key-outline" />,
+      style: { minWidth: '2rem' },
+    },
     {
       target: 'tags',
       header: <ion-icon name="pricetags-outline" />,
