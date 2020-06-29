@@ -17,10 +17,15 @@ const Layout: React.FC<Props> = ({
   noFooter,
   noHeader,
 }) => {
+  const login = () => {};
+  const logout = login;
+
   const defaultLinks = [
     { onClick: () => history.push('/'), label: 'Songs' },
     { onClick: () => history.push('/metrics'), label: 'Metrics' },
     { onClick: () => history.push('/services'), label: 'Services' },
+    { onClick: login, label: 'Login' },
+    { onClick: logout, label: 'logout' },
   ];
   return (
     <>

@@ -11,9 +11,8 @@ class Token {
 
   constructor({ userId, email }, type: 'BEARER' | 'REFRESH') {
     const iat = Math.floor(Date.now() / 1000); // NumericDate: seconds since epoch
-    this.userId = userId;
-    this.email = email;
     this.csrf = uuid();
+    this.userId = userId;
     const expiryTime =
       type === 'REFRESH'
         ? parseInt(process.env.REFRESH_TOKEN_EXPIRY, 10) || 60 * 60 * 24 * 7
@@ -47,13 +46,13 @@ class Token {
   static async find(token) {
     const { rows, rowCount } = await pool.query(
       `
-        SELECT token, user_id "userId" 
+        SELECT token
         FROM refresh_tokens
         where token = $1
       `,
       [token]
     );
-    return rowCount ? new Token(rows[0], 'REFRESH') : null;
+    return rowCount ? rows[0].token : null;
   }
 
   static async refresh(refreshToken, csrf) {
@@ -65,33 +64,20 @@ class Token {
     if (tokenCSRF !== csrf || type !== 'REFRESH')
       throw new NamedError('JsonWebTokenError', '');
 
-    const oldToken = await Token.find(refreshToken);
-
-    if (!oldToken) throw new NamedError('Auth', 'Invalid token');
-
-    await oldToken.delete();
+    const isDeleted = await Token.delete(refreshToken);
+    if (!isDeleted) throw new NamedError('Auth', 'Invalid token');
     return Token.generate({ userId: sub, email });
   }
 
   static async delete(token) {
     const { rowCount } = await pool.query(
       `
-      delete from refresh_tokens r 
-      where r.token = $1 
+      delete from refresh_tokens
+      where token = $1 
     `,
       [token]
     );
     return rowCount || null;
-  }
-
-  async delete() {
-    return Token.delete(this.token);
-  }
-
-  toJSON() {
-    delete this.userId;
-    delete this.email;
-    return this;
   }
 }
 

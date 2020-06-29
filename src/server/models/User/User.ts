@@ -59,6 +59,20 @@ class User extends Resource implements UserType {
   /**
    * READ
    */
+  static async findById(id) {
+    const { rows, rowCount } = await pool.query(
+      `
+        SELECT user_id "userId", email, first_name "firstName", last_name "lastName"
+        from users
+        where user_id = $1
+        limit 1
+      `,
+      [id]
+    );
+    if (!rowCount) return null;
+    return new User(rows[0]);
+  }
+
   static async findByEmail(email) {
     const {
       rows: [user],
@@ -86,7 +100,7 @@ class User extends Resource implements UserType {
     if (!user) return { user };
     const isAuth = await bcrypt.compare(password, user.password);
     if (!isAuth) return { user, isAuth };
-    const tokens = await Token.generate({ email, password });
+    const tokens = await Token.generate(user);
     return { user, isAuth, tokens };
   }
 

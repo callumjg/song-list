@@ -13,7 +13,7 @@ const bearerCookieOptions = {
 
 const refreshCookieOptions = {
   ...bearerCookieOptions,
-  path: '/api/v1/users/auth/refresh',
+  path: '/api/v1/users/auth',
 };
 
 export const register = asyncCatchWrapper(async (req, res) => {
@@ -42,22 +42,29 @@ export const authRefresh = asyncCatchWrapper(async (req, res) => {
   const tokens = await Token.refresh(refreshToken, csrf);
 
   res
-    .cookie('jwt', tokens.bearer.token, bearerCookieOptions)
+    .cookie('bearerToken', tokens.bearer.token, bearerCookieOptions)
     .cookie('refreshToken', tokens.refresh.token, refreshCookieOptions)
     .send({
       csrf: { bearer: tokens.bearer.csrf, refresh: tokens.refresh.csrf },
+      tokens,
     });
 });
 
-// export const logout = asyncCatchWrapper(async (req, res) => {
-//   const { refreshToken } = req.cookies;
-//   if (refreshToken) {
-//     await pool.query('delete from refresh_tokens where token = $1', [
-//       refreshToken,
-//     ]);
-//   }
-//   res
-//     .cookie('jwt', '', { maxAge: 0 })
-//     .cookie('refreshToken', '', { maxAge: 0 })
-//     .send();
-// });
+export const getProfile = asyncCatchWrapper(async (req, res) => {
+  const user = await User.findById(req?.user?.userId);
+  if (!user) throw new NamedError('NotFound', 'Unable to find user');
+  res.send({ user });
+});
+
+export const logout = asyncCatchWrapper(async (req, res) => {
+  const { refreshToken } = req.cookies;
+  console.log('cookies', req.cookies);
+  console.log('refreshToken', refreshToken);
+  const isDeleted = await Token.delete(refreshToken);
+  if (!isDeleted) throw new NamedError('Auth', 'Not a valid token');
+  res
+    .clearCookie('bearerToken', { path: bearerCookieOptions.path })
+    .clearCookie('refreshToken', { path: refreshCookieOptions.path })
+    .status(204)
+    .send();
+});
