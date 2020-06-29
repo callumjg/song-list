@@ -28,7 +28,12 @@ const Input: React.FC<Props> = ({
     <FormGroupWrap isWrapped={!skinny}>
       <div className={notInline ? '' : 'd-flex align-items-center'}>
         {label && <div style={{ flex: 10, flexGrow: 1 }}>{label}</div>}
-        <div style={{ width: notInline ? undefined : '75%' }}>
+        <div
+          style={{
+            width: notInline || !label ? undefined : '75%',
+            flex: !label && 1,
+          }}
+        >
           <input className="form-control" {...props} {...field} />
         </div>
       </div>

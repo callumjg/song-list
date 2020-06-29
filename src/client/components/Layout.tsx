@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import history from '../constants/history';
@@ -17,6 +18,7 @@ const Layout: React.FC<Props> = ({
   noFooter,
   noHeader,
 }) => {
+  const location = useLocation();
   const login = () => {};
   const logout = login;
 
@@ -24,7 +26,14 @@ const Layout: React.FC<Props> = ({
     { onClick: () => history.push('/'), label: 'Songs' },
     { onClick: () => history.push('/metrics'), label: 'Metrics' },
     { onClick: () => history.push('/services'), label: 'Services' },
-    { onClick: login, label: 'Login' },
+    {
+      onClick: () => {
+        const newPath =
+          location.pathname === '/' ? '/login' : `${location.pathname}/login`;
+        history.push(newPath);
+      },
+      label: 'Login',
+    },
     { onClick: logout, label: 'logout' },
   ];
   return (
