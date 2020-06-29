@@ -44,3 +44,10 @@ CREATE TABLE IF NOT EXISTS service_notes (
   note text NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS lyrics (
+  lyric_id serial PRIMARY KEY,
+  song_id int REFERENCES songs,
+  "section" text NOT NULL,
+  lyric text NOT NULL
+);
+
