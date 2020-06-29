@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { cache } from 'swr';
 import api from '../../apis/server';
 
 export const AuthContext = createContext(null);
@@ -31,14 +32,16 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (values) => {
-    console.log(values);
-    const { data: user, csrf } = await api.post('/users/login', values);
-    localStorage.setItem('csrf', JSON.stringify(csrf));
+    const response = await api.post('/users/login', values);
+    const csrf = response?.data?.csrf;
+    const user = response?.data?.user;
+    if (csrf) localStorage.setItem('csrf', JSON.stringify(csrf));
     setUser(user);
   };
   const logout = async () => {
     await api.get('/users/auth/logout');
     localStorage.removeItem('csrf');
+    cache.clear();
     setUser(null);
   };
   return (
