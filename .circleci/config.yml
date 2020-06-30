@@ -25,6 +25,7 @@ jobs:
 workflows:
   build-and-test:
     jobs:
+      - test
       - deploy-prod:
           filters:
             branches:
