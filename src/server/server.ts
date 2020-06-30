@@ -1,14 +1,12 @@
 import express from 'express';
 import path from 'path';
 import comp from 'express-static-gzip';
-import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import apiRouter from './routes/api';
-import { errorHandler, renderApp } from './middleware';
+import { errorHandler, renderApp, logger } from './middleware';
 
 const buildPath = path.resolve(__dirname, '../../dist/public');
 const server = express();
-const logger = morgan('combined');
 
 server.use(cookieParser());
 server.use(express.json());
