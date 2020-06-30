@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import { Formik, Form } from 'formik';
-import { Redirect } from 'react-router-dom';
 import validate from './validate';
-import server from '../../../../apis/server';
 import Loader from '../../Loader';
 import Input from '../form-inputs/Input';
 import { AuthContext } from '../../Auth';
@@ -22,7 +20,6 @@ const LoginForm: React.FC<Props> = ({
   onLogin,
 }) => {
   const { login } = useContext(AuthContext);
-  // if (user && !noRedirect) return <Redirect to="/" />;
 
   const onSubmit = async (values, actions) => {
     try {

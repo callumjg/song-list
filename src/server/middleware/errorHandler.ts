@@ -15,6 +15,10 @@ export default function errorHandler(e, req, res, next) {
       e.status = 400;
       break;
 
+    case 'ValidationError':
+      e.status = 400;
+      e.error = 'Validation Error';
+      break;
     // JWT errors
     case 'TokenExpiredError':
       e.status = 401;

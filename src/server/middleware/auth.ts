@@ -9,7 +9,9 @@ const auth = asyncCatchWrapper(async (req, res, next) => {
     process.env.JWT_SECRET
   );
 
-  if (csrf !== req.headers.authorization || type !== 'BEARER')
+  const headerCsrf = req.headers.authorization.replace('Bearer ', '');
+
+  if (csrf !== headerCsrf || type !== 'BEARER')
     throw new NamedError('JsonWebTokenError', '');
   req.user = { userId: sub, email };
   next();

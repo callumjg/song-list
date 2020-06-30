@@ -95,7 +95,14 @@ class User extends Resource implements UserType {
     return rowCount ? new User(user) : null;
   }
 
-  static async login({ email, password }) {
+  static async login(credentials) {
+    const { email, password } = yup
+      .object({
+        email: yup.string().email().required(),
+        password: yup.string().required(),
+      })
+      .validateSync(credentials);
+
     const user = await User.findByEmail(email);
     if (!user) return { user };
     const isAuth = await bcrypt.compare(password, user.password);

@@ -46,7 +46,6 @@ export const authRefresh = asyncCatchWrapper(async (req, res) => {
     .cookie('refreshToken', tokens.refresh.token, refreshCookieOptions)
     .send({
       csrf: { bearer: tokens.bearer.csrf, refresh: tokens.refresh.csrf },
-      tokens,
     });
 });
 

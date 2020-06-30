@@ -35,7 +35,7 @@ class Song extends Resource implements SongType {
 
   static schema = yup.object().shape({
     songId: yup.number().integer(),
-    title: yup.string(),
+    title: yup.string().required(),
     url: yup.string().nullable(),
     author: yup.string().nullable(),
     key: yup.string().nullable(),
