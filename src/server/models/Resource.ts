@@ -24,7 +24,7 @@ class Resource {
 
   validate(values?, context?) {
     const { schema: base, insertSchema } = this.constructor as typeof Resource;
-    const schema = context === 'insert' ? insertSchema : base;
+    const schema = context === 'insert' && insertSchema ? insertSchema : base;
     const validated = schema.validateSync(values || this, {
       abortEarly: false,
     });
