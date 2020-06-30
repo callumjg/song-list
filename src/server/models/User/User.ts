@@ -22,17 +22,21 @@ class User extends Resource implements UserType {
     email: yup.string().email(),
     firstName: yup.string().nullable(),
     lastName: yup.string().nullable(),
-    password: yup.string(),
+  });
+
+  static insertSchema = User.schema.shape({
+    password: yup.string().required(),
+    email: yup.string().required(),
   });
 
   /**
    * CREATE
    */
   async insert() {
+    console.log('INSERT');
     try {
-      const { email, firstName, lastName } = this;
-      let { password } = this;
-      if (password) password = await bcrypt.hash(password, 10);
+      const { email, firstName, lastName, password } = this;
+      const hashedPW = await bcrypt.hash(password, 10);
       const {
         rows: [{ userId }],
       } = await pool.query(
@@ -41,7 +45,7 @@ class User extends Resource implements UserType {
         values ($1, $2, $3, $4)
         returning user_id "userId"
       `,
-        [email, password, firstName, lastName]
+        [email, hashedPW, firstName, lastName]
       );
 
       this.userId = userId;

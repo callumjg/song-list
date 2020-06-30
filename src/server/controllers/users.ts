@@ -57,10 +57,8 @@ export const getProfile = asyncCatchWrapper(async (req, res) => {
 
 export const logout = asyncCatchWrapper(async (req, res) => {
   const { refreshToken } = req.cookies;
-  console.log('cookies', req.cookies);
-  console.log('refreshToken', refreshToken);
   const isDeleted = await Token.delete(refreshToken);
-  if (!isDeleted) throw new NamedError('Auth', 'Not a valid token');
+  if (!isDeleted) throw new NamedError('Server', 'Unable to delete token');
   res
     .clearCookie('bearerToken', { path: bearerCookieOptions.path })
     .clearCookie('refreshToken', { path: refreshCookieOptions.path })

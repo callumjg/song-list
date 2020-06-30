@@ -83,7 +83,7 @@ describe('POST /users', () => {
     const res = await request.post('/api/v1/users').send(newUser).expect(400);
 
     expect(res.body.error).toBeDefined();
-    expect(res.body.errors.email).toBeDefined();
+    expect(res.body.errors).toBeDefined();
 
     const {
       rowCount,
@@ -135,7 +135,7 @@ describe('POST /login', () => {
     });
     expect(cookies.refreshToken).toMatchObject({
       ...expectedCookieOptions,
-      path: '/api/v1/users/auth/',
+      path: '/api/v1/users/auth',
     });
 
     const bearerContent = await jwt.verify(
@@ -147,22 +147,18 @@ describe('POST /login', () => {
       process.env.JWT_SECRET
     );
     // Check bearer token
-    expect(bearerContent.exp).toBe(
-      bearerContent.iat + process.env.BEARER_TOKEN_EXPIRY
-    );
+    expect(bearerContent.exp).toBe(bearerContent.iat + 60 * 15);
     expect(bearerContent.sub).toBe(user.userId);
     expect(bearerContent.email).toBe(user.email);
     expect(bearerContent.type).toBe('BEARER');
-    expect(bearerContent.csrf).toBe(res.body.tokens.bearer.csrf);
+    expect(bearerContent.csrf).toBe(res.body.csrf.bearer);
 
     // Check refresh token
-    expect(refreshContent.exp).toBe(
-      refreshContent.iat + process.env.REFRESH_TOKEN_EXPIRY
-    );
+    expect(refreshContent.exp).toBe(refreshContent.iat + 60 * 60 * 24 * 7);
     expect(refreshContent.sub).toBe(user.userId);
     expect(refreshContent.email).toBe(user.email);
     expect(refreshContent.type).toBe('REFRESH');
-    expect(refreshContent.csrf).toBe(res.body.tokens.refresh.csrf);
+    expect(refreshContent.csrf).toBe(res.body.csrf.refresh);
   });
 
   it("Doesn't log a user in with wrong password", async () => {
@@ -187,23 +183,7 @@ describe('POST /login', () => {
 
 describe('GET /users/auth/refresh', () => {
   it('Gets new tokens', async () => {
-    // const [refreshToken, csrf] = await User.getToken(
-    //   users[1].userId,
-    //   users[1].email,
-    //   'REFRESH'
-    // );
-    // const [bearerToken] = await User.getToken(
-    //   users[1].userId,
-    //   users[1].email,
-    //   'BEARER'
-    // );
-
     const tokens = await Token.generate(users[1]);
-
-    await client.query(
-      'insert into refresh_tokens (token, user_id) values ($1, $2)',
-      [tokens.refresh.token, users[1].userId]
-    );
 
     const res = await request
       .get('/api/v1/users/auth/refresh')
@@ -228,7 +208,7 @@ describe('GET /users/auth/refresh', () => {
     });
     expect(cookies.refreshToken).toMatchObject({
       ...expectedCookieOptions,
-      path: '/api/v1/users/auth/',
+      path: '/api/v1/users/auth',
     });
 
     const bearerContent = await jwt.verify(
@@ -240,18 +220,14 @@ describe('GET /users/auth/refresh', () => {
       process.env.JWT_SECRET
     );
     // Check bearer token
-    expect(bearerContent.exp).toBe(
-      bearerContent.iat + process.env.BEARER_TOKEN_EXPIRY
-    );
+    expect(bearerContent.exp).toBe(bearerContent.iat + 60 * 15);
     expect(bearerContent.sub).toBe(users[1].userId);
     expect(bearerContent.email).toBe(users[1].email);
     expect(bearerContent.type).toBe('BEARER');
     expect(bearerContent.csrf).toBe(res.body.csrf.bearer);
 
     // Check refresh token
-    expect(refreshContent.exp).toBe(
-      refreshContent.iat + process.env.REFRESH_TOKEN_EXPIRY
-    );
+    expect(refreshContent.exp).toBe(refreshContent.iat + 60 * 60 * 24 * 7);
     expect(refreshContent.sub).toBe(users[1].userId);
     expect(refreshContent.email).toBe(users[1].email);
     expect(refreshContent.type).toBe('REFRESH');
@@ -261,17 +237,14 @@ describe('GET /users/auth/refresh', () => {
 
 describe('GET /users/auth/logout', () => {
   it('Logs the user out', async () => {
-    const refreshToken = await jwt.sign('nocontent', process.env.JWT_SECRET);
-    await pool.query(
-      'insert into refresh_tokens (user_id, token) values ($1, $2)',
-      [1, refreshToken]
-    );
-
+    const newToken = new Token({ email: users[1].email, userId: 1 }, 'REFRESH');
+    await newToken.save();
     const res = await request
       .get('/api/v1/users/auth/logout')
       .set('Cookie', `bearerToken=${tokens[1]}`)
-      .set('Authorization', 'csrf')
-      .expect(200);
+      .set('Cookie', `refreshToken=${newToken.token}`)
+      .set('Authorization', 'Bearer csrf')
+      .expect(204);
 
     const cookies = setCookie.parse(res, { map: true });
     expect(cookies.bearerToken.value).toBe('');

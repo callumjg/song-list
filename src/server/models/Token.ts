@@ -55,11 +55,13 @@ class Token {
     return rowCount ? rows[0].token : null;
   }
 
-  static async refresh(refreshToken, csrf) {
+  static async refresh(refreshToken, csrfHeader) {
     const { sub, email, type, csrf: tokenCSRF } = await jwt.verify(
       refreshToken,
       process.env.JWT_SECRET
     );
+
+    const csrf = csrfHeader.replace(/^Bearer /i, '');
 
     if (tokenCSRF !== csrf || type !== 'REFRESH')
       throw new NamedError('JsonWebTokenError', '');

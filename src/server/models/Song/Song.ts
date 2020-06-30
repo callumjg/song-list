@@ -72,7 +72,9 @@ class Song extends Resource implements SongType {
    * READ
    */
   static async find(input) {
-    const v = Song.schema.shape({ search: yup.string() }).validateSync(input);
+    const v = Song.schema
+      .shape({ search: yup.string(), title: yup.string() })
+      .validateSync(input);
     const { rows: songs, rowCount } = await pool.query(findSongSql, [
       v.tags,
       v.songId,
