@@ -4,6 +4,7 @@ import validate from './validate';
 import Loader from '../../Loader';
 import Input from '../form-inputs/Input';
 import { AuthContext } from '../../Auth';
+import ErrorMessage from '../../ErrorMessage';
 
 interface FormValues {
   email?: string;
@@ -39,10 +40,11 @@ const LoginForm: React.FC<Props> = ({
       validate={validate}
       onSubmit={onSubmit}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, errors }) => (
         <Form className="login-form" style={{ width: '100%', flex: 1 }}>
           <Input name="email" placeholder="email" />
           <Input name="password" type="password" placeholder="password" />
+          <ErrorMessage error={errors.hidden as any} className="mb-3" />
           <button
             className="btn btn-primary btn-block relative d-flex justify-content-center"
             type="submit"
