@@ -35,7 +35,7 @@ class Song extends Resource implements SongType {
 
   static schema = yup.object().shape({
     songId: yup.number().integer(),
-    title: yup.string(),
+    title: yup.string().required(),
     url: yup.string().nullable(),
     author: yup.string().nullable(),
     key: yup.string().nullable(),
@@ -47,8 +47,34 @@ class Song extends Resource implements SongType {
     notes: yup.array().of(yup.string()),
   });
 
+  /**
+   * CREATE
+   */
+  async insert() {
+    this.validate();
+    const {
+      rows: [{ songId }],
+    } = await pool.query(insertSongSql, [
+      this.title,
+      this.url,
+      this.author,
+      this.key,
+      this.tempo,
+      this.songSelectId,
+      this.tags,
+      this.notes,
+    ]);
+    this.songId = songId;
+    return this;
+  }
+
+  /**
+   * READ
+   */
   static async find(input) {
-    const v = Song.schema.shape({ search: yup.string() }).validateSync(input);
+    const v = Song.schema
+      .shape({ search: yup.string(), title: yup.string() })
+      .validateSync(input);
     const { rows: songs, rowCount } = await pool.query(findSongSql, [
       v.tags,
       v.songId,
@@ -106,22 +132,35 @@ class Song extends Resource implements SongType {
     return { missing, songs: songs.filter((s) => s) as Song[] };
   }
 
-  async delete() {
-    return Song.deleteById(this.songId);
+  static async getMetrics(filter) {
+    const v = await yup
+      .object()
+      .shape({
+        tags: yup.array().of(yup.string()).default([]),
+        isArchived: yup.boolean().default(false),
+        months: yup.number().integer().default(38),
+      })
+      .validateSync(filter);
+    const from = moment().subtract(v.months, 'months').toDate();
+
+    const { rows } = await pool.query(getSongMetricsSql, [
+      v.tags,
+      v.isArchived,
+      from,
+    ]);
+
+    return rows.map((song) => {
+      song.plays = parseInt(song.plays, 10);
+      if (song.sincePlayed)
+        song.weeksSincePlayed = Math.round(song.sincePlayed);
+      delete song.sincePlayed;
+      return song;
+    });
   }
 
-  static async deleteById(songId) {
-    const { rowCount } = await pool.query(
-      `
-        UPDATE songs set is_deleted = true
-        where song_id = $1
-        and is_deleted = false
-      `,
-      [songId]
-    );
-    return rowCount;
-  }
-
+  /**
+   * UPDATE
+   */
   async put() {
     const { rowCount } = await pool.query(updateSongSql, [
       this.songId,
@@ -151,48 +190,23 @@ class Song extends Resource implements SongType {
     return song.save();
   }
 
-  static async getMetrics(filter) {
-    const v = await yup
-      .object()
-      .shape({
-        tags: yup.array().of(yup.string()).default([]),
-        isArchived: yup.boolean().default(false),
-        months: yup.number().integer().default(38),
-      })
-      .validateSync(filter);
-    const from = moment().subtract(v.months, 'months').toDate();
-
-    const { rows } = await pool.query(getSongMetricsSql, [
-      v.tags,
-      v.isArchived,
-      from,
-    ]);
-
-    return rows.map((song) => {
-      song.plays = parseInt(song.plays, 10);
-      if (song.sincePlayed)
-        song.weeksSincePlayed = Math.round(song.sincePlayed);
-      delete song.sincePlayed;
-      return song;
-    });
+  /**
+   * DESTROY
+   */
+  async delete() {
+    return Song.deleteById(this.songId);
   }
 
-  async insert() {
-    this.validate();
-    const {
-      rows: [{ songId }],
-    } = await pool.query(insertSongSql, [
-      this.title,
-      this.url,
-      this.author,
-      this.key,
-      this.tempo,
-      this.songSelectId,
-      this.tags,
-      this.notes,
-    ]);
-    this.songId = songId;
-    return this;
+  static async deleteById(songId) {
+    const { rowCount } = await pool.query(
+      `
+        UPDATE songs set is_deleted = true
+        where song_id = $1
+        and is_deleted = false
+      `,
+      [songId]
+    );
+    return rowCount;
   }
 }
 

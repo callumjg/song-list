@@ -15,6 +15,16 @@ export default function errorHandler(e, req, res, next) {
       e.status = 400;
       break;
 
+    case 'ValidationError':
+      console.log(e);
+      e.status = 400;
+      e.error = 'Validation Error';
+      e.errors = e?.inner.reduce((map, item) => {
+        const errors = item.errors.length === 1 ? item.errors[0] : item.errors;
+        map[item.path] = errors;
+        return map;
+      }, {});
+      break;
     // JWT errors
     case 'TokenExpiredError':
       e.status = 401;

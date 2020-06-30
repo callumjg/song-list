@@ -1,6 +1,5 @@
 // import moment from 'moment'
 import * as yup from 'yup';
-import moment from 'moment';
 import Resource from '../Resource';
 import pool from '../../db';
 import findServiceSql from './findServiceSql';

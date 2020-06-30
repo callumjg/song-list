@@ -3,6 +3,8 @@ import NamedError from './NamedError';
 class Resource {
   static schema;
 
+  static insertSchema?;
+
   static find;
 
   protected async put() {
@@ -20,16 +22,21 @@ class Resource {
     });
   }
 
-  validate(values?) {
-    const { schema } = this.constructor as typeof Resource;
-    const validated = schema.validateSync(values || this);
+  validate(values?, context?) {
+    const { schema: base, insertSchema } = this.constructor as typeof Resource;
+    const schema = context === 'insert' && insertSchema ? insertSchema : base;
+    const validated = schema.validateSync(values || this, {
+      abortEarly: false,
+    });
     return validated;
   }
 
   async save() {
     const { name } = this.constructor;
     const idName = `${name.substr(0, 1).toLowerCase()}${name.substr(1)}Id`;
-    return this[idName] ? this.put() : this.insert();
+    const isNewResource = !this[idName];
+    this.validate(this, isNewResource ? 'insert' : 'put');
+    return isNewResource ? this.insert() : this.put();
   }
 
   static validateId(_id) {

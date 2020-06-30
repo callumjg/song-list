@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import useSWR from 'swr';
 import Layout from '../components/Layout';
 import SongTable from '../components/tables/SongTable';
 import ErrorMessage from '../components/ErrorMessage';
 import Tabs from '../components/Tabs';
 import history from '../constants/history';
+import { AuthContext } from '../components/Auth';
 
 const SongsPage = () => {
   const [isArchived, setArchived] = useState(false);
+  const { user } = useContext(AuthContext);
   const [cat, setCategory] = useState('A');
   const category = cat === 'A' ? 'Category A' : 'Category B (Hymn)';
   const { data, error, isValidating } = useSWR('/songs');
@@ -36,14 +38,18 @@ const SongsPage = () => {
             className="mb-4"
           >
             <div className="d-flex align-items-start">
-              <button
-                className="btn btn-outline-primary btn-sm mx-2"
-                type="button"
-                onClick={() => history.push(`/songs/add?category=${category}`)}
-                title="Add new song"
-              >
-                <ion-icon name="add" />
-              </button>
+              {user && (
+                <button
+                  className="btn btn-outline-primary btn-sm mx-2"
+                  type="button"
+                  onClick={() =>
+                    history.push(`/songs/add?category=${category}`)
+                  }
+                  title="Add new song"
+                >
+                  <ion-icon name="add" />
+                </button>
+              )}
               <button
                 type="button"
                 className={`btn btn-outline-primary btn-sm${

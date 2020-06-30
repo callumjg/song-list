@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import { AuthContext } from './Auth';
 import Header from './Header';
 import Footer from './Footer';
 import history from '../constants/history';
@@ -17,11 +19,28 @@ const Layout: React.FC<Props> = ({
   noFooter,
   noHeader,
 }) => {
+  const { user, logout } = useContext(AuthContext);
+  const location = useLocation();
+
   const defaultLinks = [
     { onClick: () => history.push('/'), label: 'Songs' },
     { onClick: () => history.push('/metrics'), label: 'Metrics' },
     { onClick: () => history.push('/services'), label: 'Services' },
   ];
+  defaultLinks.push(
+    user
+      ? { onClick: logout, label: 'logout' }
+      : {
+          onClick: () => {
+            const newPath =
+              location.pathname === '/'
+                ? '/login'
+                : `${location.pathname}/login`;
+            history.push(newPath);
+          },
+          label: 'Login',
+        }
+  );
   return (
     <>
       <header>

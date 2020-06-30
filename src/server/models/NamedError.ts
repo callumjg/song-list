@@ -9,6 +9,7 @@ export type Name =
   | 'SyntaxError'
   | 'TypeError'
   | 'URIError'
+  | 'ValidationError'
   | 'TokenExpiredError'
   | 'JsonWebTokenError';
 

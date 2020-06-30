@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SWRConfig } from 'swr';
 import Router from './Router';
 import api from '../../apis/server';
+import { AuthProvider } from './Auth';
 import './App.scss';
 
 const App: React.FC = () => {
@@ -43,7 +44,9 @@ const App: React.FC = () => {
         fetcher: (url) => api.get(url).then((r) => r.data),
       }}
     >
-      <Router />
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
     </SWRConfig>
   );
 };
