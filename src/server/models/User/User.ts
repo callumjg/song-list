@@ -17,11 +17,14 @@ class User extends Resource implements UserType {
 
   password?: string;
 
+  roles?: string[];
+
   static schema = yup.object().shape({
     userId: yup.number().integer(),
     email: yup.string().email(),
     firstName: yup.string().nullable(),
     lastName: yup.string().nullable(),
+    roles: yup.array(yup.string()),
   });
 
   static insertSchema = User.schema.shape({
@@ -33,7 +36,6 @@ class User extends Resource implements UserType {
    * CREATE
    */
   async insert() {
-    console.log('INSERT');
     try {
       const { email, firstName, lastName, password } = this;
       const hashedPW = await bcrypt.hash(password, 10);
@@ -41,10 +43,10 @@ class User extends Resource implements UserType {
         rows: [{ userId }],
       } = await pool.query(
         `
-        insert into public.users (email, password, first_name, last_name)
-        values ($1, $2, $3, $4)
-        returning user_id "userId"
-      `,
+          insert into public.users (email, password, first_name, last_name)
+          values ($1, $2, $3, $4)
+          returning user_id "userId"
+        `,
         [email, hashedPW, firstName, lastName]
       );
 
@@ -66,9 +68,20 @@ class User extends Resource implements UserType {
   static async findById(id) {
     const { rows, rowCount } = await pool.query(
       `
-        SELECT user_id "userId", email, first_name "firstName", last_name "lastName"
-        from users
-        where user_id = $1
+        with ur as (
+          select user_id, array_agg(role) roles
+          from user_roles
+          group by user_id 
+        )
+        SELECT 
+          u.user_id "userId", 
+          u.email, 
+          u.first_name "firstName", 
+          u.last_name "lastName",
+          coalesce (ur.roles, array[]::text[]) roles
+        from users u
+        left join ur on u.user_id = ur.user_id
+        where u.user_id = $1
         limit 1
       `,
       [id]
@@ -83,15 +96,21 @@ class User extends Resource implements UserType {
       rowCount,
     } = await pool.query(
       `
+        with ur as (
+          select user_id, array_agg(role) roles
+          from user_roles
+          group by user_id 
+        )
         select
-          user_id "userId",
-          email,
-          first_name "firstName",
-          last_name "lastName",
-          password
-        from users
-        where
-          email = $1
+          u.user_id "userId",
+          u.email,
+          u.first_name "firstName",
+          u.last_name "lastName",
+          u.password,
+          coalesce (ur.roles, array[]::text[]) roles
+        from users u
+        left join ur on u.user_id = ur.user_id
+        where u.email = $1
         limit 1
       `,
       [email]

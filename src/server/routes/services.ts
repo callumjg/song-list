@@ -4,10 +4,10 @@ import auth from '../middleware/auth';
 
 const router = Router();
 
-router.post('/', auth, c.createService);
+router.post('/', auth(), c.createService);
 router.get('/:serviceId', c.getService);
 router.get('/', c.getServices);
-router.patch('/:serviceId', auth, c.updateService);
-router.delete('/:serviceId', auth, c.deleteService);
+router.patch('/:serviceId', auth(), c.updateService);
+router.delete('/:serviceId', auth(), c.deleteService);
 
 export default router;

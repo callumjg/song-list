@@ -8,8 +8,9 @@ class Token {
   csrf: string;
   userId?: number;
   email?: string;
+  roles?: string[];
 
-  constructor({ userId, email }, type: 'BEARER' | 'REFRESH') {
+  constructor({ userId, email, roles = [] }, type: 'BEARER' | 'REFRESH') {
     const iat = Math.floor(Date.now() / 1000); // NumericDate: seconds since epoch
     this.csrf = uuid();
     this.userId = userId;
@@ -22,6 +23,7 @@ class Token {
       exp: iat + expiryTime,
       sub: userId, // subject
       email,
+      roles,
       type,
       csrf: this.csrf,
     };
@@ -56,7 +58,7 @@ class Token {
   }
 
   static async refresh(refreshToken, csrfHeader) {
-    const { sub, email, type, csrf: tokenCSRF } = await jwt.verify(
+    const { sub, email, type, csrf: tokenCSRF, roles } = await jwt.verify(
       refreshToken,
       process.env.JWT_SECRET
     );
@@ -68,7 +70,7 @@ class Token {
 
     const isDeleted = await Token.delete(refreshToken);
     if (!isDeleted) throw new NamedError('Auth', 'Invalid token');
-    return Token.generate({ userId: sub, email });
+    return Token.generate({ userId: sub, email, roles });
   }
 
   static async delete(token) {

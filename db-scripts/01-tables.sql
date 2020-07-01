@@ -59,3 +59,8 @@ CREATE TABLE IF NOT EXISTS public.refresh_tokens (
   "user_id" int REFERENCES users ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS public.user_roles (
+  "user_role_id" serial PRIMARY KEY NOT NULL,
+  "user_id" int not null REFERENCES users on DELETE CASCADE,
+  "role" text not null
+)

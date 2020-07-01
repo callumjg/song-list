@@ -4,11 +4,11 @@ import auth from '../middleware/auth';
 
 const router = Router();
 
-router.post('/', auth, c.createSong);
+router.post('/', auth(['admin']), c.createSong);
 router.get('/metrics', c.getMetrics);
 router.get('/:songId', c.getSong);
 router.get('/', c.getSongs);
-router.patch('/:songId', auth, c.updateSong);
-router.delete('/:songId', auth, c.deleteSong);
+router.patch('/:songId', auth(['admin']), c.updateSong);
+router.delete('/:songId', auth(['admin']), c.deleteSong);
 
 export default router;
