@@ -36,15 +36,15 @@ class Song extends Resource implements SongType {
   static schema = yup.object().shape({
     songId: yup.number().integer(),
     title: yup.string().required(),
-    url: yup.string().nullable(),
-    author: yup.string().nullable(),
-    key: yup.string().nullable(),
-    tempo: yup.string().nullable(),
-    songSelectId: yup.string().nullable(),
-    isArchived: yup.boolean(),
-    isDeleted: yup.boolean(),
-    tags: yup.array().of(yup.string()),
-    notes: yup.array().of(yup.string()),
+    url: yup.string().nullable().nullable(),
+    author: yup.string().nullable().nullable(),
+    key: yup.string().nullable().nullable(),
+    tempo: yup.string().nullable().nullable(),
+    songSelectId: yup.string().nullable().nullable(),
+    isArchived: yup.boolean().nullable(),
+    isDeleted: yup.boolean().nullable(),
+    tags: yup.array().of(yup.string()).nullable(),
+    notes: yup.array().of(yup.string()).nullable(),
   });
 
   /**
@@ -56,11 +56,11 @@ class Song extends Resource implements SongType {
       rows: [{ songId }],
     } = await pool.query(insertSongSql, [
       this.title,
-      this.url,
-      this.author,
-      this.key,
-      this.tempo,
-      this.songSelectId,
+      this.url || null,
+      this.author || null,
+      this.key || null,
+      this.tempo || null,
+      this.songSelectId || null,
       this.tags,
       this.notes,
     ]);
