@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Placeholder from '../Placeholder';
-import './Table.scss';
 
 export interface Column {
   target: string;
@@ -27,6 +26,10 @@ export interface Props {
   className?: string;
   style?: React.CSSProperties;
   trClassNames?: (row: any, index?: number) => string | undefined;
+  trStyle?:
+    | ((row: any, index?: number) => React.CSSProperties)
+    | React.CSSProperties;
+  onRowClick?: (e: React.MouseEvent, row?: any, index?: number) => void;
   placeholderRows?: number;
   isValidating?: boolean;
   noHeader?: boolean;
@@ -37,13 +40,17 @@ export const Table: React.FC<Props> = ({
   keyId,
   columns,
   className,
-  style: tableStyle,
+  style: tableStyleProp,
   trClassNames,
+  trStyle,
   placeholderRows,
   noHeader,
+  onRowClick,
 }) => {
-  let tableClassName = 'table';
+  let tableClassName = 'table table-hover';
   if (className) tableClassName += ` ${className}`;
+
+  const tableStyle = { marginBottom: 0, ...tableStyleProp };
 
   const [sortFunctions, _setSortFunctions] = useState(
     columns
@@ -133,6 +140,7 @@ export const Table: React.FC<Props> = ({
   const sorted = sortData(data, 0);
 
   const renderBody = () => {
+    // Render placeholder
     if (!sorted.length) {
       let placeholder = [];
       let count = placeholderRows;
@@ -148,11 +156,20 @@ export const Table: React.FC<Props> = ({
       }
       return placeholder;
     }
-    return sorted.map((row, index) => (
-      <tr key={row[keyId]} className={trClassNames && trClassNames(row, index)}>
-        {columns.map(renderColumn(row, index))}
-      </tr>
-    ));
+    return sorted.map((row, index) => {
+      const rowStyle =
+        typeof trStyle === 'function' ? trStyle(row, index) : trStyle;
+      return (
+        <tr
+          key={row[keyId]}
+          className={trClassNames && trClassNames(row, index)}
+          onClick={(e) => onRowClick && onRowClick(e, row, index)}
+          style={rowStyle}
+        >
+          {columns.map(renderColumn(row, index))}
+        </tr>
+      );
+    });
   };
 
   return (

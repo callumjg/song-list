@@ -66,7 +66,6 @@ const SongsPage = () => {
           <div className="relative">
             <SongTable
               songs={songs}
-              className="table-sm"
               style={{ fontSize: '90%', borderTopWidth: 0 }}
               isValidating={isValidating}
               placeholderRows={30}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import SongsPage from '../pages/SongsPage';
+import SongPage from '../pages/SongPage';
 import ServicesPage from '../pages/ServicesPage';
 import MetricsPage from '../pages/MetricsPage';
 import SongFormModal from './forms/SongForm/SongFormModal';
@@ -13,6 +14,7 @@ const Router = () => (
     <Switch>
       <Route path="/services" component={ServicesPage} />
       <Route path="/metrics" component={MetricsPage} />
+      <Route path="/songs/:songId" component={SongPage} />
       <Route path="/" component={SongsPage} />
     </Switch>
     <Switch>

@@ -47,7 +47,6 @@ const ServiceTable: React.FC<Props> = ({ services, ...props }) => {
       data={services}
       keyId="serviceId"
       columns={columns}
-      className="table-sm"
       style={{ fontSize: '90%' }}
       {...props}
     />

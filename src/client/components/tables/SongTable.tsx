@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import SongType from '../../../types/Song';
 import { Column, Table } from './Table';
 import sortAlphabetically from '../../../utils/sortAlphabetically';
@@ -11,40 +12,38 @@ interface Props extends Partial<TableProps> {
   isValidating?: boolean;
   placeholderRows?: number;
 }
+
+const columns: Column[] = [
+  {
+    target: 'title',
+    header: <ion-icon name="musical-notes-outline" />,
+    style: { paddingLeft: '2%' },
+    sortFunc: sortAlphabetically,
+  },
+  { target: 'author', header: <ion-icon name="person-outline" /> },
+  {
+    target: 'key',
+    header: <ion-icon name="key-outline" />,
+    style: { minWidth: '2rem' },
+  },
+];
 const SongTable: React.FC<Props> = ({ songs, ...props }) => {
-  const columns: Column[] = [
-    {
-      target: 'title',
-      header: <ion-icon name="musical-notes-outline" />,
-      style: { paddingLeft: '2%' },
-      sortFunc: sortAlphabetically,
-    },
-    { target: 'author', header: <ion-icon name="person-outline" /> },
-    {
-      target: 'key',
-      header: <ion-icon name="key-outline" />,
-      style: { minWidth: '2rem' },
-    },
-    {
-      target: 'tags',
-      header: <ion-icon name="pricetags-outline" />,
-      render: (tags) =>
-        tags.filter((t) => !t.match(/Category [AB]/)).join(', '),
-    },
-    {
-      target: 'url',
-      header: <ion-icon name="link-outline" />,
-      render: (url) =>
-        url ? (
-          <a href={url} target="_blank" rel="noopener noreferrer">
-            <ion-icon name="logo-youtube" />
-          </a>
-        ) : (
-          '-'
-        ),
-    },
-  ];
-  return <Table data={songs} keyId="songId" columns={columns} {...props} />;
+  const history = useHistory();
+  const onRowClick = (e, row) => {
+    history.push(`/songs/${row.songId}`);
+  };
+  const trStyle = { cursor: 'pointer' };
+
+  return (
+    <Table
+      data={songs}
+      keyId="songId"
+      columns={columns}
+      onRowClick={onRowClick}
+      trStyle={trStyle}
+      {...props}
+    />
+  );
 };
 
 export default SongTable;
