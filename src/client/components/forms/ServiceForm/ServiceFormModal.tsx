@@ -1,9 +1,8 @@
 import React from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router-dom';
 // import qs from 'qs';
 import Modal from '../../Modal';
 import ServiceForm from './ServiceForm';
-import history from '../../../constants/history';
 import Service from '../../../../types/Service';
 // import server from '../../../../apis/server';
 // import { mutate } from 'swr';
@@ -11,6 +10,7 @@ import Service from '../../../../types/Service';
 const ServiceFormModal = () => {
   const { id } = useParams();
   const isEditForm = !!id;
+  const history = useHistory();
 
   const onSubmit = async (values, actions, modalActions) => {
     // const method = isEditForm ? 'patch' : 'post';

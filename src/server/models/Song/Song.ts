@@ -3,6 +3,7 @@ import * as yup from 'yup';
 import pool from '../../db';
 import Resource from '../Resource';
 import SongType from '../../../types/Song';
+import LyricsType from '../../../types/Lyrics';
 import findSongSql from './findSongSql';
 import findByIdSql from './findByIdSql';
 import getSongMetricsSql from './getSongMetricsSql';
@@ -33,6 +34,8 @@ class Song extends Resource implements SongType {
 
   notes: string[];
 
+  lyrics?: LyricsType[];
+
   static schema = yup.object().shape({
     songId: yup.number().integer(),
     title: yup.string().required(),
@@ -45,6 +48,7 @@ class Song extends Resource implements SongType {
     isDeleted: yup.boolean().nullable(),
     tags: yup.array().of(yup.string()).nullable(),
     notes: yup.array().of(yup.string()).nullable(),
+    lyrics: yup.array().nullable(),
   });
 
   /**

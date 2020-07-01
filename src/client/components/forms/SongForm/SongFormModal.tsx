@@ -1,9 +1,8 @@
 import React from 'react';
-import { useParams, useLocation } from 'react-router';
+import { useParams, useLocation, useHistory } from 'react-router';
 import qs from 'qs';
 import Modal from '../../Modal';
 import SongForm from './SongForm';
-import history from '../../../constants/history';
 import Song from '../../../../types/Song';
 import server from '../../../../apis/server';
 import { mutate } from 'swr';
@@ -11,6 +10,7 @@ import { mutate } from 'swr';
 const SongFormModal = () => {
   const { id } = useParams();
   const location = useLocation();
+  const history = useHistory();
   const query = qs.parse(location.search, { ignoreQueryPrefix: true });
   const isEditForm = !!id;
 

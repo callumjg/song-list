@@ -1,3 +1,4 @@
+import LyricsType from './Lyrics';
 export default interface SongType {
   songId?: number;
   title: string;
@@ -10,4 +11,5 @@ export default interface SongType {
   isDeleted?: boolean;
   tags?: string[];
   notes?: string[];
+  lyrics?: LyricsType[];
 }

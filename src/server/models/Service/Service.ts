@@ -91,7 +91,7 @@ class Service extends Resource implements ServiceType {
 
     if (missing)
       throw new NamedError('NotFound', 'Unable to find song(s)', missing);
-    if (songs) updates.songs = songs as Song[];
+    if (songs) updates.songs = songs as any;
 
     Object.keys(updates).forEach((key) => {
       service[key] = updates[key];
