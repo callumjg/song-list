@@ -61,6 +61,14 @@ CREATE TABLE IF NOT EXISTS public.refresh_tokens (
 
 CREATE TABLE IF NOT EXISTS public.user_roles (
   "user_role_id" serial PRIMARY KEY NOT NULL,
-  "user_id" int not null REFERENCES users on DELETE CASCADE,
-  "role" text not null
-)
+  "user_id" int NOT NULL REFERENCES users ON DELETE CASCADE,
+  "role" text NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.song_lyrics (
+  "song_lyric_id" serial PRIMARY KEY NOT NULL,
+  "song_id" int NOT NULL REFERENCES songs,
+  "label" text NOT NULL,
+  "lyrics" text NOT NULL
+);
+
