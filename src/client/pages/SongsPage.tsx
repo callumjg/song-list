@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react';
 import useSWR from 'swr';
+import { useHistory } from 'react-router-dom';
 import Layout from '../components/Layout';
 import SongTable from '../components/tables/SongTable';
 import ErrorMessage from '../components/ErrorMessage';
 import Tabs from '../components/Tabs';
-import history from '../constants/history';
 import { AuthContext } from '../components/Auth';
 
 const SongsPage = () => {
+  const history = useHistory();
   const [isArchived, setArchived] = useState(false);
   const { user } = useContext(AuthContext);
   const [cat, setCategory] = useState('A');

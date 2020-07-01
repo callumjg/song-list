@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { AuthContext } from './Auth';
 import Header from './Header';
 import Footer from './Footer';
-import history from '../constants/history';
 
 interface Props {
   header?: React.Component;
@@ -21,6 +20,7 @@ const Layout: React.FC<Props> = ({
 }) => {
   const { user, logout } = useContext(AuthContext);
   const location = useLocation();
+  const history = useHistory();
 
   const defaultLinks = [
     { onClick: () => history.push('/'), label: 'Songs' },
