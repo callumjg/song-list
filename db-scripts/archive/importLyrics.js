@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const lyrics = require('./lyrics.json');
 
 const env = fs
-  .readFileSync('../.env', 'utf-8')
+  .readFileSync('../../.env', 'utf-8')
   .split('\n')
   .map((l) => l.replace(/#.*/, ''))
   .map((l) => l.replace(/'/g, ''))

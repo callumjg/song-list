@@ -1,9 +1,15 @@
 @import '../styles/mixins';
 @import '../styles/colors';
 
+@import '../../../node_modules/bootstrap/scss/functions';
+@import '../../../node_modules/bootstrap/scss/variables';
+@import '../../../node_modules/bootstrap/scss/mixins/breakpoints';
+
 .card {
-  @include boxShadowShallow();
   padding: 0.5rem;
   margin-bottom: 1rem;
   border-radius: 5px;
+  @include media-breakpoint-up(lg) {
+    @include boxShadowShallow();
+  }
 }

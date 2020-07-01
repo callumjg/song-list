@@ -8,7 +8,5 @@
   cursor: default;
   padding: 0.3rem 0;
   flex: 1;
-  .container {
-    @include flex(space-between);
-  }
+  @include flex(space-between);
 }

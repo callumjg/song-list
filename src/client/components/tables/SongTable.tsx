@@ -24,7 +24,7 @@ const columns: Column[] = [
   {
     target: 'key',
     header: <ion-icon name="key-outline" />,
-    style: { minWidth: '2rem' },
+    style: { minWidth: '3rem' },
   },
 ];
 const SongTable: React.FC<Props> = ({ songs, ...props }) => {

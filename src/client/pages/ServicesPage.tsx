@@ -22,7 +22,7 @@ const ServicesPage: React.FC = () => {
   return (
     <Layout>
       <ErrorMessage error={error} />
-      <div className="relative container py-4">
+      <div className="relative container-fluid py-4">
         <Tabs
           tabs={years}
           onClick={setYear}

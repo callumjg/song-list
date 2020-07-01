@@ -61,11 +61,11 @@ const SongDetailsPage: React.FC = () => {
         <div className="row">
           <div className="col-lg-4">
             <Card className="p-3">
-              <h3>{song?.title}</h3>
+              <h4>{song?.title}</h4>
               <LabelledTable data={labelledTable} />
             </Card>
             <Card className="p-3">
-              <h3>Tags</h3>
+              <h4>Tags</h4>
               <PlaceHolderTable data={song?.tags}>
                 <Table
                   columns={[{ target: 'tag' }]}
@@ -76,7 +76,7 @@ const SongDetailsPage: React.FC = () => {
               </PlaceHolderTable>
             </Card>
             <Card className="p-3">
-              <h3>Notes</h3>
+              <h4>Notes</h4>
               <PlaceHolderTable data={song?.notes}>
                 <Table
                   columns={[{ target: 'note' }]}
@@ -89,7 +89,7 @@ const SongDetailsPage: React.FC = () => {
           </div>
           <div className="col-lg-8">
             <Card className="p-3">
-              {!song?.lyrics && <h3>Lyrics</h3>}
+              {!song?.lyrics && <h4>Lyrics</h4>}
               <PlaceHolderTable data={song?.lyrics}>
                 <div className="my-4">{renderLyrics()}</div>
               </PlaceHolderTable>

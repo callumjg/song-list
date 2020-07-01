@@ -11,10 +11,8 @@ interface Props {
 
 const Header: React.FC<Props> = ({ navLinks = [] }) => (
   <div className="header container-fluid">
-    <div className="container">
-      <Brand />
-      <Nav links={navLinks} />
-    </div>
+    <Brand />
+    <Nav links={navLinks} />
   </div>
 );
 
