@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { Pool } = require('pg');
-const lyrics = require('./lyrics.json');
+const lyrics = require('./scraper/hymns.json');
 
 const env = fs
   .readFileSync('../../.env', 'utf-8')
@@ -57,17 +57,14 @@ const addLyrics = async (title) => {
   });
 };
 
-pool
-  .query(
-    `
-CREATE TABLE IF NOT EXISTS public.song_lyrics (
-  "song_lyric_id" serial PRIMARY KEY NOT NULL,
-  "song_id" int NOT NULL REFERENCES songs,
-  "label" text NOT NULL,
-  "lyrics" text NOT NULL
-)`
-  )
-  .then((res) => {
-    asyncIter(addLyrics, Object.keys(lyrics), () => console.log('DONE'));
-  })
-  .catch((e) => console.log(e));
+// asyncIter(addLyrics, Object.keys(lyrics), () => console.log('DONE'));
+
+const checkTitle = async (title) => {
+  const { rowCount } = await pool.query(
+    'Select * from songs where title = $1',
+    [title]
+  );
+  if (!rowCount) console.log('No entry for', title);
+};
+
+asyncIter(addLyrics, Object.keys(lyrics), () => console.log('done'));
