@@ -47,7 +47,7 @@ export const Table: React.FC<Props> = ({
   noHeader,
   onRowClick,
 }) => {
-  let tableClassName = 'table table-hover';
+  let tableClassName = 'table';
   if (className) tableClassName += ` ${className}`;
 
   const tableStyle = { marginBottom: 0, ...tableStyleProp };

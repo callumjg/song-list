@@ -27,7 +27,9 @@ const columns: Column[] = [
     style: { minWidth: '3rem' },
   },
 ];
-const SongTable: React.FC<Props> = ({ songs, ...props }) => {
+const SongTable: React.FC<Props> = ({ songs, className, ...props }) => {
+  let classes = 'table-hover';
+  if (className) classes += ` ${className}`;
   const history = useHistory();
   const onRowClick = (e, row) => {
     history.push(`/songs/${row.songId}`);
@@ -41,6 +43,7 @@ const SongTable: React.FC<Props> = ({ songs, ...props }) => {
       columns={columns}
       onRowClick={onRowClick}
       trStyle={trStyle}
+      className={classes}
       {...props}
     />
   );

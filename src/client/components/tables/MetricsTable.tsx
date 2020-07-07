@@ -48,7 +48,9 @@ const columns: Column[] = [
   },
 ];
 
-const MetricsTable: React.FC<Props> = ({ songs = [], ...props }) => {
+const MetricsTable: React.FC<Props> = ({ songs = [], className, ...props }) => {
+  let classes = 'table-hover';
+  if (className) classes += ` ${className}`;
   const history = useHistory();
   const avPlays = songs.length
     ? songs.reduce((acc, item) => item.plays + acc, 0) / songs.length
@@ -67,6 +69,7 @@ const MetricsTable: React.FC<Props> = ({ songs = [], ...props }) => {
       trClassNames={(row) => (row.plays < avPlays ? 'text-danger' : '')}
       onRowClick={onRowClick}
       trStyle={trStyle}
+      className={classes}
       {...props}
     />
   );
