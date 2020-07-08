@@ -7,8 +7,6 @@ export const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setLoading] = useState(true);
-  // TODO: useeffect to set initial state
-  // TODO: Login functions
 
   useEffect(() => {
     if (!isLoading)
@@ -26,7 +24,7 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
       })
       .catch((e) => {
-        console.log(e);
+        localStorage.removeItem('csrf');
         setLoading(false);
       });
   }, []);

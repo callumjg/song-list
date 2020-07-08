@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { AuthContext } from './Auth';
 import Header from './Header';
 import Footer from './Footer';
+import './Layout.scss';
 
 interface Props {
   header?: React.Component;

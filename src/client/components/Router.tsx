@@ -7,19 +7,18 @@ import MetricsPage from '../pages/MetricsPage';
 import SongFormModal from './forms/SongForm/SongFormModal';
 import ServiceFormModal from './forms/ServiceForm/ServiceFormModal';
 import LoginModal from './forms/LoginForm/LoginModal';
-// import "../styles/layout-dev.scss";
 
 const Router = () => (
   <>
     <Switch>
       <Route path="/services" component={ServicesPage} />
       <Route path="/metrics" component={MetricsPage} />
-      <Route path="/songs/:songId" component={SongDetailsPage} />
-      <Route path="/" component={SongsPage} />
+      <Route path={['/', '/songs/add']} component={SongsPage} exact />
     </Switch>
     <Switch>
-      <Route path="*/login" component={LoginModal} />
       <Route path="/songs/add" component={SongFormModal} />
+      <Route path="/songs/:songId" component={SongDetailsPage} exact />
+      <Route path="*/login" component={LoginModal} />
       <Route path="/services/add" component={ServiceFormModal} />
     </Switch>
   </>
