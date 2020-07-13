@@ -57,7 +57,7 @@ const MetricsTable: React.FC<Props> = ({ songs = [], className, ...props }) => {
     : 0;
 
   const onRowClick = (e, row) => {
-    history.push(`/songs/${row.songId}`);
+    history.push(`/song/${row.songId}`);
   };
   const trStyle = { cursor: 'pointer' };
   return (

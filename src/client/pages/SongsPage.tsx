@@ -31,7 +31,7 @@ const SongsPage = () => {
     <Layout>
       <div>
         <ErrorMessage error={error} />
-        <div className="pt-4 container-fluid">
+        <div className="pt-4">
           <Tabs
             tabs={['Category A', 'Hymn']}
             onClick={onTabSelect}

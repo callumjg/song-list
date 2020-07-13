@@ -46,7 +46,7 @@ const MetricsPage = () => {
     <Layout>
       <div className="relative">
         <ErrorMessage error={error} />
-        <div className="container-fluid my-4">
+        <div className="my-4">
           <Tabs
             tabs={tabs}
             onClick={onSelectTab}

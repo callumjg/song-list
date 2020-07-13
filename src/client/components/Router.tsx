@@ -11,13 +11,13 @@ import LoginModal from './forms/LoginForm/LoginModal';
 const Router = () => (
   <>
     <Switch>
+      <Route path="/song/:songId" component={SongDetailsPage} />
       <Route path="/services" component={ServicesPage} />
       <Route path="/metrics" component={MetricsPage} />
-      <Route path={['/', '/songs/add']} component={SongsPage} exact />
+      <Route path="/" component={SongsPage} />
     </Switch>
     <Switch>
-      <Route path="/songs/add" component={SongFormModal} />
-      <Route path="/songs/:songId" component={SongDetailsPage} exact />
+      <Route path="/songs/add" component={SongFormModal} exact />
       <Route path="*/login" component={LoginModal} />
       <Route path="/services/add" component={ServiceFormModal} />
     </Switch>

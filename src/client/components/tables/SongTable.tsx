@@ -32,7 +32,7 @@ const SongTable: React.FC<Props> = ({ songs, className, ...props }) => {
   if (className) classes += ` ${className}`;
   const history = useHistory();
   const onRowClick = (e, row) => {
-    history.push(`/songs/${row.songId}`);
+    history.push(`/song/${row.songId}`);
   };
   const trStyle = { cursor: 'pointer' };
 
