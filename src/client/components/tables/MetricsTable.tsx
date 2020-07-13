@@ -14,6 +14,7 @@ const columns: Column[] = [
   {
     header: 'Title',
     target: 'title',
+    style: { paddingLeft: '2%' },
     sortFunc: sortAlphabetically,
   },
   {

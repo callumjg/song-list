@@ -22,7 +22,7 @@ server.interceptors.response.use(
   (res) => res,
   async (e) => {
     const original = e.config;
-    if (e.response.status === 401 && !original._retry) {
+    if (e?.response?.status === 401 && !original._retry) {
       const {
         data: { csrf },
       } = await server.get('/users/auth/refresh');
