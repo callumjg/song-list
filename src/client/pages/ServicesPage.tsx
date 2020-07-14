@@ -20,13 +20,13 @@ const ServicesPage: React.FC = () => {
   const { data, error } = useSWR(url);
 
   return (
-    <Layout>
+    <Layout activeTab="Services">
       <ErrorMessage error={error} />
-      <div className="relative py-4">
+      <div className="relative py-5">
         <Tabs
           tabs={years}
           onClick={setYear}
-          className="pb-4"
+          className="pb-5"
           leftWidth="1rem"
         />
         <ServiceTable services={data?.services} placeholderRows={30} />

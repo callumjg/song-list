@@ -29,14 +29,14 @@ const SongsPage = () => {
   });
 
   return (
-    <Layout>
+    <Layout activeTab="Songs">
       <ErrorMessage error={error} />
-      <div className="pt-4">
+      <div className="pt-5">
         <Tabs
           tabs={['Category A', 'Hymn']}
           onClick={onTabSelect}
           leftWidth="1rem"
-          className="mb-4"
+          className="mb-5"
         >
           <div className="d-flex align-items-start">
             {user && (
