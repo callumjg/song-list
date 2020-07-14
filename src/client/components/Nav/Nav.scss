@@ -6,14 +6,18 @@
 @import '../../../../node_modules/bootstrap/scss/mixins/breakpoints';
 
 nav {
-  .nav-container {
+  .navbar-brand {
+    max-height: 4rem;
+  }
+
+  .links-slider-backdrop {
     $transition: 150ms;
     &.open {
       opacity: 1;
       visibility: visible;
     }
     @include flex(flex-end, auto);
-    background-color: rgba(black, 0.1); // color of opaque layer over content
+    background-color: rgba(black, 0.1);
     height: 100vh;
     left: 0;
     position: fixed;
@@ -23,30 +27,71 @@ nav {
     visibility: hidden;
     transition: opacity $transition ease-in-out, visibility $transition;
 
-    .nav-slider {
-      max-width: 400px;
-
+    .links-slider {
       &.open {
-        width: 80%;
+        width: 60%;
       }
       @include boxShadow();
-      @include flex(auto, stretch, column);
-      padding-top: 10vh;
-      background-color: white;
+      @include flex(center, flex-end, column);
+      background-color: $body-bg;
       width: 0%;
-      transition: width $transition - 50ms ease-in-out;
-
-      button {
-        padding: 0.5rem;
-        text-align: center;
+      transition: width $transition ease-in-out;
+      i {
+        margin: 0.4rem !important;
+        @include flex();
         cursor: pointer;
-        background-color: inherit;
-        border: none;
-        font-size: inherit;
-        &:hover,
-        &:focus {
-          background-color: rgba($primary, 0.7);
-          color: white;
+        &:hover {
+          color: rgba($primary, 0.4);
+        }
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+
+        li {
+          padding: 1rem 0.5rem;
+          text-align: center;
+          cursor: pointer;
+          &:not(:first-child) {
+            border-top: 1px solid rgba($primary, 0.3);
+          }
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    @include flex();
+    @include boxShadow();
+    flex: 1;
+    .links-slider-backdrop {
+      position: static;
+      background-color: inherit;
+      visibility: visible;
+      opacity: 1;
+      height: auto;
+      width: auto;
+
+      .links-slider {
+        width: auto;
+        box-shadow: none;
+        background-color: none;
+
+        ul {
+          @include flex(flex-end);
+          li:first-child ~ li {
+            margin-left: 1rem;
+          }
+          li {
+            &:not(:first-child) {
+              border-top: none;
+            }
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+          }
         }
       }
     }
