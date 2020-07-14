@@ -43,17 +43,17 @@ const MetricsPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout activeTab="Metrics">
       <div className="relative">
         <ErrorMessage error={error} />
-        <div className="my-4">
+        <div className="my-5">
           <Tabs
             tabs={tabs}
             onClick={onSelectTab}
-            className="mb-4"
+            className="mb-5"
             leftWidth="1rem"
           >
-            <div>
+            <div className="pr-2">
               <Selector
                 options={monthLabels}
                 onSelect={onSelectMonth}

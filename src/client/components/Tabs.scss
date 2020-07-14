@@ -11,7 +11,7 @@ $width: 1px;
   & > button {
     @include flex();
     color: $color;
-    background-color: white;
+    background-color: $body-bg;
     border: none;
     border-bottom: $width solid $color;
     min-width: 7rem;

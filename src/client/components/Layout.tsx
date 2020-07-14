@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { AuthContext } from './Auth';
-import Header from './Header';
+import Nav from './Nav';
 import Footer from './Footer';
 import './Layout.scss';
 
@@ -10,6 +10,7 @@ interface Props {
   footer?: React.Component;
   noHeader?: boolean;
   noFooter?: boolean;
+  activeTab?: string;
 }
 
 const Layout: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const Layout: React.FC<Props> = ({
   children,
   noFooter,
   noHeader,
+  activeTab,
 }) => {
   const { user, logout } = useContext(AuthContext);
   const location = useLocation();
@@ -45,7 +47,9 @@ const Layout: React.FC<Props> = ({
   return (
     <>
       <header>
-        {noHeader || header || <Header navLinks={defaultLinks} />}
+        {noHeader || header || (
+          <Nav links={defaultLinks} activeTab={activeTab} />
+        )}
       </header>
       <main>
         <div>{children}</div>

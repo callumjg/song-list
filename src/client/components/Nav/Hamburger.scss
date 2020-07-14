@@ -1,9 +1,9 @@
-@import "../../styles/colors";
-@import "../../styles/mixins";
+@import '../../styles/colors';
+@import '../../styles/mixins';
 
-@import "../../../../node_modules/bootstrap/scss/functions";
-@import "../../../../node_modules/bootstrap/scss/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import '../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../node_modules/bootstrap/scss/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins/breakpoints';
 
 .hamburger {
   height: 1.4rem;
@@ -15,7 +15,7 @@
     border-radius: 0.3rem;
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(md) {
     display: none;
   }
 }
