@@ -6,8 +6,9 @@
 @import '../../../../node_modules/bootstrap/scss/mixins/breakpoints';
 
 nav {
-  .navbar-brand {
-    height: 4rem;
+  @include boxShadow();
+  .navbar-brand img {
+    height: 3rem;
     width: auto;
   }
 
@@ -30,7 +31,7 @@ nav {
 
     .links-slider {
       &.open {
-        width: 60%;
+        width: 70%;
       }
       @include boxShadow();
       @include flex(center, flex-end, column);
@@ -66,7 +67,6 @@ nav {
 
   @include media-breakpoint-up(md) {
     @include flex();
-    @include boxShadow();
     flex: 1;
     .links-slider-backdrop {
       position: static;

@@ -17,7 +17,7 @@ const columns: Column[] = [
   {
     target: 'title',
     header: <ion-icon name="musical-notes-outline" />,
-    style: { paddingLeft: '2%' },
+    style: { paddingLeft: '1.5rem' },
     sortFunc: sortAlphabetically,
   },
   { target: 'author', header: <ion-icon name="person-outline" /> },

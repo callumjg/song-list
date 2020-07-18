@@ -22,7 +22,9 @@ const Nav: React.FC<Props> = ({ links = [], activeTab }) => {
 
   return (
     <nav className="navbar navbar-light bg-light">
-      <img src={logo} className="navbar-brand" alt="GPC" />
+      <div className="navbar-brand">
+        <img src={logo} alt="GPC" />
+      </div>
       <Hamburger onClick={() => setIsNavOpen(true)} />
       <div
         className={`links-slider-backdrop${navStatus}`}

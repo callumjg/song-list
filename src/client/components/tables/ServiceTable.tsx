@@ -14,7 +14,7 @@ const ServiceTable: React.FC<Props> = ({ services, ...props }) => {
       header: 'Date',
       target: 'date',
       render: (date) => moment(date).format('DD/MM/YYYY'),
-      style: { minWidth: '25%', paddingLeft: '2%' },
+      style: { minWidth: '25%', paddingLeft: '1.5rem' },
     },
     {
       header: 'Notes',
@@ -43,13 +43,7 @@ const ServiceTable: React.FC<Props> = ({ services, ...props }) => {
     },
   ];
   return (
-    <Table
-      data={services}
-      keyId="serviceId"
-      columns={columns}
-      style={{ fontSize: '90%' }}
-      {...props}
-    />
+    <Table data={services} keyId="serviceId" columns={columns} {...props} />
   );
 };
 

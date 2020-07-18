@@ -14,7 +14,7 @@ const columns: Column[] = [
   {
     header: 'Title',
     target: 'title',
-    style: { paddingLeft: '2%' },
+    style: { paddingLeft: '1.5rem' },
     sortFunc: sortAlphabetically,
   },
   {
@@ -66,7 +66,6 @@ const MetricsTable: React.FC<Props> = ({ songs = [], className, ...props }) => {
       data={songs}
       keyId="songId"
       columns={columns}
-      style={{ fontSize: '90%' }}
       trClassNames={(row) => (row.plays < avPlays ? 'text-danger' : '')}
       onRowClick={onRowClick}
       trStyle={trStyle}
