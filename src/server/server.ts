@@ -1,4 +1,5 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import path from 'path';
 import comp from 'express-static-gzip';
 import cookieParser from 'cookie-parser';
@@ -9,8 +10,8 @@ const buildPath = path.resolve(__dirname, '../../dist/public');
 const server = express();
 
 server.use(cookieParser());
-server.use(express.json());
-server.use(express.urlencoded({ extended: true }));
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
 server.use(comp(buildPath, { enableBrotli: true, orderPreference: ['br'] }));
 server.use(logger);
 
