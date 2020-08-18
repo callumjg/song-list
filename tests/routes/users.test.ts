@@ -10,23 +10,22 @@ import Token from '../../src/server/models/Token';
 import pool from '../../src/server/db';
 
 const request = supertest(server);
-let client;
 
 /***********************************
  *  LIFECYCLE
  ***********************************/
 
 beforeAll(async () => {
-  client = await db.connect();
+  await db.connect();
 });
 
 beforeEach(async () => {
-  await db.initTables(client);
-  await db.seedUsers(client);
+  await db.initTables();
+  await db.seedUsers();
   // seed data
 });
 
-afterAll(async () => await client.release());
+afterAll(async () => await db.end());
 
 /***********************************
  *  TESTS
@@ -52,17 +51,17 @@ describe('POST /users', () => {
     const {
       rows: [user],
       rowCount,
-    } = await client.query(
+    } = await pool.query(
       `
-        select 
-          user_id "userId", 
-          email, 
-          first_name "firstName", 
-          last_name "lastName", 
+        select
+          user_id "userId",
+          email,
+          first_name "firstName",
+          last_name "lastName",
           password,
           is_deleted,
           is_verified
-        from users 
+        from users
         where user_id = $1
       `,
       [userId]
@@ -87,7 +86,7 @@ describe('POST /users', () => {
 
     const {
       rowCount,
-    } = await client.query('select * from users where email = $1', [
+    } = await pool.query('select * from users where email = $1', [
       users[1].email,
     ]);
     expect(rowCount).toBe(1);
@@ -103,7 +102,7 @@ describe('POST /users', () => {
 
     const {
       rowCount,
-    } = await client.query('select * from users where email = $1', [
+    } = await pool.query('select * from users where email = $1', [
       users[1].email,
     ]);
     expect(rowCount).toBe(1);

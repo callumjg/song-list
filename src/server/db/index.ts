@@ -3,7 +3,7 @@ import { Pool } from 'pg';
 const pool = new Pool({
   database:
     process.env.NODE_ENV === 'test'
-      ? process.env.TEST_DATABASE
+      ? process.env.TEST_DATABASE || 'test'
       : process.env.PGDATABASE,
   ssl: process.env.PG_REQUIRE_SSL === 'true',
 });
