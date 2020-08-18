@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 const NodeExternals = require('webpack-node-externals');
-const Dotenv = require('dotenv-webpack');
 const Nodemon = require('nodemon-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopmressionPlugin = require('compression-webpack-plugin');
@@ -12,13 +11,17 @@ const src = path.resolve(__dirname, 'src');
 const makeConfig = (name) => (env) => {
   const isServer = name === 'server';
   const isProduction = !!env.production;
-  const sharedPlugins = [new webpack.IgnorePlugin(/\.\/locale$/, /moment$/)];
+  const sharedPlugins = [
+    new webpack.IgnorePlugin(/\.\/locale$/, /moment$/),
+    new CleanWebpackPlugin(),
+  ];
   let plugins = isServer
     ? [
         ...sharedPlugins,
         new Nodemon({
           script: './dist/server.js',
           watch: path.resolve(__dirname, './dist'),
+          nodeArgs: ['-r', 'dotenv/config'],
         }),
       ]
     : [
@@ -29,11 +32,6 @@ const makeConfig = (name) => (env) => {
           filename: 'template.html',
         }),
       ];
-
-  if (!isProduction && isServer) {
-    plugins.push(new Dotenv());
-    plugins.push(new CleanWebpackPlugin());
-  }
 
   if (isProduction && !isServer) {
     plugins = [
@@ -116,13 +114,6 @@ const makeConfig = (name) => (env) => {
       extensions: ['.tsx', '.ts', '.js'],
       symlinks: false,
       cacheWithContext: false,
-    },
-    cache: {
-      type: 'filesystem',
-      cacheDirectory: path.resolve(__dirname, '.cache'),
-      buildDependencies: {
-        config: [__filename],
-      },
     },
     optimization: {
       splitChunks: {
