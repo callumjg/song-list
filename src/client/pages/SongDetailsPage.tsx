@@ -59,9 +59,19 @@ const SongDetailsPage: React.FC = () => {
       <ErrorMessage error={error} />
       <div className="relative container-fluid py-4">
         <div className="row">
+          <div className="col-lg-8">
+            <Card className="p-3">
+              <div className="text-center">
+                <h4>{song?.title}</h4>
+              </div>
+              <PlaceHolderTable data={song?.lyrics}>
+                <div className="my-4">{renderLyrics()}</div>
+              </PlaceHolderTable>
+            </Card>
+          </div>
           <div className="col-lg-4">
             <Card className="p-3">
-              <h4>{song?.title}</h4>
+              <h4>Details</h4>
               <LabelledTable data={labelledTable} />
             </Card>
             <Card className="p-3">
@@ -84,14 +94,6 @@ const SongDetailsPage: React.FC = () => {
                   keyId="id"
                   noHeader
                 />
-              </PlaceHolderTable>
-            </Card>
-          </div>
-          <div className="col-lg-8">
-            <Card className="p-3">
-              {!song?.lyrics && <h4>Lyrics</h4>}
-              <PlaceHolderTable data={song?.lyrics}>
-                <div className="my-4">{renderLyrics()}</div>
               </PlaceHolderTable>
             </Card>
           </div>
