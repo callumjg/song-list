@@ -3,12 +3,14 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import comp from 'express-static-gzip';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 import apiRouter from './routes/api';
 import { errorHandler, renderApp, logger } from './middleware';
 
 const buildPath = path.resolve(__dirname, '../../dist/public');
 const server = express();
 
+server.use(helmet());
 server.use(cookieParser());
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
