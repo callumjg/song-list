@@ -10,7 +10,7 @@ import { errorHandler, renderApp, logger } from './middleware';
 const buildPath = path.resolve(__dirname, '../../dist/public');
 const server = express();
 
-server.use(helmet());
+server.use(helmet({ contentSecurityPolicy: false }));
 server.use(cookieParser());
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
