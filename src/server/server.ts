@@ -20,6 +20,6 @@ server.use(logger);
 server.use(express.static(buildPath));
 server.use('/api/v1', apiRouter);
 server.use(errorHandler);
-server.get('*', renderApp);
+server.get('*', renderApp());
 
 export default server;

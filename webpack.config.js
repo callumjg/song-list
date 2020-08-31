@@ -115,7 +115,7 @@ const client = (env) => {
       new HtmlWebpackPlugin({
         template: __dirname + '/src/server/public/index.html',
         favicon: __dirname + '/src/server/public/favicon.ico',
-        filename: 'template.html',
+        filename: isProduction ? 'template.html' : 'index.html',
       }),
       ...(isProduction
         ? [
@@ -140,6 +140,17 @@ const client = (env) => {
           ]
         : []),
     ],
+    devServer: {
+      contentBase: path.join(__dirname, 'dist/public'),
+      compress: false,
+      port: 3000,
+      hot: true,
+      publicPath: '/',
+      historyApiFallback: true,
+      proxy: {
+        '/api': 'http://localhost:8080',
+      },
+    },
     optimization: {
       splitChunks: {
         cacheGroups: {
@@ -156,5 +167,3 @@ const client = (env) => {
 };
 
 module.exports = [client, server];
-
-// module.exports = [makeConfig('server'), makeConfig('client')];
