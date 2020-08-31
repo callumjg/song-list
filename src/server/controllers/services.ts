@@ -14,6 +14,11 @@ export const getService = asyncCatchWrapper(async (req, res) => {
   res.send({ service });
 });
 
+export const getClosestService = asyncCatchWrapper(async (req, res) => {
+  const service = await Service.findClosest();
+  res.send({ service });
+});
+
 export const getServices = asyncCatchWrapper(async (req, res) => {
   const { services, count } = await Service.find(req.query);
   res.send({ services, count });

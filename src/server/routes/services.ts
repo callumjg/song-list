@@ -16,6 +16,7 @@ const getMaxAge = (req) => {
 };
 
 router.post('/', auth(), c.createService);
+router.get('/closest', clientCache(day), c.getClosestService);
 router.get('/:serviceId', clientCache(week), c.getService);
 router.get('/', clientCache(getMaxAge), c.getServices);
 router.patch('/:serviceId', auth(), c.updateService);

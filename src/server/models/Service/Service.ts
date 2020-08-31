@@ -3,6 +3,7 @@ import * as yup from 'yup';
 import Resource from '../Resource';
 import pool from '../../db';
 import findServiceSql from './findServiceSql';
+import findClosestSql from './findClosestSql';
 import findServiceByIdSql from './findServiceByIdSql';
 import insertServiceSql from './insertServiceSql';
 import updateServiceByIdSql from './updateServiceByIdSql';
@@ -51,6 +52,15 @@ class Service extends Resource implements ServiceType {
       rows: [service],
       rowCount,
     } = await pool.query(findServiceByIdSql, [serviceId]);
+    return rowCount ? new Service(service) : null;
+  }
+
+  static async findClosest() {
+    const {
+      rows: [service],
+      rowCount,
+    } = await pool.query(findClosestSql);
+
     return rowCount ? new Service(service) : null;
   }
 
