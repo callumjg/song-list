@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
 import useSWR from 'swr';
 import { useHistory } from 'react-router-dom';
+import moment from 'moment';
 import Layout from '../components/Layout';
 import SongTable from '../components/tables/SongTable';
 import ErrorMessage from '../components/ErrorMessage';
 import Tabs from '../components/Tabs';
 import { AuthContext } from '../components/Auth';
+import Card from '../components/Card';
 
 const SongsPage = () => {
   const history = useHistory();
@@ -14,6 +16,10 @@ const SongsPage = () => {
   const [cat, setCategory] = useState('A');
   const category = cat === 'A' ? 'Category A' : 'Category B (Hymn)';
   const { data, error, isValidating } = useSWR('/songs');
+  const { data: serviceData, error: serviceError } = useSWR(
+    '/services/closest'
+  );
+  const service = serviceData ? serviceData?.service : null;
   const onAddSongClick = () => history.push(`/songs/add?category=${category}`);
   const onArchiveClick = () => setArchived(!isArchived);
   const onTabSelect = (selected) => {
@@ -30,7 +36,26 @@ const SongsPage = () => {
 
   return (
     <Layout activeTab="Songs">
-      <ErrorMessage error={error} />
+      <ErrorMessage error={error || serviceError} />
+      {service && (
+        <div className="mt-5 container-fluid">
+          <Card className="p-5">
+            <h3>Recent Songs</h3>
+            <h6>{moment(service?.date).format('DD/MM/Y')}</h6>
+            {service?.songs.map((s) => (
+              <button
+                key={s.songId}
+                onClick={() => {
+                  history.push(`/song/${s.songId}`);
+                }}
+                className="btn btn-outline-primary mr-3 mt-3"
+              >
+                {s.title}
+              </button>
+            ))}
+          </Card>
+        </div>
+      )}
       <div className="pt-5">
         <Tabs
           tabs={['Category A', 'Hymn']}

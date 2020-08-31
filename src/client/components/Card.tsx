@@ -1,7 +1,11 @@
 import React from 'react';
 import './Card.scss';
 
-const Card = ({ children, className, ...props }) => {
+interface Props {
+  className?: string
+}
+
+const Card : React.FC<Props> = ({ children, className, ...props }) => {
   let classes = 'ccc-card';
   if (className) classes += ` ${className}`;
   return (
