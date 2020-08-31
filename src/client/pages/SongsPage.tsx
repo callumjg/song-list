@@ -38,7 +38,7 @@ const SongsPage = () => {
     <Layout activeTab="Songs">
       <ErrorMessage error={error || serviceError} />
       {service && (
-        <div className="mt-5 container-fluid">
+        <div className="mt-5 container-fluid" style={{ maxWidth: '70rem' }}>
           <Card className="p-5">
             <h3>Recent Songs</h3>
             <h6>{moment(service?.date).format('DD/MM/Y')}</h6>
@@ -56,7 +56,7 @@ const SongsPage = () => {
           </Card>
         </div>
       )}
-      <div className="pt-5">
+      <div className="container-fluid my-5" style={{ maxWidth: '70rem' }}>
         <Tabs
           tabs={['Category A', 'Hymn']}
           onClick={onTabSelect}
