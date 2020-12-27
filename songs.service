@@ -1,0 +1,13 @@
+[Unit]
+Description=Dynamic DNS                      
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/npm start --prefix /usr/local/song-list
+Restart=always
+KillSignal=SIGINT
+User=callum
+
+[Install]
+WantedBy=multi-user.target
