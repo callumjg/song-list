@@ -11,7 +11,7 @@ const PlaceHolderTable = ({ children, data }) =>
   !data?.length ? <p>Nothing to display</p> : <>{children}</>;
 
 const SongDetailsPage: React.FC = () => {
-  const { songId } = useParams();
+  const { songId } = useParams<{songId: string}>();
   const { data, error } = useSWR(`/songs/${songId}`);
   const song = data?.song;
 

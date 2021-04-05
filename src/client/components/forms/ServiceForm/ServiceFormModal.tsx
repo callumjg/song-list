@@ -8,7 +8,7 @@ import Service from '../../../../types/Service';
 // import { mutate } from 'swr';
 
 const ServiceFormModal = () => {
-  const { id } = useParams();
+  const { id } = useParams<{id: string}>();
   const isEditForm = !!id;
   const history = useHistory();
 

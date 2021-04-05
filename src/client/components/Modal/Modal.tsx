@@ -58,7 +58,7 @@ const Modal: React.FC<Props> = ({
     return new Promise((resolve) => {
       setTimeout(() => {
         setDisplay('none');
-        resolve();
+        resolve(null);
       }, 100);
     });
   };

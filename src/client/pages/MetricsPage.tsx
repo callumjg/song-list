@@ -44,9 +44,9 @@ const MetricsPage = () => {
 
   return (
     <Layout activeTab="Metrics">
+      <ErrorMessage error={error} />
       <div className="relative">
-        <ErrorMessage error={error} />
-        <div className="my-5">
+        <div className="container my-5">
           <Tabs
             tabs={tabs}
             onClick={onSelectTab}

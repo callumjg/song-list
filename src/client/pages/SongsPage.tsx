@@ -16,10 +16,7 @@ const SongsPage = () => {
   const [cat, setCategory] = useState('A');
   const category = cat === 'A' ? 'Category A' : 'Category B (Hymn)';
   const { data, error, isValidating } = useSWR('/songs');
-  const { data: serviceData, error: serviceError } = useSWR(
-    '/services/closest'
-  );
-  const service = serviceData ? serviceData?.service : null;
+
   const onAddSongClick = () => history.push(`/songs/add?category=${category}`);
   const onArchiveClick = () => setArchived(!isArchived);
   const onTabSelect = (selected) => {
@@ -36,27 +33,8 @@ const SongsPage = () => {
 
   return (
     <Layout activeTab="Songs">
-      <ErrorMessage error={error || serviceError} />
-      {service && (
-        <div className="mt-5 container-fluid" style={{ maxWidth: '70rem' }}>
-          <Card className="p-5">
-            <h3>Recent Songs</h3>
-            <h6>{moment(service?.date).format('DD/MM/Y')}</h6>
-            {service?.songs.map((s) => (
-              <button
-                key={s.songId}
-                onClick={() => {
-                  history.push(`/song/${s.songId}`);
-                }}
-                className="btn btn-outline-primary mr-3 mt-3"
-              >
-                {s.title}
-              </button>
-            ))}
-          </Card>
-        </div>
-      )}
-      <div className="container-fluid my-5" style={{ maxWidth: '70rem' }}>
+      <ErrorMessage error={error} />
+      <div className="container my-5">
         <Tabs
           tabs={['Category A', 'Hymn']}
           onClick={onTabSelect}

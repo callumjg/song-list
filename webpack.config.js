@@ -13,7 +13,7 @@ const shared = (env) => {
 
   return {
     mode: isProduction ? 'production' : 'development',
-    devtool: isProduction ? undefined : 'source-maps',
+    devtool: isProduction ? undefined : 'source-map',
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
       symlinks: false,
@@ -95,9 +95,11 @@ const client = (env) => {
   const isProduction = !!env.production;
   const config = {
     name: 'client',
-    entry: `${__dirname}/src/client/index.tsx`,
+    entry: {
+      client: `${__dirname}/src/client/index.tsx`,
+    },
     output: {
-      filename: 'client.js',
+      filename: '[name].js',
       path: __dirname + '/dist/public/',
       publicPath: '/',
     },
@@ -120,22 +122,19 @@ const client = (env) => {
       ...(isProduction
         ? [
             new CopmressionPlugin({
-              filename: '[path].br[query]',
+              filename: '[base].br',
               algorithm: 'brotliCompress',
               test: /\.(js|css|html|svg)$/,
               compressionOptions: { level: 11 },
               threshold: 10240,
               minRatio: 0.8,
-              cache: true,
             }),
             new CopmressionPlugin({
-              filename: '[path].gz[query]',
+              filename: '[base].gz',
               algorithm: 'gzip',
               test: /\.js$|\.css$|\.html$/,
               threshold: 10240,
               minRatio: 0.8,
-              cache: true,
-              deleteOriginalAssets: true,
             }),
           ]
         : []),

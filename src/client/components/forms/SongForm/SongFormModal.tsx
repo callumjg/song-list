@@ -8,7 +8,7 @@ import server from '../../../../apis/server';
 import { mutate } from 'swr';
 
 const SongFormModal = () => {
-  const { id } = useParams();
+  const { id } = useParams<{id: string}>();
   const location = useLocation();
   const history = useHistory();
   const query = qs.parse(location.search, { ignoreQueryPrefix: true });

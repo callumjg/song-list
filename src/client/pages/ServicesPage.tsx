@@ -22,7 +22,7 @@ const ServicesPage: React.FC = () => {
   return (
     <Layout activeTab="Services">
       <ErrorMessage error={error} />
-      <div className="relative py-5">
+      <div className="container relative py-5">
         <Tabs
           tabs={years}
           onClick={setYear}
