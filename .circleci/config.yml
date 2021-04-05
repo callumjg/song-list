@@ -21,7 +21,7 @@ jobs:
     machine:
       enabled: true
     steps:
-      - run: ssh root@callumcancreate.com "./song-list/deploy.sh"
+      - run: ssh root@callumcancreate.com "~/deploy.sh"
 workflows:
   build-and-test:
     jobs:
