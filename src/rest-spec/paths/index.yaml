@@ -1,0 +1,21 @@
+/songs:
+  get:
+    description: Gets songs
+    responses:
+      '200': 
+        description: A list of songs
+        content:
+          application/json:
+            schema: 
+              type: object
+              required:
+                - songs
+                - count
+              properties:
+                count:
+                  type: integer
+                songs:
+                  type: array
+                  items: string
+                    
+                

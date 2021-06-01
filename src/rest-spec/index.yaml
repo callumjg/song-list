@@ -1,0 +1,16 @@
+openapi: 3.1.0
+
+info: 
+  title: "GPC Songs List API"
+  description: "API to access the GPC Songs Database"
+  version: 1.0.0
+
+basePath: /api/v1
+produces:
+  - application/json
+
+components: 
+  $ref: './components/index.yaml'
+  
+paths:
+  $ref: './paths/index.yaml'

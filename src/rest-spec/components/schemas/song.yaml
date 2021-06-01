@@ -1,0 +1,35 @@
+type: object
+required: 
+- title
+properties:
+  songId:
+    type: number
+  title:
+    type: string
+  url: 
+    type: string;
+  author: 
+    type: string
+  key: 
+    type: string
+  tempo: 
+    type: string
+  songSelectId: 
+    type: string
+  isArchived: 
+    type: boolean
+  isDeleted: 
+    type: boolean
+  tags: 
+    type: array
+    items: 
+      type: string
+  notes:
+    type: array
+    items: 
+      type: string
+  lyrics: 
+    type: array
+    items:
+      type: object
+      $ref: './lyric.yaml'

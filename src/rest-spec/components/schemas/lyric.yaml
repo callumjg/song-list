@@ -1,0 +1,12 @@
+type: object
+required: 
+- label
+- lyrics
+properties:
+  songLyricId:
+    type: number
+  label:
+    type: string
+  lyrics: 
+    type: string;
+  

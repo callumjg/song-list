@@ -1,0 +1,9 @@
+schemas:
+  Song: 
+    $ref: './schemas/song.yaml'
+  Lyric:
+    $ref: './schemas/lyric.yaml'
+  Service:
+    $ref: './schemas/service.yaml'
+  User:
+    $ref: './schemas/user.yaml'

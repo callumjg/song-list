@@ -1,0 +1,17 @@
+type: object
+required:
+  - date
+  - songs
+properties:
+  date:
+    type: date
+  songs:
+    type: array
+    items:
+      $ref: ./song.yaml
+  notes:
+    type: array
+    items:
+      type: string
+  serviceId:
+    type: number

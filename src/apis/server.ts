@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const server = axios.create({
-  baseURL: '/api/v1',
+  baseURL: 'https://songs.callumcancreate.com/api/v1',
 });
 
 server.interceptors.request.use(
