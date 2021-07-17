@@ -13,7 +13,7 @@ const buildPath = path.resolve(__dirname, '../../dist/public');
 const server = express();
 
 server.use(cors());
-server.use(helmet({ contentSecurityPolicy: false }));
+// server.use(helmet({ contentSecurityPolicy: false }));
 server.use(cookieParser());
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
