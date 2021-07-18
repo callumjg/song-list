@@ -8,6 +8,7 @@ import apiRouter from './routes/api';
 import { errorHandler, renderApp, logger } from './middleware';
 import feedbackFormHandler from './routes/feedback';
 import cors from 'cors';
+import pool from './db';
 
 const buildPath = path.resolve(__dirname, '../../dist/public');
 const server = express();
@@ -23,6 +24,16 @@ server.use(logger);
 server.use(express.static(buildPath));
 server.use('/api/v1', apiRouter);
 server.post('/feedback-form', feedbackFormHandler);
+server.get('/feedback-form-view', async (req, res) => {
+  try {
+    const data = await pool.query('select * from feedback');
+
+    return res.send({ rows: data.rows });
+  } catch (e) {
+    console.log(e);
+    return res.status(400);
+  }
+});
 server.use(errorHandler);
 server.get('*', renderApp());
 
