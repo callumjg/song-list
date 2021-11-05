@@ -83,7 +83,10 @@ const server = (env) => {
         watch: path.resolve(__dirname, './dist'),
         nodeArgs: ['-r', 'dotenv/config'],
       }),
-      new webpack.IgnorePlugin(/\.\/locale$/, /moment$/),
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^\.\/locale$/,
+        contextRegExp: /moment$/,
+      }),
       new CleanWebpackPlugin(),
     ],
   };
@@ -113,7 +116,10 @@ const client = (env) => {
     },
     target: 'web',
     plugins: [
-      new webpack.IgnorePlugin(/\.\/locale$/, /moment$/),
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^\.\/locale$/,
+        contextRegExp: /moment$/,
+      }),
       new HtmlWebpackPlugin({
         template: __dirname + '/src/server/public/index.html',
         favicon: __dirname + '/src/server/public/favicon.ico',
